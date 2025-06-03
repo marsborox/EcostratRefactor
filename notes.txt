@@ -1,0 +1,1 @@
+Somewhat fixed main menu (buttons not displayed, background is disabled tho)

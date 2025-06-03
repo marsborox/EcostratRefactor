@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4b2c085cccb2a448abaa2b7ec756a5, type: 3}
+  m_Name: Vandalism 4
+  m_EditorClassIdentifier: 
+  artwork: {fileID: 21300000, guid: 3deee3cc8d1b6f04784dcd13ca1946d5, type: 3}
+  upgradeType: 8
+  price: 180000
+  description: "You finally caught the attention of those who pretended that nothing
+    was happening. Now you need more people in the streets, more shouting and mischief,
+    so they don\u2019t think they are the only dangerous ones. The state is ultimately
+    run by the people, and if you get more people into every major state in the world,
+    a change in more than one of them will be inevitable. That\u2019s why you need
+    more people, more organisers and as many followers as possible."
+  benefits: <sprite=0>-8000
+  actions:
+  - {fileID: 11400000, guid: f60f7d32a89780b4d9326cf0f4ae69a4, type: 2}

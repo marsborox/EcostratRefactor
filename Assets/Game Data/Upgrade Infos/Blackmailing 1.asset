@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4b2c085cccb2a448abaa2b7ec756a5, type: 3}
+  m_Name: Blackmailing 1
+  m_EditorClassIdentifier: 
+  artwork: {fileID: 21300000, guid: 75c8c384e1b0e154e9430e66a83df4ed, type: 3}
+  upgradeType: 7
+  price: 300
+  description: "You never thought you would go this far. But planet Earth really
+    needs you to save it. Unfortunately, sometimes a polite and politically correct
+    letter written to the city office does not help. That\u2019s why you bought 7
+    books on persuasion techniques and threat tactics, for less pleasant situations,
+    for less friendly people. It\u2019s no glory, but it\u2019s important to understand
+    this persuasive method first."
+  benefits: <sprite=4>-5 + <sprite=9> -5
+  actions:
+  - {fileID: 11400000, guid: 02edac20010d6454f814d5b019d1caa1, type: 2}
+  - {fileID: 11400000, guid: 82e4a7d7a11dc8342ba0d1815436e118, type: 2}

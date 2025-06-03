@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4b2c085cccb2a448abaa2b7ec756a5, type: 3}
+  m_Name: Blackmailing 5
+  m_EditorClassIdentifier: 
+  artwork: {fileID: 21300000, guid: bb17f04ba641ba24d9dd43a38395ba46, type: 3}
+  upgradeType: 7
+  price: 50000
+  description: "The gang you work with is successful, but you\u2019re starting to
+    get a bad feeling about their methods, which you\u2019d rather not go into too
+    much detail for your peaceful sleep. However, if you want to increase your possibilities
+    to the highest level, you need to find someone who will not only be successful,
+    but also reliable and up-to-date. La Familia, a mafia organisation originally
+    from Spain, has its roots firmly rooted in the political scene not only in the
+    US, but in most of the world."
+  benefits: <sprite=4>-30 + <sprite=9> -25
+  actions:
+  - {fileID: 11400000, guid: 0e84a58de3c2c7741821e5cf3ee725c4, type: 2}
+  - {fileID: 11400000, guid: 9680de2d266f3364fa50018618f37c0c, type: 2}

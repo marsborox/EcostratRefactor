@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3844d973ff520a43986b101af840fef, type: 3}
+  m_Name: A huge amount of smog in Shanghai!
+  m_EditorClassIdentifier: 
+  artwork: {fileID: 21300000, guid: af8ad386f4303724a8173559e518dee2, type: 3}
+  eventPicture: {fileID: 21300000, guid: a0f28c45b1e71814cbe7fe31cdabdcc5, type: 3}
+  eventSound: {fileID: 8300000, guid: 29b2fc53904828b4590e18f138a7a62c, type: 3}
+  time: 1130
+  repeatInterval: 770
+  repeatTimes: 1
+  reactions:
+  - label: Electrical solution design
+    description: 
+    additionalDescription: <sprite=2>-10<sprite=3>+4 000
+    actions:
+    - {fileID: 11400000, guid: 1b93fe6f616ee384d8ef321a928162b4, type: 2}
+    - {fileID: 11400000, guid: 67d0cc56b5259844da48c366061c47b4, type: 2}
+    - {fileID: 11400000, guid: 735ad536ed66b8d4a9bf951721f49277, type: 2}
+    consequenceMessage: The people of Shanghai are indebted to you! <sprite=2>-10<sprite=3>+4
+      000
+  - label: Rouse
+    description: Rouse the Shanghai population.
+    additionalDescription: <sprite=2>+25<sprite=3>+7000<sprite=4>+40
+    actions:
+    - {fileID: 11400000, guid: fc40fc52acb8d2d459a6137d4f63e16e, type: 2}
+    - {fileID: 11400000, guid: 57d6ba77b1d852c46a33208a930ff13d, type: 2}
+    - {fileID: 11400000, guid: e0a375cac5bc56445934211415debe20, type: 2}
+    consequenceMessage: "Unfortunately, you didn\u2019t manage to solve the pollution,
+      but at least you gained a lot of new followers!"
+  - label: Negotiation
+    description: Negotiations with the management of companies that produce smog.
+    additionalDescription: <sprite=2>+15
+    actions:
+    - {fileID: 11400000, guid: 24b63840c232b6b40988eaf3127a3899, type: 2}
+    - {fileID: 11400000, guid: 00d9277a3aef6b549b4417b999bb3d1d, type: 2}
+    consequenceMessage: Negotiations do not always go well and management is not
+      interested in our environmental problems. <sprite=2>+15
+  ignoreConsequences:
+  - {fileID: 11400000, guid: 24b63840c232b6b40988eaf3127a3899, type: 2}
+  - {fileID: 11400000, guid: fc05dd6c007a34248a44852e40e63e58, type: 2}
+  ignoreMessage: 'You ignored to take an action for: A huge amount of smog in Shanghai! 
+    <sprite=2>+15 <sprite=3>-4000.'
+  eventDescription: A huge amount of smog in Shanghai due to coal consumption.
+  mapPosition: {x: 0, y: 0}

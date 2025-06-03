@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4b2c085cccb2a448abaa2b7ec756a5, type: 3}
+  m_Name: Hacking 3
+  m_EditorClassIdentifier: 
+  artwork: {fileID: 21300000, guid: 594cc791022ab2444b7c2ed3539a35cd, type: 3}
+  upgradeType: 5
+  price: 8000
+  description: "Paul showed you the possibilities of the Dark Web. You found a hacker
+    group from Yugoslavia, WHN, which stands for We Help Nature. You don\u2019t hesitate
+    and ask them for help to protect the Earth together."
+  benefits: Hints for your upcoming reaction. <sprite=8>+2 <sprite=6>+20
+  actions:
+  - {fileID: 11400000, guid: 95ec3378c0116fa4da256325c32cc817, type: 2}
+  - {fileID: 11400000, guid: f7748fb1742a62e4da916aff8c82241a, type: 2}

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4b2c085cccb2a448abaa2b7ec756a5, type: 3}
+  m_Name: Bribe 2
+  m_EditorClassIdentifier: 
+  artwork: {fileID: 21300000, guid: a29d6c067f964f54490d5388d835c81f, type: 3}
+  upgradeType: 6
+  price: 3000
+  description: "Romero actually did his job well, but most of the money he kept for
+    himself. If you want to bribe and control higher management, you will need someone
+    more courageous and trustworthy. Your friend Johny gave you a tip about his cousin
+    Jake Reins, who works with a bunch of other companies and has control over some
+    of their managers. He\u2019ll definitely be useful to you."
+  benefits: More time to save the planet Earth and reduces all prices. <sprite=11>+30
+    + <sprite=10>-5%
+  actions:
+  - {fileID: 11400000, guid: e4dca024d94f61e4eabf3823c04fee31, type: 2}
+  - {fileID: 11400000, guid: 74cef5b5c0e6d2a4f8f08bf103c04836, type: 2}
