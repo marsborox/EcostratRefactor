@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+
 public interface I_InitiateButton
 {
     public void InitiateButton(Button button, UnityAction method)

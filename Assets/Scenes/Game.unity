@@ -2804,7 +2804,6 @@ MonoBehaviour:
   trashIncrementInterval: 3
   paused: 1
   hints: 0
-  speed: 1
   trashIncrementAmountIncreaseTimer: 0
   priceModifier: 1
   specialEventDatabase: {fileID: 11400000, guid: 1acabb3c13918a14da04a2de7dce2757, type: 2}
@@ -3864,7 +3863,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_PressedColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
     m_SelectedColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -3885,11 +3884,11 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 414828723}
   toggleTransition: 1
   graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 738475002}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &415976643
 GameObject:
   m_ObjectHideFlags: 0
@@ -7067,6 +7066,7 @@ MonoBehaviour:
   _toggleX2: {fileID: 1539165774}
   _toggleX3: {fileID: 1353270317}
   _gameManager: {fileID: 348457563}
+  _timeController: {fileID: 1096999222}
 --- !u!1 &751130155
 GameObject:
   m_ObjectHideFlags: 0
@@ -9629,6 +9629,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f819732f3721a42a1c631f5152e8c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elapsedDeltaTime: 0
+  timeSpeed: 1
+  pauseTimeSpeedReference: 0
 --- !u!1 &1101403724
 GameObject:
   m_ObjectHideFlags: 0
@@ -12009,7 +12012,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_PressedColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
     m_SelectedColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -12030,7 +12033,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1353270315}
   toggleTransition: 1
   graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 738475002}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -13552,7 +13555,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_PressedColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
     m_SelectedColor: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -13573,7 +13576,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1539165772}
   toggleTransition: 1
   graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 738475002}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []

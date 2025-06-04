@@ -9,9 +9,11 @@ public class GameManager : MonoBehaviour
     public float money = 500;
     private float followers = 0;
     private float followerIncomeTimer = 0;
-    [SerializeField] private float illegality = 0;
+    [SerializeField] public float illegality = 0;
     [SerializeField] private float trash = 0;
-    private float gameTimer = 1825;
+    public  float gameTimer = 1825;
+
+
     private float elapsedTime = 0;
     private float donationTimer = 0;
     private float trashTimer = 0;
@@ -19,10 +21,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float trashIncrementAmount = 10;
     [SerializeField] private float trashIncrementInterval = 3;
     private List<GameObject> trashBubbles = new();
-    public bool paused = true;
+    /*public bool paused = true;*/
     private float oneDayInSec;
     public float hints = 0;
-    public int speed = 1;
+    //public int speed = 1;
 
     public float trashIncrementAmountIncreaseTimer = 0;//was private
     private float donation = 0;
@@ -77,6 +79,7 @@ public class GameManager : MonoBehaviour
     
     public static GameManager instance;
 
+
     private void Awake()
     {
         instance = this;
@@ -89,20 +92,20 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(StartEventTimer(item, item.repeatTimes, false));
         }
-        StartCoroutine(GameNewsCoroutine());
-        StartCoroutine(IllegalityNewsCoroutine());
+        
         StartCoroutine(SpecialEventsCoroutine());
         oneDayInSec = gameTimer / 365;
         UpdateUI();
-        paused = true;
+        
     }
     private void Update()
     {
-        if (paused)
+        if (TimeController.instance.paused)
             return;
         TimerDisplay();
 
-        gameTimer -= Time.deltaTime* speed;
+        gameTimer -=TimeController.instance.elapsedDeltaTime;
+        //gameTimer -= Time.deltaTime* speed;
         gameTimerSlider.value = gameTimer;
         dayText.text = (int)(gameTimer / oneDayInSec) + " days left";
 
@@ -112,15 +115,15 @@ public class GameManager : MonoBehaviour
             GameOver("Your time to save planet Earth has just run out.",
                 "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
         }
-
-        donationTimer += Time.deltaTime * speed;
+        donationTimer += TimeController.instance.elapsedDeltaTime;
+        //donationTimer += Time.deltaTime * speed;
         if (donationTimer >= donationIntensity)
         {
             donationTimer = 0;
             CreateBubble();
         }
-
-        trashTimer += Time.deltaTime * speed;
+        trashTimer += TimeController.instance.elapsedDeltaTime;
+        //trashTimer += Time.deltaTime * speed;
         trashSlider.maxValue = trashIncrementInterval;
         trashSlider.value = trashTimer;
 
@@ -132,7 +135,8 @@ public class GameManager : MonoBehaviour
 
         if (illegality > 0)
         {
-            illegalityTimer += Time.deltaTime * speed;
+            illegalityTimer += TimeController.instance.elapsedDeltaTime;
+            //illegalityTimer += Time.deltaTime * speed;
             illegalityReductionSlider.maxValue = illegalReductionInterval;
             illegalityReductionSlider.value = illegalityTimer;
             if (illegalityTimer >= illegalReductionInterval)
@@ -142,7 +146,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        followerIncomeTimer += Time.deltaTime * speed;
+        followerIncomeTimer += TimeController.instance.elapsedDeltaTime;
+        //followerIncomeTimer += Time.deltaTime * speed;
         followerIncomeSlider.maxValue = 60;
         followerIncomeSlider.value = followerIncomeTimer;
 
@@ -152,7 +157,8 @@ public class GameManager : MonoBehaviour
             followerIncomeTimer = 0;
             ChangeStats(PlayerStat.Money, followers);
         }
-        trashIncrementAmountIncreaseTimer += Time.deltaTime * speed;
+        trashIncrementAmountIncreaseTimer += TimeController.instance.elapsedDeltaTime;
+        //trashIncrementAmountIncreaseTimer += Time.deltaTime * speed;
 
         if (trashIncrementAmountIncreaseTimer >= 60)
         {
@@ -163,7 +169,9 @@ public class GameManager : MonoBehaviour
 
     private void TimerDisplay()
     {
-        elapsedTime += Time.deltaTime * speed;
+        elapsedTime += TimeController.instance.elapsedDeltaTime;
+        //elapsedTime += Time.deltaTime * speed;
+
         elapsedTimeText.text = GetTimeStamp();
         /*
         System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(elapsedTime);
@@ -243,10 +251,7 @@ public class GameManager : MonoBehaviour
     {
         ChangeStats(PlayerStat.Money, Random.Range(10, 51) + donation);
     }
-    public void ChangeStats()
-    { //mine method
-    
-    }
+
     public void ChangeStats(PlayerStat stat, float modifier)
     {
         FloatingText text;
@@ -346,7 +351,7 @@ public class GameManager : MonoBehaviour
             if (!illegalityGameOverEvent.activeInHierarchy)
             {
                 illegalityGameOverEvent.SetActive(true);
-                StartCoroutine(DelayedPause(true));
+                StartCoroutine(TimeController.instance.DelayedPause());
             }
         }
         if (trash >= trashCapacity)
@@ -385,8 +390,9 @@ public class GameManager : MonoBehaviour
             time = eventData.time;
         while (time > 0)
         {
-            if (!paused)
-                time -= Time.deltaTime * speed;
+            if (!TimeController.instance.paused)
+            time -= TimeController.instance.elapsedDeltaTime;
+            //time -= Time.deltaTime * speed;
             yield return null;
         }
         Event tempEvent = Instantiate(eventPrefab, interactiveCanvas.transform);
@@ -398,6 +404,7 @@ public class GameManager : MonoBehaviour
         if (eventData.repeatInterval > 0 && repeatTimes > 0)
             StartCoroutine(StartEventTimer(eventData, repeatTimes - 1, true));
     }
+    /*
     private IEnumerator GameNewsCoroutine()
     {
         yield return new WaitUntil(() => gameTimer < 1350);
@@ -427,14 +434,16 @@ public class GameManager : MonoBehaviour
         News.instance.AddMessage("Black BMWs start to appear suspiciously often around your apartment. It’s starting to look like the cops are watching us.");
         yield return new WaitUntil(() => illegality >= 80);
         News.instance.AddMessage("Breaking News! The Green Inc. - helping the planet or a criminal organisation?!");
-    }
+    }*/
+
     private IEnumerator SpecialEventsCoroutine()
     {
         float timer = 0;
         while (true)
         {
-            if (!paused)
-                timer += Time.deltaTime * speed;
+            if (!TimeController.instance.paused)
+            timer += TimeController.instance.elapsedDeltaTime;
+            //timer += Time.deltaTime * speed;
             if (timer >= 400)
             {
                 Event tempEvent = Instantiate(eventPrefab, interactiveCanvas.transform);
@@ -514,15 +523,17 @@ public class GameManager : MonoBehaviour
                 "You have such a great influence on a huge group of your supporters that even the largest manufacturing companies are prying from your hand and are ready to submit to any measures that will help reduce their part of the blame for the pollution of our planet Earth.");
         }
     }
+    /*
     private IEnumerator DelayedPause(bool value)
     {
         yield return new WaitForSeconds(1);
         PauseGameToggle(value);
-    }
+    }*/
+    /*
     public void PauseGameToggle(bool value)
     {
         paused = value;
-    }
+    }*/
     public bool LegalUltimatePerkUnlocked()
     {
         return negotiationLevel == 5 && socialSitesLevel == 5 && riotsLevel == 5 && socialEventsLevel == 5;
@@ -530,17 +541,18 @@ public class GameManager : MonoBehaviour
     public bool IllegalUltimatePerkUnlocked()
     {
         return hackingLevel == 5 && bribeLevel == 5 && blackmailLevel == 5 && landfillsLevel == 5;
-    }
+    }/*
     public void ChangeGameSpeed(int speed)
     {
-        this.speed = speed;
+        TimeController.instance.timeSpeed=speed;
+        //this.speed = speed;
         SoundManager.instance.Speed(speed);
-    }
+    }*/
     public void GameOver(string label, string description)
     {
         gameoverScreen.UpdateTexts(label, description);
         RadioSoundManager.instance.StopPlaying();
-        PauseGameToggle(true);
+        TimeController.instance.paused = true;
     }
     public void MainMenu()
     {

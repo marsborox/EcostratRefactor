@@ -1,12 +1,26 @@
 Somewhat fixed main menu (buttons not displayed, background is disabled tho)
 Added Text explaining "Press Esc to skip intro"
 Renamed Camera Canvas to UI Canvas (makes more sense)
+Fixed timer on ui (was running even when game paused)
+Trash increment amount - was being increased same rate disregard the game speed - fixed
 
 
-when paused on action decide time keeps running- timescale?
 
-GameManager - Update must be divided
+GameManager - Update must be divided - noto nly update
+	-Separate UI
+	-Separate Sound
+	-Separate Spawner
+	-Separate Timer/TimeControl - DONE, moved all time relateed variables to TimeController
+	
+top buttons - make into toggle group
+	rework buttons / toggles - one class for "Speed Buttons" that will be assigned as events with 
 
-time should be redone to timescale, buttons redone must be (x1, x2, x3)
+
+buttons need fixing all of them
+
+
+we have Interface for button initiation - does not have to be motherClass
+its our standard InitiateButton, with playSound bonus
 
 mabye UI class and rest will inherit from it
+

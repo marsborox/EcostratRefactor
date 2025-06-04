@@ -38,12 +38,12 @@ public class EventWindow : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
-        GameManager.instance.PauseGameToggle(true);
+        TimeController.instance.PauseGameToggle();
     }
     public void Hide()
     {
         gameObject.SetActive(false);
-        GameManager.instance.PauseGameToggle(false);
+        TimeController.instance.PauseGameToggle();
     }
     public void EventResolved()
     {
