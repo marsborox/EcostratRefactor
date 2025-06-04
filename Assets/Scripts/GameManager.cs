@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private float elapsedTime = 0;
     private float donationTimer = 0;
     private float trashTimer = 0;
+
     [SerializeField] private float trashIncrementAmount = 10;
     [SerializeField] private float trashIncrementInterval = 3;
     private List<GameObject> trashBubbles = new();
