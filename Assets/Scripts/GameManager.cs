@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public float hints = 0;
     public int speed = 1;
 
-    private float trashIncrementAmountIncreaseTimer = 0;
+    public float trashIncrementAmountIncreaseTimer = 0;//was private
     private float donation = 0;
     private float donationIntensity = 5;
     public float priceModifier = 1;
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     public EventDatabase eventDatabase;
     public FloatingText floatingTextPrefab;
     public GameObject illegalityGameOverEvent;
-
+    
     [Header("UI References")]
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI followerText;
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     public RectTransform illegalityFloatingText;
     public RectTransform trashFloatingText;
     public Animator upgradeBTNAnimator;
-
+    
     public static GameManager instance;
 
     private void Awake()
@@ -98,14 +98,11 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(elapsedTime);
-        elapsedTime += Time.deltaTime;
-        elapsedTimeText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
-
         if (paused)
             return;
+        TimerDisplay();
 
-        gameTimer -= Time.deltaTime * speed;
+        gameTimer -= Time.deltaTime* speed;
         gameTimerSlider.value = gameTimer;
         dayText.text = (int)(gameTimer / oneDayInSec) + " days left";
 
@@ -155,17 +152,30 @@ public class GameManager : MonoBehaviour
             followerIncomeTimer = 0;
             ChangeStats(PlayerStat.Money, followers);
         }
-        trashIncrementAmountIncreaseTimer += Time.deltaTime;
+        trashIncrementAmountIncreaseTimer += Time.deltaTime * speed;
 
         if (trashIncrementAmountIncreaseTimer >= 60)
         {
             trashIncrementAmountIncreaseTimer = 0;
-            ChangeStats(PlayerStat.TrashIncrement, 5);
+            ChangeStats(PlayerStat.TrashIncrement, 5);//must remove hardcoded values
         }
+    }
+
+    private void TimerDisplay()
+    {
+        elapsedTime += Time.deltaTime * speed;
+        elapsedTimeText.text = GetTimeStamp();
+        /*
+        System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(elapsedTime);
+        elapsedTime += Time.deltaTime * speed;
+
+        elapsedTimeText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+        */
     }
     public string GetTimeStamp()
     {
         System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(elapsedTime);
+        
         return string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
     }
     private void CreateBubble()
@@ -234,7 +244,7 @@ public class GameManager : MonoBehaviour
         ChangeStats(PlayerStat.Money, Random.Range(10, 51) + donation);
     }
     public void ChangeStats()
-    { 
+    { //mine method
     
     }
     public void ChangeStats(PlayerStat stat, float modifier)

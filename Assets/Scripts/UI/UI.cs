@@ -1,16 +1,36 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System;
+using UnityEngine.Events;
+
+
 
 public class UI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public void InitiateButton(Button button, UnityAction method)
     {
-        
+        button.onClick.AddListener(delegate
+        {
+            method();
+        });
+        //boolUI = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InitiateButton<T>(Button button, UnityAction<T> method, T value)
     {
-        
+        button.onClick.AddListener(delegate
+        {
+            method(value);
+        });
+        //boolUI = false;
     }
+
+    void MyAction()
+    {
+        Debug.Log("Hello!");
+    }
+
+
+    
 }

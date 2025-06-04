@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TimeController : MonoBehaviour
 {
+    private int timeSpeed;
     public void TimeX0()
     { 
         Time.timeScale = 0f;

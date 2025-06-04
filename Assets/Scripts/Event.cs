@@ -23,7 +23,9 @@ public class Event : MonoBehaviour
     {
         if (GameManager.instance.paused || eventData.name == "Amogus")
             return;
-        timer -= Time.deltaTime * GameManager.instance.speed;
+        timer -= Time.deltaTime * GameManager.instance.speed; // timer refactor
+        timer -= Time.deltaTime;
+
         slider.value = timer;
         if (timer <= 0)
         {
