@@ -7,7 +7,7 @@ public class TimeController : MonoBehaviour
 
     public float elapsedDeltaTime = 0;
     public int timeSpeed=1;
-    public int pauseTimeSpeedReference;
+    public int pauseTimeSpeedReference=1;
     public bool paused = true;
 
     private void Awake()

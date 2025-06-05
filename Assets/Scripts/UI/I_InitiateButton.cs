@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
+using System;
 
 public interface I_InitiateButton
 {
@@ -29,6 +29,15 @@ public interface I_InitiateButton
         button.onClick.AddListener(delegate
         {
             method(value);
+            SoundManager.instance.Click();
+        });
+        //boolUI = false;
+    }
+    public void InitiateButton<T>(Button button, Action<T,T> method, T value, T value2)
+    {
+        button.onClick.AddListener(delegate
+        {
+            method(value, value2);
             SoundManager.instance.Click();
         });
         //boolUI = false;
