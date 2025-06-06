@@ -2556,6 +2556,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291789057}
   m_CullTransparentMesh: 1
+--- !u!1 &295448208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 295448209}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &295448209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295448208}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 870.429, y: 479.84268, z: 895.6187}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &321536646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2721,15 +2752,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7531f7d658c6c46a503c71aad87a97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 1000
-  illegality: 0
-  trash: 0
-  gameTimer: 1825
-  trashIncrementAmount: 10
+  daysGameTimer: 1825
   trashIncrementInterval: 3
-  hints: 0
+  trash: 0
+  trashIncrementAmount: 10
   trashIncrementAmountIncreaseTimer: 0
+  money: 1000
   priceModifier: 1
+  illegality: 0
+  hints: 0
   specialEventDatabase: {fileID: 11400000, guid: 1acabb3c13918a14da04a2de7dce2757, type: 2}
   mapSprite: {fileID: 2800000, guid: 26351b75dc6ce9148a63b60d591ec706, type: 3}
   bubblePrefab: {fileID: 6920311472419885847, guid: b0007dfa7e649864ba8260b195b79df6, type: 3}
@@ -9479,7 +9510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elapsedDeltaTime: 0
   timeSpeed: 1
-  pauseTimeSpeedReference: 0
+  pauseTimeSpeedReference: 1
   paused: 1
 --- !u!1 &1101403724
 GameObject:
@@ -15597,10 +15628,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 348457563}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: PauseGameToggle
-        m_Mode: 6
+      - m_Target: {fileID: 1096999222}
+        m_TargetAssemblyTypeName: TimeController, Assembly-CSharp
+        m_MethodName: UnpauseGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15757,10 +15788,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 348457563}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: PauseGameToggle
-        m_Mode: 6
+      - m_Target: {fileID: 1096999222}
+        m_TargetAssemblyTypeName: TimeController, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -19844,3 +19875,4 @@ SceneRoots:
   - {fileID: 1245856357}
   - {fileID: 1283622643}
   - {fileID: 1096999221}
+  - {fileID: 295448209}

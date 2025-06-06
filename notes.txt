@@ -7,13 +7,23 @@ Trash increment amount - was being increased same rate disregard the game speed 
 
 
 GameManager - Update must be divided - noto nly update
+	-Update
 	-Separate UI
 	-Separate Sound
 	-Separate Spawner
 	-Separate Timer/TimeControl - DONE, moved all time relateed variables to TimeController
+-Update-	 News relocated into news class, Update and ChangeStats must be separated into methods doing only one resource/playerStat
+		enum PlayerStat - rework this, probably instances of PlayerStat inheriting classes playerGameObject?
+		illegality and followerIncome is the same
+		we can use one method for all slider display - can go to UI
+
+create Singleton Classes - 2 presistent and only scene
 	
-top buttons - make into toggle group
-	rework buttons / toggles - one class for "Speed Buttons" that will be assigned as events with 
+top buttons - 	 made into toggle group, made own class for SpeedButtons,
+		 assigned per interface w implemented InitiateButton method
+
+	
+
 
 
 buttons need fixing all of them

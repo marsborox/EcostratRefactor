@@ -6,35 +6,41 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [Header ("Time")]
+    private float oneDayInSec;
+    public  float daysGameTimer = 1825;
+    private float elapsedTime = 0;
+    /*public bool paused = true;*/
+    //public int speed = 1;
+
+    [Header ("Trash")]
+    private float trashTimer = 0;
+    [SerializeField] private float trashIncrementInterval = 3;
+
+    [SerializeField] private float trash = 0;
+    [SerializeField] private float trashIncrementAmount = 10;
+    private float trashCapacity = 20000;
+    private List<GameObject> trashBubbles = new();
+    public float trashIncrementAmountIncreaseTimer = 0;//was private
+
+    [Header ("Followers + Money")]
+    private float donationTimer = 0;
+
     public float money = 500;
     private float followers = 0;
     private float followerIncomeTimer = 0;
-    [SerializeField] public float illegality = 0;
-    [SerializeField] private float trash = 0;
-    public  float gameTimer = 1825;
-
-
-    private float elapsedTime = 0;
-    private float donationTimer = 0;
-    private float trashTimer = 0;
-
-    [SerializeField] private float trashIncrementAmount = 10;
-    [SerializeField] private float trashIncrementInterval = 3;
-    private List<GameObject> trashBubbles = new();
-    /*public bool paused = true;*/
-    private float oneDayInSec;
-    public float hints = 0;
-    //public int speed = 1;
-
-    public float trashIncrementAmountIncreaseTimer = 0;//was private
     private float donation = 0;
     private float donationIntensity = 5;
     public float priceModifier = 1;
-    private float trashCapacity = 20000;
+
+    [Header("Illegality")]
     private float illegalityTimer = 0;
-    private int illegalCapacity = 100;
     private float illegalReductionInterval = 120;
 
+    [SerializeField] public float illegality = 0;
+    private int illegalCapacity = 100;
+
+    [Header ("Upgrades")]
     private int negotiationLevel = 0;
     private int socialSitesLevel = 0;
     private int riotsLevel = 0;
@@ -45,7 +51,9 @@ public class GameManager : MonoBehaviour
     private int blackmailLevel = 0;
     private int vandalismLevel = 0;
     private int landfillsLevel = 0;
+    public float hints = 0;
 
+    [Header("Prefabs")]
     public SpecialEventDatabase specialEventDatabase;
     public Texture2D mapSprite;
     public Button bubblePrefab;
@@ -94,7 +102,7 @@ public class GameManager : MonoBehaviour
         }
         
         StartCoroutine(SpecialEventsCoroutine());
-        oneDayInSec = gameTimer / 365;
+        oneDayInSec = daysGameTimer / 365;
         UpdateUI();
         
     }
@@ -104,17 +112,19 @@ public class GameManager : MonoBehaviour
             return;
         TimerDisplay();
 
-        gameTimer -=TimeController.instance.elapsedDeltaTime;
+        daysGameTimer -=TimeController.instance.elapsedDeltaTime;
         //gameTimer -= Time.deltaTime* speed;
-        gameTimerSlider.value = gameTimer;
-        dayText.text = (int)(gameTimer / oneDayInSec) + " days left";
+        gameTimerSlider.value = daysGameTimer;
+        //this section goes to timeControl
+        dayText.text = (int)(daysGameTimer / oneDayInSec) + " days left";
 
-        if (gameTimer <= 0)
+        if (daysGameTimer <= 0)
         {
             SoundManager.instance.Defeat();
             GameOver("Your time to save planet Earth has just run out.",
                 "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
         }
+
         donationTimer += TimeController.instance.elapsedDeltaTime;
         //donationTimer += Time.deltaTime * speed;
         if (donationTimer >= donationIntensity)
@@ -122,6 +132,7 @@ public class GameManager : MonoBehaviour
             donationTimer = 0;
             CreateBubble();
         }
+
         trashTimer += TimeController.instance.elapsedDeltaTime;
         //trashTimer += Time.deltaTime * speed;
         trashSlider.maxValue = trashIncrementInterval;
@@ -157,9 +168,9 @@ public class GameManager : MonoBehaviour
             followerIncomeTimer = 0;
             ChangeStats(PlayerStat.Money, followers);
         }
+
         trashIncrementAmountIncreaseTimer += TimeController.instance.elapsedDeltaTime;
         //trashIncrementAmountIncreaseTimer += Time.deltaTime * speed;
-
         if (trashIncrementAmountIncreaseTimer >= 60)
         {
             trashIncrementAmountIncreaseTimer = 0;
@@ -171,7 +182,6 @@ public class GameManager : MonoBehaviour
     {
         elapsedTime += TimeController.instance.elapsedDeltaTime;
         //elapsedTime += Time.deltaTime * speed;
-
         elapsedTimeText.text = GetTimeStamp();
         /*
         System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(elapsedTime);
@@ -264,6 +274,7 @@ public class GameManager : MonoBehaviour
                 text = Instantiate(floatingTextPrefab, followersFloatingText);
                 text.UpdateText("<sprite=3>" + ((int)modifier).ToString("+#;-#;0"), modifier > 0, true);
                 break;
+
             case PlayerStat.Money:
                 money += modifier;
                 if (money < 0)
@@ -279,11 +290,13 @@ public class GameManager : MonoBehaviour
                     }
                 }
                 break;
+
             case PlayerStat.Timer:
-                gameTimer += modifier;
+                daysGameTimer += modifier;
                 text = Instantiate(floatingTextPrefab, timeFloatingText);
                 text.UpdateText(((int)modifier).ToString("+#;-#;0") + " seconds", modifier > 0, false);
                 break;
+
             case PlayerStat.Trash:
                 trash += modifier;
                 if (modifier > 0)
@@ -296,19 +309,23 @@ public class GameManager : MonoBehaviour
                     {
                         RemoveTrashBubble();
                     }
+
                 text = Instantiate(floatingTextPrefab, trashFloatingText);
                 text.UpdateText("<sprite=0>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
                 if (trash < 0)
                     trash = 0;
                 break;
+
             case PlayerStat.TrashIncrement:
                 trashIncrementAmount += modifier;
                 text = Instantiate(floatingTextPrefab, trashFloatingText);
                 text.UpdateText("<sprite=2>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
                 break;
+
             case PlayerStat.TrashIncrementInterval:
                 trashIncrementInterval += modifier;
                 break;
+
             case PlayerStat.Illegality:
                 illegality += modifier;
                 if (illegality < 0)
@@ -318,31 +335,39 @@ public class GameManager : MonoBehaviour
                 text.UpdateText("<sprite=4>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
                 SoundManager.instance.Illegality();
                 break;
+
             case PlayerStat.Hint:
                 hints += modifier;
                 if (hints < 0)
                     hints = 0;
                 break;
+
             case PlayerStat.Donation:
                 donation += modifier;
                 break;
+
             case PlayerStat.DonationIntensity:
                 donationIntensity += modifier;
                 if (donationIntensity < 0.1)
                     donationIntensity = 0.1f;
                 break;
+
             case PlayerStat.PriceModifier:
                 priceModifier += modifier;
                 break;
+
             case PlayerStat.TrashCapacity:
                 trashCapacity += modifier;
                 break;
+
             case PlayerStat.IlegalityCapacity:
                 illegalCapacity += (int)modifier;
                 break;
+
             case PlayerStat.IlegalityReductionInterval:
                 illegalReductionInterval += modifier;
                 break;
+
             default:
                 break;
         }
@@ -379,6 +404,7 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+        
         return true;
     }
     public IEnumerator StartEventTimer(EventDataScriptable eventData, int repeatTimes, bool isRepeating)
