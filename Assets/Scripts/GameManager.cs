@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -205,7 +206,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject bubbleInstance = Instantiate(trashBubblePrefab, mapCanvas.transform);
         bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(true);
-        float random = Random.Range(0.8f, 1.5f);
+        float random = UnityEngine.Random.Range(0.8f, 1.5f);
         bubbleInstance.GetComponent<RectTransform>().localScale = new Vector3(random, random, random);
         trashBubbles.Add(bubbleInstance);
     }
@@ -222,28 +223,28 @@ public class GameManager : MonoBehaviour
     {
         Vector2 targetPos;
         if (isTrashBubble)
-            targetPos = new Vector2(Random.Range(0, 1920), Random.Range(0, 1080));
+            targetPos = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080));
         else
-            targetPos = new Vector2(Random.Range(0, 1920 - 164), Random.Range(0, 1080 - 253));
+            targetPos = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253));
 
         Color color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
         while (color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582)    // Sea Color: R 204 G 412 B 480
         {
             if (isTrashBubble)
-                targetPos = new Vector2(Random.Range(0, 1920), Random.Range(0, 1080));
+                targetPos = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080));
             else
-                targetPos = new Vector2(Random.Range(0, 1920 - 164), Random.Range(0, 1080 - 253));
+                targetPos = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253));
             color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
         }
         return targetPos;
     }
     private Vector2 GetPointOnWater()
     {
-        Vector2 targetPos = new Vector2(Random.Range(0, mapCanvas.pixelRect.width), Random.Range(0, mapCanvas.pixelRect.height));
+        Vector2 targetPos = new Vector2(UnityEngine.Random.Range(0, mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, mapCanvas.pixelRect.height));
         Color color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
         while (!(color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582))
         {
-            targetPos = new Vector2(Random.Range(0, mapCanvas.pixelRect.width), Random.Range(0, mapCanvas.pixelRect.height));
+            targetPos = new Vector2(UnityEngine.Random.Range(0, mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, mapCanvas.pixelRect.height));
             color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
         }
         return targetPos;
@@ -259,7 +260,7 @@ public class GameManager : MonoBehaviour
     }
     public void AddMoney()
     {
-        ChangeStats(PlayerStat.Money, Random.Range(10, 51) + donation);
+        ChangeStats(PlayerStat.Money, UnityEngine.Random.Range(10, 51) + donation);
     }
 
     public void ChangeStats(PlayerStat stat, float modifier)
@@ -582,6 +583,7 @@ public class GameManager : MonoBehaviour
     }
     public void MainMenu()
     {
+        //(Singleton(SingletonPresistent))MySceneManager.instance.numberr;
         MySceneManager.instance.MainMenu();
     }
 }

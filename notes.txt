@@ -1,23 +1,19 @@
+Done:
+
 Somewhat fixed main menu (buttons not displayed, background is disabled tho)
 Added Text explaining "Press Esc to skip intro"
 Renamed Camera Canvas to UI Canvas (makes more sense)
 Fixed timer on ui (was running even when game paused)
 Trash increment amount - was being increased same rate disregard the game speed - fixed
 
-
-
-GameManager - Update must be divided - noto nly update
-	-Update
-	-Separate UI
-	-Separate Sound
-	-Separate Spawner
-	-Separate Timer/TimeControl - DONE, moved all time relateed variables to TimeController
+GameManager 
+	-Separate Timer/TimeControl - , moved all time relateed variables to TimeController
 -Update-	 News relocated into news class, Update and ChangeStats must be separated into methods doing only one resource/playerStat
 		enum PlayerStat - rework this, probably instances of PlayerStat inheriting classes playerGameObject?
 		illegality and followerIncome is the same
 		we can use one method for all slider display - can go to UI
 
-create Singleton Classes - 2 presistent and only scene
+
 	
 top buttons - 	 made into toggle group, made own class for SpeedButtons,
 		 assigned per interface w implemented InitiateButton method
@@ -25,7 +21,19 @@ top buttons - 	 made into toggle group, made own class for SpeedButtons,
 	
 
 
+To Do:
 
+GameManager - Update must be divided - noto nly update
+	-Update
+	-Separate UI
+	-Separate Sound
+	-Separate Spawner
+
+make Singleton Parent class implement to all singletons, make inheriting Singleton presistent and use that
+create Singleton Classes - 2 presistent and only scene
+
+
+Tutorial - put those windows in que instead, all buttons will subscribe to open
 buttons need fixing all of them
 
 

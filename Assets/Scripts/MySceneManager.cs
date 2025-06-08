@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class MySceneManager : MonoBehaviour
+using System;
+public class MySceneManager : SingletonPresistent<MySceneManager>
 {
     public static MySceneManager instance;
+    public int number = 123;
+    //public static MySceneManager instance;
     void Start()
     {
         instance = this;
@@ -21,5 +24,9 @@ public class MySceneManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+    void Test()
+    {
+
     }
 }
