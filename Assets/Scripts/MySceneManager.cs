@@ -5,13 +5,14 @@ using UnityEngine.SceneManagement;
 using System;
 public class MySceneManager : SingletonPresistent<MySceneManager>
 {
-    public static MySceneManager instance;
+    public static new MySceneManager instance => SingletonPresistent<MySceneManager>.instance;
     public int number = 123;
     //public static MySceneManager instance;
+
     void Start()
     {
-        instance = this;
-        DontDestroyOnLoad(gameObject);
+        //instance = this;
+        //DontDestroyOnLoad(gameObject);
     }
     public void MainMenu()
     {

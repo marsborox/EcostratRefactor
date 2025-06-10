@@ -583,7 +583,6 @@ public class GameManager : MonoBehaviour
     }
     public void MainMenu()
     {
-        //(Singleton(SingletonPresistent))MySceneManager.instance.numberr;
         MySceneManager.instance.MainMenu();
     }
 }

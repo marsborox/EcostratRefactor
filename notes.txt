@@ -1,6 +1,9 @@
 Done:
 
-Somewhat fixed main menu (buttons not displayed, background is disabled tho)
+MainMenu 	- Somewhat fixed main menu (buttons not displayed, background is disabled tho)
+		- MainMenu_UI class, subscribing methods to events triggered by buttons //***** mabye own category??
+
+
 Added Text explaining "Press Esc to skip intro"
 Renamed Camera Canvas to UI Canvas (makes more sense)
 Fixed timer on ui (was running even when game paused)
@@ -18,7 +21,8 @@ GameManager
 top buttons - 	 made into toggle group, made own class for SpeedButtons,
 		 assigned per interface w implemented InitiateButton method
 
-	
+Singleton 	- we have Singleton<T> class and SingletonPresistent<T> class (second inherits from first)
+		-implemented on Scene Manager, rest waits for implementation	
 
 
 To Do:

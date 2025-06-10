@@ -2,11 +2,11 @@ using Unity.VisualScripting;
 
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : Singleton<T>
+public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     private static T _instance;
     public static T instance { get { return _instance; } }
-    public void Awake()
+    protected virtual void Awake()
     {
         if (_instance != null && this.gameObject != null)
         {
@@ -14,8 +14,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
         }
         else
         {
-            _instance = (T)this;
+            _instance = this as T;
         }
     }
-    
 }
