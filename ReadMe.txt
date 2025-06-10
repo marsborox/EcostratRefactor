@@ -1,3 +1,8 @@
+Unity ver 6000.1.0a7
+Itch:
+Original codebase:
+
+
 Done:
 
 MainMenu 	- Somewhat fixed main menu (buttons not displayed, background is disabled tho)
