@@ -1,6 +1,6 @@
 Unity ver 6000.1.0a7
-Itch:
-Original codebase:
+Itch:	h		ttps://ecostrat.itch.io/ecostrat
+Original codebase:	https://github.com/marsborox/EcostratOriginal/
 
 
 Done:
@@ -27,19 +27,25 @@ top buttons - 	 made into toggle group, made own class for SpeedButtons,
 		 assigned per interface w implemented InitiateButton method
 
 Singleton 	- we have Singleton<T> class and SingletonPresistent<T> class (second inherits from first)
-		-implemented on Scene Manager, rest waits for implementation	
+		-implemented on MySceneManager, rest waits for implementation	
 
 
 To Do:
 
-GameManager - Update must be divided - noto nly update
-	-Update
-	-Separate UI
-	-Separate Sound
-	-Separate Spawner
+GameManager 	- Update must be divided - noto nly update
+		- Update
+		- Separate UI
+		- Separate Sound
+		- Separate Spawner
 
 make Singleton Parent class implement to all singletons, make inheriting Singleton presistent and use that
 create Singleton Classes - 2 presistent and only scene
+Singletons:	- temporary add Scene Manager to game scene, 
+		- sound manager make presistent , move to menu, make temporary in game
+		- what needs to be converted to inherit from Singleton<T> class
+		- RadioSoundManager, SoundManager, //*** mabye merge? // make perma
+		- TimeController, EventWindow, EventWindow, GameManager, //temp
+		- (UI) News, UpgradesDescriptionPanel, UpgradesWindow, 
 
 
 Tutorial - put those windows in que instead, all buttons will subscribe to open

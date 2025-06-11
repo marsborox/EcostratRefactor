@@ -6,7 +6,7 @@ using System;
 public class MySceneManager : SingletonPresistent<MySceneManager>
 {
     public static new MySceneManager instance => SingletonPresistent<MySceneManager>.instance;
-    public int number = 123;
+
     //public static MySceneManager instance;
 
     void Start()

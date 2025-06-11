@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 public class SoundManager : MonoBehaviour
 {
     public List<AudioClip> sounds;
@@ -46,6 +44,7 @@ public class SoundManager : MonoBehaviour
     {
         audioSource.PlayOneShot(FindSoundByName("penalty"));
     }
+
     public void Upgrade(int number)
     {
         audioSource.PlayOneShot(FindSoundByName("upgrade" + number.ToString()));
