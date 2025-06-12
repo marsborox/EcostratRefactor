@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
-public class SoundManager : MonoBehaviour
+public class SoundManager : SingletonPresistent<SoundManager>
 {
+    public static new SoundManager instance => SingletonPresistent<SoundManager>.instance;
     public List<AudioClip> sounds;
     private AudioSource audioSource;
 
-    public static SoundManager instance;
+    //public static SoundManager instance;
 
-    private void Awake()
+    protected override void Awake()
     {
-        instance = this;
+        base.Awake();
+        //instance = this;
         audioSource = GetComponent<AudioSource>();
     }
     public AudioClip FindSoundByName(string name)

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     [Header ("Time")]
     private float oneDayInSec;
@@ -86,12 +86,13 @@ public class GameManager : MonoBehaviour
     public RectTransform trashFloatingText;
     public Animator upgradeBTNAnimator;
     
-    public static GameManager instance;
+    public static new GameManager instance => Singleton<GameManager>.instance;
 
 
     private void Awake()
     {
-        instance = this;
+        base.Awake();
+        //instance = this;
     }
     private void Start()
     {

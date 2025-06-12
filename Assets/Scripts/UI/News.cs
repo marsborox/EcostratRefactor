@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-public class News : MonoBehaviour
+public class News : Singleton<News>
 {
     public TextMeshProUGUI textContent;
     public ScrollRect scrollRect;
 
-    public static News instance;
-    private void Awake()
+    public static new News instance => Singleton<News>.instance;
+    protected override void Awake()
     {
-        instance = this;
+        base.Awake();
+        //instance = this;
     }
     private void Start()
     {

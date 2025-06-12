@@ -1,18 +1,19 @@
 using System.Collections;
 using UnityEngine;
 
-public class TimeController : MonoBehaviour
+public class TimeController : Singleton<TimeController>
 {
-    public static TimeController instance;
+    public static new TimeController instance => Singleton<TimeController>.instance;
 
     public float elapsedDeltaTime = 0;
     public int timeSpeed=1;
     public int pauseTimeSpeedReference=1;
     public bool paused = true;
 
-    private void Awake()
+    protected override void Awake()
     {
-        instance = this;//should be in stat but initialisation order... somestuff messed up
+        base.Awake();
+        //instance = this;//should be in stat but initialisation order... somestuff messed up
 
     }
     private void Start()

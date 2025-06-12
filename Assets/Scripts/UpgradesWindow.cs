@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradesWindow : MonoBehaviour
+public class UpgradesWindow : Singleton<UpgradesWindow>
 {
-    public static UpgradesWindow instance;
+    public static new UpgradesWindow instance => Singleton<UpgradesWindow>.instance;
+    protected override void Awake()
+    {
+        base.Awake();
+    }
     private void Start()
     {
-        instance = this;
+        
+        //instance = this;
         gameObject.SetActive(false);
     }
     public void ShowUpgradesWindow()

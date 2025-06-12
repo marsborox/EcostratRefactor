@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RadioSoundManager : MonoBehaviour
-{
+public class RadioSoundManager : Singleton<RadioSoundManager>
+{ 
+    
     private AudioSource audioSource;
-    public static RadioSoundManager instance;
+    public static new RadioSoundManager instance=>Singleton<RadioSoundManager>.instance;
     public List<AudioClip> radioSounds;
     private void Awake()
     {
+        base.Awake();
         audioSource = GetComponent<AudioSource>();
-        instance = this;
+        //instance = this;
     }
     public void PlayRadioSound()
     {

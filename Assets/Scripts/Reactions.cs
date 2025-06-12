@@ -16,6 +16,7 @@ public class Reactions : MonoBehaviour
             reaction.UpdateReaction(reactionData[i], hinted);
         }
     }
+    
     public void AddListenerToReactions(UnityAction listener)
     {
         foreach (var item in transform.GetComponentsInChildren<Reaction>())

@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UpgradesDescriptionPanel : MonoBehaviour
+public class UpgradesDescriptionPanel : Singleton<UpgradesDescriptionPanel>
 {
     public TextMeshProUGUI nameText, priceText, descriptionText, benefitsText;
 
-    public static UpgradesDescriptionPanel instance;
-    private void Awake()
+    public static new UpgradesDescriptionPanel instance => Singleton<UpgradesDescriptionPanel>.instance;
+    protected override void Awake()
     {
-        instance = this;
+        base.Awake();
+        //instance = this;
     }
     public void UpdateDescription(UpgradeInfo info)
     {

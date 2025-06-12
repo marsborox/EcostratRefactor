@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class EventWindow : MonoBehaviour
+public class EventWindow : Singleton<EventWindow>
 {
     public TextMeshProUGUI labelText, descriptionText;
     public Reactions reactions;
@@ -12,10 +12,11 @@ public class EventWindow : MonoBehaviour
     public Button ignoreButton;
     public Image eventPicture;
 
-    public static EventWindow instance;
-    private void Awake()
+    public static new EventWindow instance=> Singleton<EventWindow>.instance;
+    protected override void Awake()
     {
-        instance = this;
+        //instance = this;
+        base.Awake();
         Hide();
     }
     public void UpdateEvent(EventDataScriptable eventData, Event currentEvent = null)
@@ -37,18 +38,18 @@ public class EventWindow : MonoBehaviour
     }
     public void Show()
     {
-        gameObject.SetActive(true);
         TimeController.instance.PauseGameToggle();
+        gameObject.SetActive(true);
     }
     public void Hide()
     {
-        gameObject.SetActive(false);
         TimeController.instance.PauseGameToggle();
+        gameObject.SetActive(false);
     }
     public void EventResolved()
     {
         if (currentEvent)
             currentEvent.Destroy();
-        Hide();
+        //Hide(); // hide was triggered twice
     }
 }

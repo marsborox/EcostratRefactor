@@ -28,6 +28,8 @@ top buttons - 	 made into toggle group, made own class for SpeedButtons,
 
 Singleton 	- we have Singleton<T> class and SingletonPresistent<T> class (second inherits from first)
 		-implemented on MySceneManager, rest waits for implementation	
+		- SoundManager(Perma), RadioSoundManager,  TimeController, 
+		- (UI) News, UpgradesDescriptionPanel, UpgradesWindow, EventWindow, 
 
 
 To Do:
@@ -40,13 +42,14 @@ GameManager 	- Update must be divided - noto nly update
 
 make Singleton Parent class implement to all singletons, make inheriting Singleton presistent and use that
 create Singleton Classes - 2 presistent and only scene
-Singletons:	- temporary add Scene Manager to game scene, 
-		- sound manager make presistent , move to menu, make temporary in game
+Singletons:	- temporary add Scene Manager to game scene gameObject!, 
+		- sound manager make presistent , move to mainGameMenu, make temporary gameObject in game
 		- what needs to be converted to inherit from Singleton<T> class
-		- RadioSoundManager, SoundManager, //*** mabye merge? // make perma
-		- TimeController, EventWindow, EventWindow, GameManager, //temp
-		- (UI) News, UpgradesDescriptionPanel, UpgradesWindow, 
-
+		- 
+		- GameManager, //temp
+		
+After Singleton MIgration for some reason after we clicked smthign in event window - it deactivated gameobjcet ,
+which should be followed by unpausing the game, that didnt happen...
 
 Tutorial - put those windows in que instead, all buttons will subscribe to open
 buttons need fixing all of them
@@ -57,3 +60,6 @@ its our standard InitiateButton, with playSound bonus
 
 mabye UI class and rest will inherit from it
 
+mabye
+???
+change PlayClip methods (playOneShot) to LINQ
