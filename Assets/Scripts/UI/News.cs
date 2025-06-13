@@ -32,21 +32,21 @@ public class News : Singleton<News>
     }
     private IEnumerator GameNewsCoroutine()
     {
-        yield return new WaitUntil(() => GameManager.instance.daysGameTimer< 1350);
+        yield return new WaitUntil(() => GameManager.instance.daysRemaining< 1350);
     AddMessage("There are 273 days remaining. If you plan to save the Earth, you better get moving!");
-        yield return new WaitUntil(() => GameManager.instance.daysGameTimer < 900);
+        yield return new WaitUntil(() => GameManager.instance.daysRemaining < 900);
     AddMessage("You have exactly half of the time remaining, exactly 182 and a half days. I don’t want to be smart, but I think you really should start making changes for the better if you haven’t realised it yet!");
-        yield return new WaitUntil(() => GameManager.instance.daysGameTimer < 450);
+        yield return new WaitUntil(() => GameManager.instance.daysRemaining < 450);
     AddMessage("There are 91 days remaining. I don’t care how you want to calculate it, the important thing is that you understand we don’t have any time to waste anymore!");
-        yield return new WaitUntil(() => GameManager.instance.daysGameTimer < 300);
+        yield return new WaitUntil(() => GameManager.instance.daysRemaining < 300);
     AddMessage("You have 60 days left, i.e. 2 months. Don't forget to check the upgrades for some more time, if needed.");
-        yield return new WaitUntil(() => GameManager.instance.daysGameTimer < 150);
+        yield return new WaitUntil(() => GameManager.instance.daysRemaining < 150);
     AddMessage("One month remaining! Get moving, otherwise it will be not only Game Over, but also forget about the future of humanity on the Earth.");
-        yield return new WaitUntil(() => GameManager.instance.daysGameTimer < 90);
+        yield return new WaitUntil(() => GameManager.instance.daysRemaining < 90);
     AddMessage("One week remaining. Garbage is flooding the cities. Doomsday is knocking on the door.");
-        yield return new WaitUntil(() => GameManager.instance.daysGameTimer < 30);
+        yield return new WaitUntil(() => GameManager.instance.daysRemaining < 30);
     AddMessage("6 days and it’s all over. Thousands of dead fish suffocated are being washed up from the seas and the oceans. Do something about it!");
-        yield return new WaitUntil(() => GameManager.instance.daysGameTimer < 15);
+        yield return new WaitUntil(() => GameManager.instance.daysRemaining < 15);
     AddMessage("Last rescue task - last 3 days. The whole world is infested with garbage, Doomsday is here!");
     }
     private IEnumerator IllegalityNewsCoroutine()

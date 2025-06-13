@@ -7,9 +7,10 @@ using System;
 
 public class GameManager : Singleton<GameManager>
 {
+    public static new GameManager instance => Singleton<GameManager>.instance;
     [Header ("Time")]
     private float oneDayInSec;
-    public  float daysGameTimer = 1825;
+    public  float daysRemaining = 1825;
     private float elapsedTime = 0;
     /*public bool paused = true;*/
     //public int speed = 1;
@@ -18,6 +19,7 @@ public class GameManager : Singleton<GameManager>
     private float trashTimer = 0;
     [SerializeField] private float trashIncrementInterval = 3;
 
+    private int trashIncrement_increment = 5;
     [SerializeField] private float trash = 0;
     [SerializeField] private float trashIncrementAmount = 10;
     private float trashCapacity = 20000;
@@ -27,16 +29,18 @@ public class GameManager : Singleton<GameManager>
     [Header ("Followers + Money")]
     private float donationTimer = 0;
 
+    private float followerIncomeTimer = 0;
     public float money = 500;
     private float followers = 0;
-    private float followerIncomeTimer = 0;
     private float donation = 0;
     private float donationIntensity = 5;
     public float priceModifier = 1;
 
     [Header("Illegality")]
     private float illegalityTimer = 0;
+
     private float illegalReductionInterval = 120;
+    private float illegalityIncrement = -5;
 
     [SerializeField] public float illegality = 0;
     private int illegalCapacity = 100;
@@ -86,8 +90,6 @@ public class GameManager : Singleton<GameManager>
     public RectTransform trashFloatingText;
     public Animator upgradeBTNAnimator;
     
-    public static new GameManager instance => Singleton<GameManager>.instance;
-
 
     private void Awake()
     {
@@ -104,7 +106,7 @@ public class GameManager : Singleton<GameManager>
         }
         
         StartCoroutine(SpecialEventsCoroutine());
-        oneDayInSec = daysGameTimer / 365;
+        oneDayInSec = daysRemaining / 365;
         UpdateUI();
         
     }
@@ -114,13 +116,13 @@ public class GameManager : Singleton<GameManager>
             return;
         TimerDisplay();
 
-        daysGameTimer -=TimeController.instance.elapsedDeltaTime;
+        daysRemaining -=TimeController.instance.elapsedDeltaTime;
         //gameTimer -= Time.deltaTime* speed;
-        gameTimerSlider.value = daysGameTimer;
+        gameTimerSlider.value = daysRemaining;
         //this section goes to timeControl
-        dayText.text = (int)(daysGameTimer / oneDayInSec) + " days left";
+        dayText.text = (int)(daysRemaining / oneDayInSec) + " days left";
 
-        if (daysGameTimer <= 0)
+        if (daysRemaining <= 0)
         {
             SoundManager.instance.Defeat();
             GameOver("Your time to save planet Earth has just run out.",
@@ -135,16 +137,6 @@ public class GameManager : Singleton<GameManager>
             CreateBubble();
         }
 
-        trashTimer += TimeController.instance.elapsedDeltaTime;
-        //trashTimer += Time.deltaTime * speed;
-        trashSlider.maxValue = trashIncrementInterval;
-        trashSlider.value = trashTimer;
-
-        if (trashTimer >= trashIncrementInterval)
-        {
-            trashTimer = 0;
-            ChangeStats(PlayerStat.Trash, trashIncrementAmount);
-        }
 
         if (illegality > 0)
         {
@@ -154,7 +146,7 @@ public class GameManager : Singleton<GameManager>
             illegalityReductionSlider.value = illegalityTimer;
             if (illegalityTimer >= illegalReductionInterval)
             {
-                ChangeStats(PlayerStat.Illegality, -5);
+                ChangeStats(PlayerStat.Illegality, illegalityIncrement);
                 illegalityTimer = 0;
             }
         }
@@ -170,13 +162,23 @@ public class GameManager : Singleton<GameManager>
             followerIncomeTimer = 0;
             ChangeStats(PlayerStat.Money, followers);
         }
+        trashTimer += TimeController.instance.elapsedDeltaTime;
+        //trashTimer += Time.deltaTime * speed;
+        trashSlider.maxValue = trashIncrementInterval;
+        trashSlider.value = trashTimer;
+
+        if (trashTimer >= trashIncrementInterval)
+        {
+            trashTimer = 0;
+            ChangeStats(PlayerStat.Trash, trashIncrementAmount);
+        }
 
         trashIncrementAmountIncreaseTimer += TimeController.instance.elapsedDeltaTime;
         //trashIncrementAmountIncreaseTimer += Time.deltaTime * speed;
         if (trashIncrementAmountIncreaseTimer >= 60)
         {
             trashIncrementAmountIncreaseTimer = 0;
-            ChangeStats(PlayerStat.TrashIncrement, 5);//must remove hardcoded values
+            ChangeStats(PlayerStat.TrashIncrement, trashIncrement_increment);//must remove hardcoded values
         }
     }
 
@@ -294,7 +296,7 @@ public class GameManager : Singleton<GameManager>
                 break;
 
             case PlayerStat.Timer:
-                daysGameTimer += modifier;
+                daysRemaining += modifier;
                 text = Instantiate(floatingTextPrefab, timeFloatingText);
                 text.UpdateText(((int)modifier).ToString("+#;-#;0") + " seconds", modifier > 0, false);
                 break;
