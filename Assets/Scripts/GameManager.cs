@@ -18,20 +18,25 @@ public class GameManager : Singleton<GameManager>
     [Header ("Trash")]
     private float trashTimer = 0;
     [SerializeField] private float trashIncrementInterval = 3;
-
-    private int trashIncrement_increment = 5;
     [SerializeField] private float trash = 0;
+
+
+    public float trashIncrementTimer = 0;//was private
     [SerializeField] private float trashIncrementAmount = 10;
-    private float trashCapacity = 20000;
+    private int trashIncrement_increment = 5;
+    private int trashIncrementTimerInterval = 60;
+
     private List<GameObject> trashBubbles = new();
-    public float trashIncrementAmountIncreaseTimer = 0;//was private
+    private float trashCapacity = 20000;
 
     [Header ("Followers + Money")]
     private float donationTimer = 0;
 
     private float followerIncomeTimer = 0;
+    private int followerIncomeInterval = 60;
     public float money = 500;
     private float followers = 0;
+
     private float donation = 0;
     private float donationIntensity = 5;
     public float priceModifier = 1;
@@ -129,12 +134,26 @@ public class GameManager : Singleton<GameManager>
                 "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
         }
 
+
         donationTimer += TimeController.instance.elapsedDeltaTime;
         //donationTimer += Time.deltaTime * speed;
         if (donationTimer >= donationIntensity)
         {
             donationTimer = 0;
             CreateBubble();
+        }
+
+
+        followerIncomeTimer += TimeController.instance.elapsedDeltaTime;
+        //followerIncomeTimer += Time.deltaTime * speed;
+        followerIncomeSlider.maxValue = followerIncomeInterval;
+        followerIncomeSlider.value = followerIncomeTimer;
+
+        if (followerIncomeTimer >= followerIncomeInterval)
+        {
+            SoundManager.instance.Income();
+            followerIncomeTimer = 0;
+            ChangeStats(PlayerStat.Money, followers);
         }
 
 
@@ -151,17 +170,8 @@ public class GameManager : Singleton<GameManager>
             }
         }
 
-        followerIncomeTimer += TimeController.instance.elapsedDeltaTime;
-        //followerIncomeTimer += Time.deltaTime * speed;
-        followerIncomeSlider.maxValue = 60;
-        followerIncomeSlider.value = followerIncomeTimer;
 
-        if (followerIncomeTimer >= 60)
-        {
-            SoundManager.instance.Income();
-            followerIncomeTimer = 0;
-            ChangeStats(PlayerStat.Money, followers);
-        }
+
         trashTimer += TimeController.instance.elapsedDeltaTime;
         //trashTimer += Time.deltaTime * speed;
         trashSlider.maxValue = trashIncrementInterval;
@@ -173,11 +183,11 @@ public class GameManager : Singleton<GameManager>
             ChangeStats(PlayerStat.Trash, trashIncrementAmount);
         }
 
-        trashIncrementAmountIncreaseTimer += TimeController.instance.elapsedDeltaTime;
+        trashIncrementTimer += TimeController.instance.elapsedDeltaTime;
         //trashIncrementAmountIncreaseTimer += Time.deltaTime * speed;
-        if (trashIncrementAmountIncreaseTimer >= 60)
+        if (trashIncrementTimer >= trashIncrementTimerInterval)
         {
-            trashIncrementAmountIncreaseTimer = 0;
+            trashIncrementTimer = 0;
             ChangeStats(PlayerStat.TrashIncrement, trashIncrement_increment);//must remove hardcoded values
         }
     }
