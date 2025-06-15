@@ -296,7 +296,7 @@ public class GameManager : Singleton<GameManager>
                 text = Instantiate(floatingTextPrefab, moneyFloatingText);
                 text.UpdateText("<sprite=1>" + ((int)modifier).ToString("+#;-#;0"), modifier > 0, true);
                 foreach (var item in FindObjectsOfType<UpgradeButton>(true))
-                {
+                {//this should be done on open in / update of UpgradeUI
                     if (money >= item.currentUpgradeInfo.price)
                     {
                         upgradeBTNAnimator.SetTrigger("Highlight");
