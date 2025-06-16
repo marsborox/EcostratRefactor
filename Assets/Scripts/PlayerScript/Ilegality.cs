@@ -1,16 +1,6 @@
 using UnityEngine;
 
-public class Ilegality : MonoBehaviour
+public class Ilegality : PlayerStatNew
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
