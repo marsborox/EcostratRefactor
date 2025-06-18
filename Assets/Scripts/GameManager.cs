@@ -285,16 +285,21 @@ public class GameManager : Singleton<GameManager>
                 followers += modifier;
                 if (followers < 0)
                     followers = 0;
+                Spawner.instance.SpawnText(SpawnedStatTextType.FOLLOWER,modifier);
+                /*
                 text = Instantiate(floatingTextPrefab, followersFloatingText);
-                text.UpdateText("<sprite=3>" + ((int)modifier).ToString("+#;-#;0"), modifier > 0, true);
+                text.UpdateText("<sprite=3>" + ((int)modifier).ToString("+#;-#;0"), modifier > 0, true);*/
                 break;
 
             case PlayerStat.Money:
                 money += modifier;
                 if (money < 0)
                     money = 0;
+                Spawner.instance.SpawnText(SpawnedStatTextType.MONEY,modifier);
+                /*
                 text = Instantiate(floatingTextPrefab, moneyFloatingText);
                 text.UpdateText("<sprite=1>" + ((int)modifier).ToString("+#;-#;0"), modifier > 0, true);
+                */
                 foreach (var item in FindObjectsOfType<UpgradeButton>(true))
                 {//this should be done on open in / update of UpgradeUI
                     if (money >= item.currentUpgradeInfo.price)
@@ -307,8 +312,11 @@ public class GameManager : Singleton<GameManager>
 
             case PlayerStat.Timer:
                 daysRemaining += modifier;
+                Spawner.instance.SpawnText(SpawnedStatTextType.TIME, modifier);
+                /*
                 text = Instantiate(floatingTextPrefab, timeFloatingText);
                 text.UpdateText(((int)modifier).ToString("+#;-#;0") + " seconds", modifier > 0, false);
+                */
                 break;
 
             case PlayerStat.Trash:
@@ -323,17 +331,23 @@ public class GameManager : Singleton<GameManager>
                     {
                         RemoveTrashBubble();
                     }
-
+                Spawner.instance.SpawnText(SpawnedStatTextType.TRASH, modifier);
+                
                 text = Instantiate(floatingTextPrefab, trashFloatingText);
                 text.UpdateText("<sprite=0>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
+                
+
                 if (trash < 0)
                     trash = 0;
                 break;
 
             case PlayerStat.TrashIncrement:
                 trashIncrementAmount += modifier;
+                Spawner.instance.SpawnText(SpawnedStatTextType.TRASH, modifier);
+                /*
                 text = Instantiate(floatingTextPrefab, trashFloatingText);
                 text.UpdateText("<sprite=2>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
+                */
                 break;
 
             case PlayerStat.TrashIncrementInterval:
@@ -345,8 +359,11 @@ public class GameManager : Singleton<GameManager>
                 if (illegality < 0)
                     illegality = 0;
                 illegalityTimer = 0;
+                Spawner.instance.SpawnText(SpawnedStatTextType.ILLEGALITY, modifier);
+                /*
                 text = Instantiate(floatingTextPrefab, illegalityFloatingText);
                 text.UpdateText("<sprite=4>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
+                */
                 SoundManager.instance.Illegality();
                 break;
 

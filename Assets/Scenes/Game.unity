@@ -14703,6 +14703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnedText: 0
   _textPrefab: {fileID: 7647043177308104611, guid: b7060d68bef390d4185072f7e10a2146, type: 3}
+  _floatingTextParentTransform: {fileID: 574949716}
   _trashTextSpawnPoint: {fileID: 669177463}
   _followerTextSpawnPoint: {fileID: 1628915546}
   _moneyTextSpawnPoint: {fileID: 796477942}

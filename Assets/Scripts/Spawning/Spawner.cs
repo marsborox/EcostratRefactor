@@ -1,26 +1,31 @@
 using UnityEngine;
 public enum SpawnedStatTextType {TRASH,FOLLOWER,MONEY,TIME,ILLEGALITY };
 public class Spawner : Singleton<Spawner>
-{
+{//might be ui some day
+
     public SpawnedStatTextType spawnedText;
     public static new Spawner instance => Singleton<Spawner>.instance;
 
     [SerializeField] FloatingText _textPrefab;
+    [SerializeField] Transform _floatingTextParentTransform;
 
-    [SerializeField] RectTransform _trashTextSpawnPoint;//up//up
+    [SerializeField] Transform _trashTextSpawnPoint;//up//up
     [SerializeField] Transform _followerTextSpawnPoint;//up
-    [SerializeField] RectTransform _moneyTextSpawnPoint;//up
-    [SerializeField] RectTransform _timeTextSpawnPoint;//down
-    [SerializeField] RectTransform _illegalityTextSpawnPoint;//up
+    [SerializeField] Transform _moneyTextSpawnPoint;//up
+    [SerializeField] Transform _timeTextSpawnPoint;//down
+    [SerializeField] Transform _illegalityTextSpawnPoint;//up
 
     protected override void Awake()
     {
         base.Awake();
     }
 
-    public void SpawnText(SpawnedStatTextType spawnedTextType, int amount)
+    public void SpawnText(SpawnedStatTextType spawnedTextType, float amount)
     { 
         FloatingText spawnedText = Instantiate(_textPrefab);
+        spawnedText.transform.SetParent(_floatingTextParentTransform);
+        //mabye transform absolute or something
+        Debug.Log("SpawningText");
         //spawnedText.UpdateText();
         switch (spawnedTextType)
         {
