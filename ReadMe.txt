@@ -14,16 +14,15 @@ Renamed Camera Canvas to UI Canvas (makes more sense)
 Fixed timer on ui (was running even when game paused)
 Trash increment amount - was being increased same rate disregard the game speed - fixed
 When closing event window - for some reason Hide was triggered twice, causing bug - fixed
-
+Fixed text for add display time
 
 GameManager 
 	-Separate Timer/TimeControl - , moved all time relateed variables to TimeController
--Update-	 News relocated into news class, Update and ChangeStats must be separated into methods doing only one resource/playerStat
+	-Update-	 News relocated into news class, Update and ChangeStats must be separated into methods doing only one resource/playerStat
 		enum PlayerStat - rework this, probably instances of PlayerStat inheriting classes playerGameObject?
 		illegality and followerIncome is the same
 		we can use one method for all slider display - can go to UI
-
-
+	- UI display of spawned text Methods used to Spawner class 
 	
 top buttons - 	 made into toggle group, made own class for SpeedButtons,
 		 assigned per interface w implemented InitiateButton method
@@ -48,9 +47,12 @@ GameManager 	- Update must be divided - noto nly update
 Tutorial - put those windows in que instead, all buttons will subscribe to open
 buttons need fixing all of them
 
-
 we have Interface for button initiation - does not have to be motherClass
 its our standard InitiateButton, with playSound bonus
+
+mute music option-mabye even ingame button
+
+UI does not refresh immediately - because time is postponed, 
 
 mabye UI class and rest will inherit from it
 
