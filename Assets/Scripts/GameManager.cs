@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using 
+
 public class GameManager : Singleton<GameManager>
 {
     public static new GameManager instance => Singleton<GameManager>.instance;
@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     private int trashIncrement_increment = 5;
     private int trashIncrementTimerInterval = 60;
 
-    private List<GameObject> trashBubbles = new();
+    public List<GameObject> trashBubbles = new();
     private float trashCapacity = 20000;
 
     [Header ("Followers + Money")]
@@ -140,7 +140,7 @@ public class GameManager : Singleton<GameManager>
         if (donationTimer >= donationIntensity)
         {
             donationTimer = 0;
-            CreateBubble();
+            Spawner.instance.CreateBubble();
         }
 
 
@@ -210,6 +210,9 @@ public class GameManager : Singleton<GameManager>
         
         return string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
     }
+    
+    #region moveToSpawn
+    /*
     private void CreateBubble()
     {
         Button bubbleInstance = Instantiate(bubblePrefab, interactiveCanvas.transform);
@@ -261,7 +264,8 @@ public class GameManager : Singleton<GameManager>
             color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
         }
         return targetPos;
-    }
+    }*/
+    #endregion
     public void UpdateUI()
     {
         moneyText.text = ((int)money).ToString();
@@ -324,12 +328,12 @@ public class GameManager : Singleton<GameManager>
                 if (modifier > 0)
                     for (int i = 0; i < modifier; i++)
                     {
-                        CreateTrashBubble();
+                        Spawner.instance.CreateTrashBubble();
                     }
                 else
                     for (int i = 0; i > modifier; i--)
                     {
-                        RemoveTrashBubble();
+                        Spawner.instance.RemoveTrashBubble();
                     }
                 Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TRASH, modifier);
                 /*
@@ -454,44 +458,13 @@ public class GameManager : Singleton<GameManager>
         }
         Event tempEvent = Instantiate(eventPrefab, interactiveCanvas.transform);
         if (eventData.mapPosition == Vector2.zero)
-            tempEvent.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(false);
+            tempEvent.GetComponent<RectTransform>().anchoredPosition = Spawner.instance.GetPointOnTerrain(false);
         else
             tempEvent.GetComponent<RectTransform>().anchoredPosition = eventData.mapPosition / 4;
         tempEvent.UpdateEvent(eventData);
         if (eventData.repeatInterval > 0 && repeatTimes > 0)
             StartCoroutine(StartEventTimer(eventData, repeatTimes - 1, true));
     }
-    /*
-    private IEnumerator GameNewsCoroutine()
-    {
-        yield return new WaitUntil(() => gameTimer < 1350);
-        News.instance.AddMessage("There are 273 days remaining. If you plan to save the Earth, you better get moving!");
-        yield return new WaitUntil(() => gameTimer < 900);
-        News.instance.AddMessage("You have exactly half of the time remaining, exactly 182 and a half days. I don’t want to be smart, but I think you really should start making changes for the better if you haven’t realised it yet!");
-        yield return new WaitUntil(() => gameTimer < 450);
-        News.instance.AddMessage("There are 91 days remaining. I don’t care how you want to calculate it, the important thing is that you understand we don’t have any time to waste anymore!");
-        yield return new WaitUntil(() => gameTimer < 300);
-        News.instance.AddMessage("You have 60 days left, i.e. 2 months. Don't forget to check the upgrades for some more time, if needed.");
-        yield return new WaitUntil(() => gameTimer < 150);
-        News.instance.AddMessage("One month remaining! Get moving, otherwise it will be not only Game Over, but also forget about the future of humanity on the Earth.");
-        yield return new WaitUntil(() => gameTimer < 90);
-        News.instance.AddMessage("One week remaining. Garbage is flooding the cities. Doomsday is knocking on the door.");
-        yield return new WaitUntil(() => gameTimer < 30);
-        News.instance.AddMessage("6 days and it’s all over. Thousands of dead fish suffocated are being washed up from the seas and the oceans. Do something about it!");
-        yield return new WaitUntil(() => gameTimer < 15);
-        News.instance.AddMessage("Last rescue task - last 3 days. The whole world is infested with garbage, Doomsday is here!");
-    }
-    private IEnumerator IllegalityNewsCoroutine()
-    {
-        yield return new WaitUntil(() => illegality >= 20);
-        News.instance.AddMessage("Your friend Johny has been summoned for questioning. Be careful so you don’t end up the same!");
-        yield return new WaitUntil(() => illegality >= 40);
-        News.instance.AddMessage("You have been summoned for questioning! No worries, you are well covered, so you are not at risk of any major problems.");
-        yield return new WaitUntil(() => illegality >= 60);
-        News.instance.AddMessage("Black BMWs start to appear suspiciously often around your apartment. It’s starting to look like the cops are watching us.");
-        yield return new WaitUntil(() => illegality >= 80);
-        News.instance.AddMessage("Breaking News! The Green Inc. - helping the planet or a criminal organisation?!");
-    }*/
 
     private IEnumerator SpecialEventsCoroutine()
     {
@@ -506,7 +479,7 @@ public class GameManager : Singleton<GameManager>
                 Event tempEvent = Instantiate(eventPrefab, interactiveCanvas.transform);
                 EventDataScriptable eventData = specialEventDatabase.GetRandomEvent();
                 if (eventData.mapPosition == Vector2.zero)
-                    tempEvent.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(false);
+                    tempEvent.GetComponent<RectTransform>().anchoredPosition = Spawner.instance.GetPointOnTerrain(false);
                 else
                     tempEvent.GetComponent<RectTransform>().anchoredPosition = eventData.mapPosition / 4;
                 tempEvent.UpdateEvent(eventData);
@@ -580,17 +553,7 @@ public class GameManager : Singleton<GameManager>
                 "You have such a great influence on a huge group of your supporters that even the largest manufacturing companies are prying from your hand and are ready to submit to any measures that will help reduce their part of the blame for the pollution of our planet Earth.");
         }
     }
-    /*
-    private IEnumerator DelayedPause(bool value)
-    {
-        yield return new WaitForSeconds(1);
-        PauseGameToggle(value);
-    }*/
-    /*
-    public void PauseGameToggle(bool value)
-    {
-        paused = value;
-    }*/
+
     public bool LegalUltimatePerkUnlocked()
     {
         return negotiationLevel == 5 && socialSitesLevel == 5 && riotsLevel == 5 && socialEventsLevel == 5;
@@ -598,13 +561,7 @@ public class GameManager : Singleton<GameManager>
     public bool IllegalUltimatePerkUnlocked()
     {
         return hackingLevel == 5 && bribeLevel == 5 && blackmailLevel == 5 && landfillsLevel == 5;
-    }/*
-    public void ChangeGameSpeed(int speed)
-    {
-        TimeController.instance.timeSpeed=speed;
-        //this.speed = speed;
-        SoundManager.instance.Speed(speed);
-    }*/
+    }
     public void GameOver(string label, string description)
     {
         gameoverScreen.UpdateTexts(label, description);
@@ -616,3 +573,52 @@ public class GameManager : Singleton<GameManager>
         MySceneManager.instance.MainMenu();
     }
 }
+    /*
+private IEnumerator DelayedPause(bool value)
+{
+    yield return new WaitForSeconds(1);
+    PauseGameToggle(value);
+}*/
+    /*
+    public void PauseGameToggle(bool value)
+    {
+        paused = value;
+    }*/
+    /*
+    public void ChangeGameSpeed(int speed)
+    {
+        TimeController.instance.timeSpeed=speed;
+        //this.speed = speed;
+        SoundManager.instance.Speed(speed);
+    }*/
+    /*
+    private IEnumerator GameNewsCoroutine()
+    {
+        yield return new WaitUntil(() => gameTimer < 1350);
+        News.instance.AddMessage("There are 273 days remaining. If you plan to save the Earth, you better get moving!");
+        yield return new WaitUntil(() => gameTimer < 900);
+        News.instance.AddMessage("You have exactly half of the time remaining, exactly 182 and a half days. I don’t want to be smart, but I think you really should start making changes for the better if you haven’t realised it yet!");
+        yield return new WaitUntil(() => gameTimer < 450);
+        News.instance.AddMessage("There are 91 days remaining. I don’t care how you want to calculate it, the important thing is that you understand we don’t have any time to waste anymore!");
+        yield return new WaitUntil(() => gameTimer < 300);
+        News.instance.AddMessage("You have 60 days left, i.e. 2 months. Don't forget to check the upgrades for some more time, if needed.");
+        yield return new WaitUntil(() => gameTimer < 150);
+        News.instance.AddMessage("One month remaining! Get moving, otherwise it will be not only Game Over, but also forget about the future of humanity on the Earth.");
+        yield return new WaitUntil(() => gameTimer < 90);
+        News.instance.AddMessage("One week remaining. Garbage is flooding the cities. Doomsday is knocking on the door.");
+        yield return new WaitUntil(() => gameTimer < 30);
+        News.instance.AddMessage("6 days and it’s all over. Thousands of dead fish suffocated are being washed up from the seas and the oceans. Do something about it!");
+        yield return new WaitUntil(() => gameTimer < 15);
+        News.instance.AddMessage("Last rescue task - last 3 days. The whole world is infested with garbage, Doomsday is here!");
+    }
+    private IEnumerator IllegalityNewsCoroutine()
+    {
+        yield return new WaitUntil(() => illegality >= 20);
+        News.instance.AddMessage("Your friend Johny has been summoned for questioning. Be careful so you don’t end up the same!");
+        yield return new WaitUntil(() => illegality >= 40);
+        News.instance.AddMessage("You have been summoned for questioning! No worries, you are well covered, so you are not at risk of any major problems.");
+        yield return new WaitUntil(() => illegality >= 60);
+        News.instance.AddMessage("Black BMWs start to appear suspiciously often around your apartment. It’s starting to look like the cops are watching us.");
+        yield return new WaitUntil(() => illegality >= 80);
+        News.instance.AddMessage("Breaking News! The Green Inc. - helping the planet or a criminal organisation?!");
+    }*/

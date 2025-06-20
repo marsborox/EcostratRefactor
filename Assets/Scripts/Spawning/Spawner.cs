@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Pool;
+using UnityEngine.UI;
 public enum SpawnedStatTextType {TRASH,FOLLOWER,MONEY,TIME,ILLEGALITY };
 public class Spawner : Singleton<Spawner>
 {//might be ui some day
@@ -15,7 +15,7 @@ public class Spawner : Singleton<Spawner>
     [SerializeField] Transform _moneyTextSpawnPoint;//up
     [SerializeField] Transform _timeTextSpawnPoint;//down
     [SerializeField] Transform _illegalityTextSpawnPoint;//up
-
+    Vector2 _spawnPosition;
     protected override void Awake()
     {
         base.Awake();
@@ -66,9 +66,84 @@ public class Spawner : Singleton<Spawner>
         }
     }
 
-    public void SpawnTextSwitch(SpawnedStatTextType spawnedText1)
+    public void CreateBubble()
     {
+        Button bubbleInstance = Instantiate(GameManager.instance.bubblePrefab, GameManager.instance.interactiveCanvas.transform);
+        bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(false);
+    }
+    public void CreateTrashBubble()
+    {
+        GameObject bubbleInstance = Instantiate(GameManager.instance.trashBubblePrefab, GameManager.instance.mapCanvas.transform);
+        bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(true);
+        float random = UnityEngine.Random.Range(0.8f, 1.5f);
+        bubbleInstance.GetComponent<RectTransform>().localScale = new Vector3(random, random, random);
+        GameManager.instance.trashBubbles.Add(bubbleInstance);
+    }
+    public void RemoveTrashBubble()
+    {
+        if (GameManager.instance.trashBubbles.Count > 0)
+        {
+            GameObject obj = GameManager.instance.trashBubbles[GameManager.instance.trashBubbles.Count - 1];
+            GameManager.instance.trashBubbles.Remove(obj);
+            Destroy(obj);
+        }
+    }
+    /*
+    public Vector2 GetPointOnTerrain(bool isTrashBubble)
+    {
+        Vector2 targetPos;
+        if (isTrashBubble)
+            targetPos = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080));
+        else
+            targetPos = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253));
 
+        Color color = GameManager.instance.mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
+        while (color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582)    // Sea Color: R 204 G 412 B 480
+        {
+            if (isTrashBubble)
+                targetPos = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080));
+            else
+                targetPos = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253));
+            color = GameManager.instance.mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
+        }
+        return targetPos;
+    }*/
+    public void GetRandomPointOnTerrain()
+    { 
+        // check if 
+    }
+    public Vector2 GetPointOnTerrain(bool isTrashBubble)
+    {
+        if (isTrashBubble)
+        {
+            _spawnPosition = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080)); 
+        }
+        else
+        {
+            _spawnPosition = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253)); 
+        }
+        Color color = GameManager.instance.mapSprite.GetPixel((int)_spawnPosition.x * 4, (int)_spawnPosition.y * 4);
 
+        if (color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582)
+        {
+            GetPointOnTerrain(isTrashBubble);
+        }
+        return _spawnPosition;
+    }
+
+    private Vector2 GetPointOnWater()
+    {
+        Vector2 targetPos = new Vector2(UnityEngine.Random.Range(0, GameManager.instance.mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, GameManager.instance.mapCanvas.pixelRect.height));
+        Color color = GameManager.instance.mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
+        while (!(color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582))
+        {
+            targetPos = new Vector2(UnityEngine.Random.Range(0, GameManager.instance.mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, GameManager.instance.mapCanvas.pixelRect.height));
+            color = GameManager.instance.mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
+        }
+        return targetPos;
+    }
+    private void GetRandomPointOnMap()
+    {
+        
     }
 }

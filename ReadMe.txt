@@ -22,7 +22,8 @@ GameManager
 		enum PlayerStat - rework this, probably instances of PlayerStat inheriting classes playerGameObject?
 		illegality and followerIncome is the same
 		we can use one method for all slider display - can go to UI
-	- UI display of spawned text Methods used to Spawner class 
+	- Spawner - UI display of spawned text Methods used to Spawner class 
+		- Moved stuff to spawner class which should be there, shortened GetPointOnTerrain method
 	
 top buttons - 	 made into toggle group, made own class for SpeedButtons,
 		 assigned per interface w implemented InitiateButton method
