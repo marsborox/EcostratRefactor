@@ -121,7 +121,7 @@ public class GameManager : Singleton<GameManager>
             return;
         TimerDisplay();
 
-        daysRemaining -=TimeController.instance.elapsedDeltaTime;
+        daysRemaining -= TimeController.instance.elapsedDeltaTime;
         //gameTimer -= Time.deltaTime* speed;
         gameTimerSlider.value = daysRemaining;
         //this section goes to timeControl
@@ -133,17 +133,14 @@ public class GameManager : Singleton<GameManager>
             GameOver("Your time to save planet Earth has just run out.",
                 "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
         }
+        DonationTimerSpawner();
+        FollowerIncomeTimerSpawner();
+        IllegalityTimerSpawner();
+        TrashTimerSpawner();
+    }
 
-
-        donationTimer += TimeController.instance.elapsedDeltaTime;
-        //donationTimer += Time.deltaTime * speed;
-        if (donationTimer >= donationIntensity)
-        {
-            donationTimer = 0;
-            Spawner.instance.CreateBubble();
-        }
-
-
+    private void FollowerIncomeTimerSpawner()
+    {
         followerIncomeTimer += TimeController.instance.elapsedDeltaTime;
         //followerIncomeTimer += Time.deltaTime * speed;
         followerIncomeSlider.maxValue = followerIncomeInterval;
@@ -155,8 +152,10 @@ public class GameManager : Singleton<GameManager>
             followerIncomeTimer = 0;
             ChangeStats(PlayerStat.Money, followers);
         }
+    }
 
-
+    private void IllegalityTimerSpawner()
+    {
         if (illegality > 0)
         {
             illegalityTimer += TimeController.instance.elapsedDeltaTime;
@@ -169,9 +168,10 @@ public class GameManager : Singleton<GameManager>
                 illegalityTimer = 0;
             }
         }
+    }
 
-
-
+    private void TrashTimerSpawner()
+    {
         trashTimer += TimeController.instance.elapsedDeltaTime;
         //trashTimer += Time.deltaTime * speed;
         trashSlider.maxValue = trashIncrementInterval;
@@ -189,6 +189,17 @@ public class GameManager : Singleton<GameManager>
         {
             trashIncrementTimer = 0;
             ChangeStats(PlayerStat.TrashIncrement, trashIncrement_increment);//must remove hardcoded values
+        }
+    }
+
+    private void DonationTimerSpawner()
+    {
+        donationTimer += TimeController.instance.elapsedDeltaTime;
+        //donationTimer += Time.deltaTime * speed;
+        if (donationTimer >= donationIntensity)
+        {
+            donationTimer = 0;
+            Spawner.instance.CreateBubble();
         }
     }
 
@@ -211,70 +222,6 @@ public class GameManager : Singleton<GameManager>
         return string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
     }
     
-    #region moveToSpawn
-    /*
-    private void CreateBubble()
-    {
-        Button bubbleInstance = Instantiate(bubblePrefab, interactiveCanvas.transform);
-        bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(false);
-    }
-    private void CreateTrashBubble()
-    {
-        GameObject bubbleInstance = Instantiate(trashBubblePrefab, mapCanvas.transform);
-        bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(true);
-        float random = UnityEngine.Random.Range(0.8f, 1.5f);
-        bubbleInstance.GetComponent<RectTransform>().localScale = new Vector3(random, random, random);
-        trashBubbles.Add(bubbleInstance);
-    }
-    private void RemoveTrashBubble()
-    {
-        if (trashBubbles.Count > 0)
-        {
-            GameObject obj = trashBubbles[trashBubbles.Count - 1];
-            trashBubbles.Remove(obj);
-            Destroy(obj);
-        }
-    }
-    private Vector2 GetPointOnTerrain(bool isTrashBubble)
-    {
-        Vector2 targetPos;
-        if (isTrashBubble)
-            targetPos = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080));
-        else
-            targetPos = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253));
-
-        Color color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
-        while (color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582)    // Sea Color: R 204 G 412 B 480
-        {
-            if (isTrashBubble)
-                targetPos = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080));
-            else
-                targetPos = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253));
-            color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
-        }
-        return targetPos;
-    }
-    private Vector2 GetPointOnWater()
-    {
-        Vector2 targetPos = new Vector2(UnityEngine.Random.Range(0, mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, mapCanvas.pixelRect.height));
-        Color color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
-        while (!(color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582))
-        {
-            targetPos = new Vector2(UnityEngine.Random.Range(0, mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, mapCanvas.pixelRect.height));
-            color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
-        }
-        return targetPos;
-    }*/
-    #endregion
-    public void UpdateUI()
-    {
-        moneyText.text = ((int)money).ToString();
-        followerText.text = followers.ToString();
-        trashText.text = trash.ToString() + "/" + trashCapacity.ToString();
-        illegalitySlider.maxValue = illegalCapacity;
-        illegalitySlider.value = illegality;
-        illegalityText.text = illegality + "/" + illegalCapacity;
-    }
     public void AddMoney()
     {
         ChangeStats(PlayerStat.Money, UnityEngine.Random.Range(10, 51) + donation);
@@ -572,6 +519,15 @@ public class GameManager : Singleton<GameManager>
     {
         MySceneManager.instance.MainMenu();
     }
+    private void UpdateUI()
+    {
+        moneyText.text = ((int)money).ToString();
+        followerText.text = followers.ToString();
+        trashText.text = trash.ToString() + "/" + trashCapacity.ToString();
+        illegalitySlider.maxValue = illegalCapacity;
+        illegalitySlider.value = illegality;
+        illegalityText.text = illegality + "/" + illegalCapacity;
+    }
 }
     /*
 private IEnumerator DelayedPause(bool value)
@@ -622,3 +578,59 @@ private IEnumerator DelayedPause(bool value)
         yield return new WaitUntil(() => illegality >= 80);
         News.instance.AddMessage("Breaking News! The Green Inc. - helping the planet or a criminal organisation?!");
     }*/
+
+    #region moveToSpawn
+    /*
+    private void CreateBubble()
+    {
+        Button bubbleInstance = Instantiate(bubblePrefab, interactiveCanvas.transform);
+        bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(false);
+    }
+    private void CreateTrashBubble()
+    {
+        GameObject bubbleInstance = Instantiate(trashBubblePrefab, mapCanvas.transform);
+        bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(true);
+        float random = UnityEngine.Random.Range(0.8f, 1.5f);
+        bubbleInstance.GetComponent<RectTransform>().localScale = new Vector3(random, random, random);
+        trashBubbles.Add(bubbleInstance);
+    }
+    private void RemoveTrashBubble()
+    {
+        if (trashBubbles.Count > 0)
+        {
+            GameObject obj = trashBubbles[trashBubbles.Count - 1];
+            trashBubbles.Remove(obj);
+            Destroy(obj);
+        }
+    }
+    private Vector2 GetPointOnTerrain(bool isTrashBubble)
+    {
+        Vector2 targetPos;
+        if (isTrashBubble)
+            targetPos = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080));
+        else
+            targetPos = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253));
+
+        Color color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
+        while (color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582)    // Sea Color: R 204 G 412 B 480
+        {
+            if (isTrashBubble)
+                targetPos = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080));
+            else
+                targetPos = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253));
+            color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
+        }
+        return targetPos;
+    }
+    private Vector2 GetPointOnWater()
+    {
+        Vector2 targetPos = new Vector2(UnityEngine.Random.Range(0, mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, mapCanvas.pixelRect.height));
+        Color color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
+        while (!(color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582))
+        {
+            targetPos = new Vector2(UnityEngine.Random.Range(0, mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, mapCanvas.pixelRect.height));
+            color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
+        }
+        return targetPos;
+    }*/
+    #endregion
