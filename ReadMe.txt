@@ -43,7 +43,7 @@ GameManager 	- Update must be divided - noto nly update
 		- Separate Spawner
 
 
-		
+can we do something with performance - instantiation mabye spawning (not pixel but coords/ object		
 
 Tutorial - put those windows in que instead, all buttons will subscribe to open
 buttons need fixing all of them
