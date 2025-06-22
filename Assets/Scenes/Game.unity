@@ -2757,6 +2757,7 @@ MonoBehaviour:
   trash: 0
   trashIncrementTimer: 0
   trashIncrementAmount: 10
+  trashBubbles: []
   money: 1000
   priceModifier: 1
   illegality: 0

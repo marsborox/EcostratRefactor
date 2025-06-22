@@ -37,10 +37,11 @@ Singleton 	- we have Singleton<T> class and SingletonPresistent<T> class (second
 To Do:
 
 GameManager 	- Update must be divided - noto nly update
-		- Update
+		
 		- Separate UI
 		- Separate Sound
-		- Separate Spawner
+		- Update - to dissolve Update need Events, on their trigger all sorts of things will happen - subscribbed 
+			make GetTimestamp Interface, move timerDisplay to Timer class 
 
 
 can we do something with performance - instantiation mabye spawning (not pixel but coords/ object		

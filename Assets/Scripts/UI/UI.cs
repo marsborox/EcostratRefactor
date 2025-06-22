@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-
+using System;
 
 
 public class UI : MonoBehaviour
 {
 
-    public void InitiateButton(Button button, UnityAction method)
+    public void InitiateButton(Button button, System.Action method)
     {
         button.onClick.AddListener(delegate
         {
@@ -16,7 +16,7 @@ public class UI : MonoBehaviour
         //boolUI = false;
     }
 
-    public void InitiateButton<T>(Button button, UnityAction<T> method, T value)
+    public void InitiateButton<T>(Button button, System.Action<T> method, T value)
     {
         button.onClick.AddListener(delegate
         {
