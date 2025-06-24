@@ -17,22 +17,30 @@ When closing event window - for some reason Hide was triggered twice, causing bu
 Fixed text for add display time
 
 GameManager 
+
+Events
+we created EventHandler that will Invoke events and other stuff will subscribe to them,
 	-Separate Timer/TimeControl - , moved all time relateed variables to TimeController
-	-Update-	 News relocated into news class, Update and ChangeStats must be separated into methods doing only one resource/playerStat
-		enum PlayerStat - rework this, probably instances of PlayerStat inheriting classes playerGameObject?
-		illegality and followerIncome is the same
-		we can use one method for all slider display - can go to UI
+
+	-Update	- News relocated into news class, methods that add time to counter if treshold full do method - 
+	we are using the generic one and it will invoke events, NEXT TIME SUBSCRIBE 
+		
+		
 	- Spawner - UI display of spawned text Methods used to Spawner class 
 		- Moved stuff to spawner class which should be there, shortened GetPointOnTerrain method
+		- 
 	
-top buttons - 	 made into toggle group, made own class for SpeedButtons,
+top buttons - 	 made into toggle group, made own class for SpeedButtons,-must redo this 
 		 assigned per interface w implemented InitiateButton method
 
 Singleton 	- we have Singleton<T> class and SingletonPresistent<T> class (second inherits from first)
-		-implemented on MySceneManager(Perma), 
+		- implemented on MySceneManager(Perma), 
 		- SoundManager(Perma), RadioSoundManager,  TimeController, 
 		- (UI) News, UpgradesDescriptionPanel, UpgradesWindow, EventWindow, GameManager, 
 		- Some Singletons are now prefabs
+
+Interfaces	- we have Interface for button initiation - does not have to be motherClass
+		- its our standard InitiateButton, with playSound bonus
 
 To Do:
 
@@ -42,6 +50,12 @@ GameManager 	- Update must be divided - noto nly update
 		- Separate Sound
 		- Update - to dissolve Update need Events, on their trigger all sorts of things will happen - subscribbed 
 			make GetTimestamp Interface, move timerDisplay to Timer class 
+			 - Update and ChangeStats must be separated into methods doing only one resource/playerStat
+
+			- enum PlayerStat - rework this, probably instances of PlayerStat inheriting classes playerGameObject?
+		illegality and followerIncome is the same
+		- we can use one method for all slider display - can go to UI
+
 
 
 can we do something with performance - instantiation mabye spawning (not pixel but coords/ object		
@@ -49,8 +63,6 @@ can we do something with performance - instantiation mabye spawning (not pixel b
 Tutorial - put those windows in que instead, all buttons will subscribe to open
 buttons need fixing all of them
 
-we have Interface for button initiation - does not have to be motherClass
-its our standard InitiateButton, with playSound bonus
 
 mute music option-mabye even ingame button
 

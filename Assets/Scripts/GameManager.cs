@@ -138,10 +138,30 @@ public class GameManager : Singleton<GameManager>
         IllegalityTimerSpawner();
         TrashTimerSpawner();
         TrashIncrementTimeSpawner();
+        CalcAllTimers();
     }
-
+    #region WhatWasInUpdate
+    private void CalcAllTimers()
+    {
+        GenericTimerSpawner(ref donationTimer,donationIntensity,MyEventHandler.instance.DonationTimerSpawnerEvent);
+        GenericTimerSpawner(ref followerIncomeTimer,followerIncomeInterval, MyEventHandler.instance.FollowerIncomeTimerSpawner);
+        GenericTimerSpawner(ref illegality, illegalReductionInterval, MyEventHandler.instance.IllegalityTimerSpawner);
+        GenericTimerSpawner(ref trashTimer, trashIncrementInterval,MyEventHandler.instance.TrashTimerSpawner);
+        GenericTimerSpawner(ref trashIncrementTimer, trashIncrementTimerInterval, MyEventHandler.instance.TrashIncrementTimeSpawner);
+    }
+    private void DonationTimerSpawner()
+    {
+        donationTimer += TimeController.instance.elapsedDeltaTime;
+        //donationTimer += Time.deltaTime * speed;
+        if (donationTimer >= donationIntensity)
+        {
+            donationTimer -=donationIntensity;
+            Spawner.instance.CreateBubble();
+        }
+    }
     private void FollowerIncomeTimerSpawner()
     {
+
         followerIncomeTimer += TimeController.instance.elapsedDeltaTime;
         //followerIncomeTimer += Time.deltaTime * speed;
 
@@ -154,12 +174,12 @@ public class GameManager : Singleton<GameManager>
         }
         followerIncomeSlider.maxValue = followerIncomeInterval;
         followerIncomeSlider.value = followerIncomeTimer;
+        
     }
 
     private void IllegalityTimerSpawner()
     {
-        if (illegality > 0)
-        {
+
             illegalityTimer += TimeController.instance.elapsedDeltaTime;
             //illegalityTimer += Time.deltaTime * speed;
 
@@ -170,7 +190,7 @@ public class GameManager : Singleton<GameManager>
             }
             illegalityReductionSlider.maxValue = illegalReductionInterval;
             illegalityReductionSlider.value = illegalityTimer;
-        }
+
     }
 
     private void TrashTimerSpawner()
@@ -199,16 +219,6 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    private void DonationTimerSpawner()
-    {
-        donationTimer += TimeController.instance.elapsedDeltaTime;
-        //donationTimer += Time.deltaTime * speed;
-        if (donationTimer >= donationIntensity)
-        {
-            donationTimer -=donationIntensity;
-            Spawner.instance.CreateBubble();
-        }
-    }
     private void GenericTimerSpawner(ref float timer, float treshold, System.Action method)
     {
         timer += TimeController.instance.elapsedDeltaTime;
@@ -218,7 +228,7 @@ public class GameManager : Singleton<GameManager>
             method();
         }
     }
-
+    #endregion
     private void TimerDisplay()
     {
         elapsedTime += TimeController.instance.elapsedDeltaTime;
