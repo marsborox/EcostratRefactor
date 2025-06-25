@@ -20,7 +20,10 @@ GameManager
 
 Events
 we created EventHandler that will Invoke events and other stuff will subscribe to them,
+	its kinda working but broken, must fix why illegality coutns weird, trash substract twice time, illegality adds every second - prob smthing with counting
+
 	-Separate Timer/TimeControl - , moved all time relateed variables to TimeController
+	
 
 	-Update	- News relocated into news class, methods that add time to counter if treshold full do method - 
 	we are using the generic one and it will invoke events, NEXT TIME SUBSCRIBE 
@@ -55,6 +58,12 @@ GameManager 	- Update must be divided - noto nly update
 			- enum PlayerStat - rework this, probably instances of PlayerStat inheriting classes playerGameObject?
 		illegality and followerIncome is the same
 		- we can use one method for all slider display - can go to UI
+
+lets move Time counting into time prob.+
+
+notes for PlayerStats
+Moving TImerSpawner - Donation Income, FOllowerIncome, Illegality,trashTimer,TrashIncrement,
+
 
 
 
