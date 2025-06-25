@@ -16,15 +16,15 @@ public class GameManager : Singleton<GameManager>
     //public int speed = 1;
 
     [Header ("Trash")]
-    private float trashTimer = 0;
-    [SerializeField] private float trashIncrementInterval = 3;
+    public float trashTimer = 0;
+    [SerializeField] public float trashIncrementInterval = 3;
     [SerializeField] private float trash = 0;
 
 
     public float trashIncrementTimer = 0;//was private
-    [SerializeField] private float trashIncrementAmount = 10;
-    private int trashIncrement_increment = 5;
-    private int trashIncrementTimerInterval = 60;
+    [SerializeField] public float trashIncrementAmount = 10;
+    public int trashIncrement_increment = 5;
+    public int trashIncrementTimerInterval = 60;
 
     public List<GameObject> trashBubbles = new();
     private float trashCapacity = 20000;
@@ -32,20 +32,20 @@ public class GameManager : Singleton<GameManager>
     [Header ("Followers + Money")]
     private float donationTimer = 0;
 
-    private float followerIncomeTimer = 0;
-    private int followerIncomeInterval = 60;
+    public float followerIncomeTimer = 0;
+    public int followerIncomeInterval = 60;
     public float money = 500;
-    private float followers = 0;
+    public float followers = 0;
 
     private float donation = 0;
     private float donationIntensity = 5;
     public float priceModifier = 1;
 
     [Header("Illegality")]
-    private float illegalityTimer = 0;
+    public float illegalityTimer = 0;
 
-    private float illegalReductionInterval = 120;
-    private float illegalityIncrement = -5;
+    public float illegalReductionInterval = 120;
+    public int illegalityIncrement = -5;
 
     [SerializeField] public float illegality = 0;
     private int illegalCapacity = 100;
@@ -133,12 +133,15 @@ public class GameManager : Singleton<GameManager>
             GameOver("Your time to save planet Earth has just run out.",
                 "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
         }
+        
         DonationTimerSpawner();
         FollowerIncomeTimerSpawner();
         IllegalityTimerSpawner();
         TrashTimerSpawner();
         TrashIncrementTimeSpawner();
-        CalcAllTimers();
+        
+        //******
+        //CalcAllTimers();
     }
     #region WhatWasInUpdate
     private void CalcAllTimers()
@@ -148,6 +151,15 @@ public class GameManager : Singleton<GameManager>
         GenericTimerSpawner(ref illegality, illegalReductionInterval, MyEventHandler.instance.IllegalityTimerSpawner);
         GenericTimerSpawner(ref trashTimer, trashIncrementInterval,MyEventHandler.instance.TrashTimerSpawner);
         GenericTimerSpawner(ref trashIncrementTimer, trashIncrementTimerInterval, MyEventHandler.instance.TrashIncrementTimeSpawner);
+    }
+    private void GenericTimerSpawner(ref float timer, float treshold, System.Action method)
+    {
+        timer += TimeController.instance.elapsedDeltaTime;
+        if (timer >= treshold)
+        {
+            timer -=treshold;
+            method();
+        }
     }
     private void DonationTimerSpawner()
     {
@@ -161,7 +173,6 @@ public class GameManager : Singleton<GameManager>
     }
     private void FollowerIncomeTimerSpawner()
     {
-
         followerIncomeTimer += TimeController.instance.elapsedDeltaTime;
         //followerIncomeTimer += Time.deltaTime * speed;
 
@@ -182,11 +193,10 @@ public class GameManager : Singleton<GameManager>
 
             illegalityTimer += TimeController.instance.elapsedDeltaTime;
             //illegalityTimer += Time.deltaTime * speed;
-
             if (illegalityTimer >= illegalReductionInterval)
             {
                 ChangeStats(PlayerStat.Illegality, illegalityIncrement);
-                illegalityTimer -= followerIncomeInterval;
+                illegalityTimer -= illegalReductionInterval;
             }
             illegalityReductionSlider.maxValue = illegalReductionInterval;
             illegalityReductionSlider.value = illegalityTimer;
@@ -199,7 +209,7 @@ public class GameManager : Singleton<GameManager>
 
         if (trashTimer >= trashIncrementInterval)
         {
-            trashTimer -= trashIncrementInterval;
+            trashTimer += trashIncrementInterval;
             ChangeStats(PlayerStat.Trash, trashIncrementAmount);
         }
         //UI
@@ -216,16 +226,6 @@ public class GameManager : Singleton<GameManager>
         {
             trashIncrementTimer -= trashIncrementTimerInterval;
             ChangeStats(PlayerStat.TrashIncrement, trashIncrement_increment);
-        }
-    }
-
-    private void GenericTimerSpawner(ref float timer, float treshold, System.Action method)
-    {
-        timer += TimeController.instance.elapsedDeltaTime;
-        if (timer >= treshold)
-        {
-            timer = -treshold;
-            method();
         }
     }
     #endregion

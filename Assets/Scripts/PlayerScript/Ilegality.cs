@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Ilegality : PlayerStatNew
+public class Ilegality : PlayerStatsNew
 {
     
 }

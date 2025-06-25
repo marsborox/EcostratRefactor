@@ -2565,6 +2565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 295448209}
+  - component: {fileID: 295448210}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2587,6 +2588,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &295448210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295448208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8712ce21db66ea7468c7f7e644976cff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statTimer: 0
+  statTreshold: 0
+  statAmmount: 0
+  statIncrement: 0
+  trashTimer: 0
+  trashIncrementInterval: 0
+  trashAmmount: 0
+  trashIncrementAmmount: 0
+  trashIncrementTimer: 0
+  trashIncrementTimerInterval: 0
+  trashIncrementAmmount_____: 0
+  trashIncrement_increment: 0
+  followerIncomeTimer: 0
+  followerIncomeTimerInterval: 0
+  followerIncomeAmmount: 0
+  followerAmmount: 0
+  illegalityTimer: 0
+  illegalityTimerInterval: 0
+  illegalityAmmount: 0
+  illegalityIncrementAmmount: 0
 --- !u!1 &321536646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2734,7 +2767,7 @@ GameObject:
   - component: {fileID: 342608022}
   - component: {fileID: 342608023}
   m_Layer: 0
-  m_Name: CodeEventHandler
+  m_Name: MyEventHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2767,6 +2800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a65ab5f2f76cff458b16c2a33884446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberrrr: 0
 --- !u!1 &348457562
 GameObject:
   m_ObjectHideFlags: 0
@@ -2797,13 +2831,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   daysRemaining: 1825
+  trashTimer: 0
   trashIncrementInterval: 3
   trash: 0
   trashIncrementTimer: 0
   trashIncrementAmount: 10
   trashBubbles: []
+  followerIncomeTimer: 0
+  followerIncomeInterval: 60
   money: 1000
+  followers: 0
   priceModifier: 1
+  illegalityTimer: 0
+  illegalReductionInterval: 120
+  illegalityIncrement: -5
   illegality: 0
   hints: 0
   specialEventDatabase: {fileID: 11400000, guid: 1acabb3c13918a14da04a2de7dce2757, type: 2}

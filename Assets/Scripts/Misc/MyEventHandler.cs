@@ -23,7 +23,6 @@ public class MyEventHandler : Singleton<MyEventHandler>
     {
         
     }
-
     // Update is called once per frame
     void Update()
     {
