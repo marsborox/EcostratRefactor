@@ -20,7 +20,7 @@ GameManager
 
 Events
 we created EventHandler that will Invoke events and other stuff will subscribe to them,
-	its kinda working but broken, must fix why illegality coutns weird, trash substract twice time, illegality adds every second - prob smthing with counting
+	Events work fine w subscribed methods;
 
 	-Separate Timer/TimeControl - , moved all time relateed variables to TimeController
 	
@@ -47,12 +47,16 @@ Interfaces	- we have Interface for button initiation - does not have to be mothe
 
 To Do:
 
+
+
 GameManager 	- Update must be divided - noto nly update
 		
 		- Separate UI
 		- Separate Sound
 		- Update - to dissolve Update need Events, on their trigger all sorts of things will happen - subscribbed 
 			make GetTimestamp Interface, move timerDisplay to Timer class 
+			Events 		- migrate changeStats methods accordingly, move TIMECounting into TimeController? or own class / rename controller
+
 			 - Update and ChangeStats must be separated into methods doing only one resource/playerStat
 
 			- enum PlayerStat - rework this, probably instances of PlayerStat inheriting classes playerGameObject?

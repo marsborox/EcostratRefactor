@@ -133,22 +133,15 @@ public class GameManager : Singleton<GameManager>
             GameOver("Your time to save planet Earth has just run out.",
                 "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
         }
-        /*
-        DonationTimerSpawner();
-        FollowerIncomeTimerSpawner();
-        IllegalityTimerSpawner();
-        TrashTimerSpawner();
-        TrashIncrementTimeSpawner();
-        */
+
         //******
         CalcAllTimers();
     }
-    #region WhatWasInUpdate
     private void CalcAllTimers()
     {
         GenericTimerSpawner(ref donationTimer,donationIntensity,MyEventHandler.instance.DonationTimerSpawnerEvent);
         GenericTimerSpawner(ref followerIncomeTimer,followerIncomeInterval, MyEventHandler.instance.FollowerIncomeTimerSpawner);
-        GenericTimerSpawner(ref illegality, illegalReductionInterval, MyEventHandler.instance.IllegalityTimerSpawner);
+        GenericTimerSpawner(ref illegalityTimer, illegalReductionInterval, MyEventHandler.instance.IllegalityTimerSpawner);
         GenericTimerSpawner(ref trashTimer, trashIncrementInterval,MyEventHandler.instance.TrashTimerSpawner);
         GenericTimerSpawner(ref trashIncrementTimer, trashIncrementTimerInterval, MyEventHandler.instance.TrashIncrementTimeSpawner);
     }
@@ -161,72 +154,6 @@ public class GameManager : Singleton<GameManager>
             method();
         }
     }
-    private void DonationTimerSpawner()
-    {
-        donationTimer += TimeController.instance.elapsedDeltaTime;
-        //donationTimer += Time.deltaTime * speed;
-        if (donationTimer >= donationIntensity)
-        {
-            donationTimer -=donationIntensity;
-            Spawner.instance.CreateBubble();
-        }
-    }
-    private void FollowerIncomeTimerSpawner()
-    {
-        followerIncomeTimer += TimeController.instance.elapsedDeltaTime;
-        //followerIncomeTimer += Time.deltaTime * speed;
-
-        if (followerIncomeTimer >= followerIncomeInterval)
-        {
-            SoundManager.instance.Income();
-
-            followerIncomeTimer -= followerIncomeInterval;
-            ChangeStats(PlayerStat.Money, followers);
-        }
-        followerIncomeSlider.maxValue = followerIncomeInterval;
-        followerIncomeSlider.value = followerIncomeTimer;
-        
-    }
-
-    private void IllegalityTimerSpawner()
-    {
-            illegalityTimer += TimeController.instance.elapsedDeltaTime;
-            //illegalityTimer += Time.deltaTime * speed;
-            if (illegalityTimer >= illegalReductionInterval)
-            {
-                ChangeStats(PlayerStat.Illegality, illegalityIncrement);
-                illegalityTimer -= illegalReductionInterval;
-            }
-            illegalityReductionSlider.maxValue = illegalReductionInterval;
-            illegalityReductionSlider.value = illegalityTimer;
-    }
-
-    private void TrashTimerSpawner()
-    {
-        //trashTimer += Time.deltaTime * speed;
-        if (trashTimer >= trashIncrementInterval)
-        {
-            trashTimer += trashIncrementInterval;
-            ChangeStats(PlayerStat.Trash, trashIncrementAmount);
-        }
-        //UI
-        trashSlider.maxValue = trashIncrementInterval;
-        trashSlider.value = trashTimer;
-    }
-
-    
-
-    private void TrashIncrementTimeSpawner()
-    {
-        trashIncrementTimer += TimeController.instance.elapsedDeltaTime;
-        //trashIncrementAmountIncreaseTimer += Time.deltaTime * speed;
-        if (trashIncrementTimer >= trashIncrementTimerInterval)
-        {
-            trashIncrementTimer -= trashIncrementTimerInterval;
-            ChangeStats(PlayerStat.TrashIncrement, trashIncrement_increment);
-        }
-    }
-    #endregion
     private void TimerDisplay()
     {
         elapsedTime += TimeController.instance.elapsedDeltaTime;
@@ -655,5 +582,84 @@ private IEnumerator DelayedPause(bool value)
             color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
         }
         return targetPos;
+    }*/
+    #endregion
+    #region WhatWasInUpdate
+    
+    /*
+    void Update2() 
+    {//this was in update
+        
+        DonationTimerSpawner();
+        FollowerIncomeTimerSpawner();
+        IllegalityTimerSpawner();
+        TrashTimerSpawner();
+        TrashIncrementTimeSpawner();
+        
+    }
+    private void DonationTimerSpawner()
+    {
+        donationTimer += TimeController.instance.elapsedDeltaTime;
+        //donationTimer += Time.deltaTime * speed;
+        if (donationTimer >= donationIntensity)
+        {
+            donationTimer -=donationIntensity;
+            Spawner.instance.CreateBubble();
+        }
+    }
+    private void FollowerIncomeTimerSpawner()
+    {
+        followerIncomeTimer += TimeController.instance.elapsedDeltaTime;
+        //followerIncomeTimer += Time.deltaTime * speed;
+
+        if (followerIncomeTimer >= followerIncomeInterval)
+        {
+            SoundManager.instance.Income();
+
+            followerIncomeTimer -= followerIncomeInterval;
+            ChangeStats(PlayerStat.Money, followers);
+        }
+        followerIncomeSlider.maxValue = followerIncomeInterval;
+        followerIncomeSlider.value = followerIncomeTimer;
+        
+    }
+
+    private void IllegalityTimerSpawner()
+    {
+            illegalityTimer += TimeController.instance.elapsedDeltaTime;
+            //illegalityTimer += Time.deltaTime * speed;
+            if (illegalityTimer >= illegalReductionInterval)
+            {
+                ChangeStats(PlayerStat.Illegality, illegalityIncrement);
+                illegalityTimer -= illegalReductionInterval;
+            }
+            illegalityReductionSlider.maxValue = illegalReductionInterval;
+            illegalityReductionSlider.value = illegalityTimer;
+    }
+
+    private void TrashTimerSpawner()
+    {
+        //trashTimer += Time.deltaTime * speed;
+        if (trashTimer >= trashIncrementInterval)
+        {
+            trashTimer += trashIncrementInterval;
+            ChangeStats(PlayerStat.Trash, trashIncrementAmount);
+        }
+        //UI
+        trashSlider.maxValue = trashIncrementInterval;
+        trashSlider.value = trashTimer;
+    }
+
+    
+
+    private void TrashIncrementTimeSpawner()
+    {
+        trashIncrementTimer += TimeController.instance.elapsedDeltaTime;
+        //trashIncrementAmountIncreaseTimer += Time.deltaTime * speed;
+        if (trashIncrementTimer >= trashIncrementTimerInterval)
+        {
+            trashIncrementTimer -= trashIncrementTimerInterval;
+            ChangeStats(PlayerStat.TrashIncrement, trashIncrement_increment);
+        }
     }*/
     #endregion

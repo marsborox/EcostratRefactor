@@ -123,7 +123,7 @@ public class PlayerStatsNew : MonoBehaviour
     }
     void ChangeTrashIncrement()
     {
-        gameManager.ChangeStats(PlayerStat.TrashIncrement, trashIncrement_increment);
+        gameManager.ChangeStats(PlayerStat.TrashIncrement, gameManager.trashIncrement_increment);
     }
 
 }
