@@ -133,15 +133,15 @@ public class GameManager : Singleton<GameManager>
             GameOver("Your time to save planet Earth has just run out.",
                 "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
         }
-        
+        /*
         DonationTimerSpawner();
         FollowerIncomeTimerSpawner();
         IllegalityTimerSpawner();
         TrashTimerSpawner();
         TrashIncrementTimeSpawner();
-        
+        */
         //******
-        //CalcAllTimers();
+        CalcAllTimers();
     }
     #region WhatWasInUpdate
     private void CalcAllTimers()
@@ -190,7 +190,6 @@ public class GameManager : Singleton<GameManager>
 
     private void IllegalityTimerSpawner()
     {
-
             illegalityTimer += TimeController.instance.elapsedDeltaTime;
             //illegalityTimer += Time.deltaTime * speed;
             if (illegalityTimer >= illegalReductionInterval)
@@ -200,13 +199,11 @@ public class GameManager : Singleton<GameManager>
             }
             illegalityReductionSlider.maxValue = illegalReductionInterval;
             illegalityReductionSlider.value = illegalityTimer;
-
     }
 
     private void TrashTimerSpawner()
     {
         //trashTimer += Time.deltaTime * speed;
-
         if (trashTimer >= trashIncrementInterval)
         {
             trashTimer += trashIncrementInterval;
@@ -217,11 +214,12 @@ public class GameManager : Singleton<GameManager>
         trashSlider.value = trashTimer;
     }
 
+    
+
     private void TrashIncrementTimeSpawner()
     {
         trashIncrementTimer += TimeController.instance.elapsedDeltaTime;
         //trashIncrementAmountIncreaseTimer += Time.deltaTime * speed;
-
         if (trashIncrementTimer >= trashIncrementTimerInterval)
         {
             trashIncrementTimer -= trashIncrementTimerInterval;
@@ -237,14 +235,12 @@ public class GameManager : Singleton<GameManager>
         /*
         System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(elapsedTime);
         elapsedTime += Time.deltaTime * speed;
-
         elapsedTimeText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
         */
     }
     public string GetTimeStamp()
     {
         System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(elapsedTime);
-        
         return string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
     }
     
@@ -545,8 +541,9 @@ public class GameManager : Singleton<GameManager>
     {
         MySceneManager.instance.MainMenu();
     }
-    private void UpdateUI()
+    public void UpdateUI()
     {
+        Debug.Log("updating UI");
         moneyText.text = ((int)money).ToString();
         followerText.text = followers.ToString();
         trashText.text = trash.ToString() + "/" + trashCapacity.ToString();

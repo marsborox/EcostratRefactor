@@ -107,22 +107,19 @@ public class PlayerStatsNew : MonoBehaviour
     {
         gameManager.ChangeStats(PlayerStat.Money, gameManager.followers);
         //move this to UI somewhere should be in update
-        gameManager.followerIncomeSlider.maxValue = gameManager.followerIncomeInterval;
-        gameManager.followerIncomeSlider.value = gameManager.followerIncomeTimer;
+
     }
     void ChangeIllegality()
     {
         gameManager.ChangeStats(PlayerStat.Illegality, gameManager.illegalityIncrement);
         //move this to UI somewhere should be in update
-        gameManager.illegalityReductionSlider.maxValue = gameManager.illegalReductionInterval;
-        gameManager.illegalityReductionSlider.value = gameManager.illegalityTimer;
+
     }
     void ChangeTrash()
     {
         gameManager.ChangeStats(PlayerStat.Trash, gameManager.trashIncrementAmount);
         //move this to UI somewhere should be in update
-        gameManager.trashSlider.maxValue = gameManager.trashIncrementInterval;
-        gameManager.trashSlider.value = gameManager.trashTimer;
+
     }
     void ChangeTrashIncrement()
     {

@@ -59,6 +59,8 @@ GameManager 	- Update must be divided - noto nly update
 		illegality and followerIncome is the same
 		- we can use one method for all slider display - can go to UI
 
+Playerstats broken 
+
 lets move Time counting into time prob.+
 
 notes for PlayerStats
