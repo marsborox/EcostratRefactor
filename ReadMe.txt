@@ -22,8 +22,8 @@ Events
 we created EventHandler that will Invoke events and other stuff will subscribe to them,
 	Events work fine w subscribed methods;
 
-	-Separate Timer/TimeControl - , moved all time relateed variables to TimeController
-	
+	-MainTimer - Separate Timer/TimeControl - , moved all time relateed variables to TimeController
+			- we added counting time to spawn event for stat value manipulation,
 
 	-Update	- News relocated into news class, methods that add time to counter if treshold full do method - 
 	we are using the generic one and it will invoke events, NEXT TIME SUBSCRIBE 
