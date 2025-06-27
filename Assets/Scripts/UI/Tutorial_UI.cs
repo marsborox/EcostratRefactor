@@ -55,6 +55,6 @@ public class Tutorial_UI : MonoBehaviour, I_InitiateButton
     void CloseTutorial(GameObject closeUI)
     {
         closeUI.SetActive(false);
-        TimeController.instance.UnpauseGame();
+        MainTimer.instance.UnpauseGame();
     }
 }

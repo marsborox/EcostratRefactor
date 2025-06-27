@@ -81,7 +81,7 @@ public class PlayerStatsNew : MonoBehaviour
     }
     void StatAddTimer()
     {
-        statTimer += TimeController.instance.elapsedDeltaTime;
+        statTimer += MainTimer.instance.elapsedDeltaTime;
         if (statTimer >= statTreshold)
         {
             //DoSound
@@ -92,7 +92,7 @@ public class PlayerStatsNew : MonoBehaviour
     }
     void StatAddTimer(ref float timer,int treshold,System.Action method)
     {
-        timer += TimeController.instance.elapsedDeltaTime;
+        timer += MainTimer.instance.elapsedDeltaTime;
         if (timer >= treshold)
         {
             timer = -treshold;

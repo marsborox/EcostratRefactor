@@ -2845,7 +2845,7 @@ MonoBehaviour:
   followers: 0
   priceModifier: 1
   illegalityTimer: 0
-  illegalReductionInterval: 120
+  illegalityReductionInterval: 120
   illegalityIncrement: -5
   illegality: 0
   hints: 0
@@ -7071,7 +7071,7 @@ MonoBehaviour:
   _toggleX2: {fileID: 1539165774}
   _toggleX3: {fileID: 1353270317}
   _gameManager: {fileID: 348457563}
-  _timeController: {fileID: 1096999222}
+  _timeController: {fileID: 0}
 --- !u!1 &751130155
 GameObject:
   m_ObjectHideFlags: 0
@@ -9593,13 +9593,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1096999220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f819732f3721a42a1c631f5152e8c7, type: 3}
+  m_Script: {fileID: 11500000, guid: d2815d39de64cf342bd2d9c86c1f797c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   elapsedDeltaTime: 0
   timeSpeed: 1
   pauseTimeSpeedReference: 1
   paused: 1
+  _donationIncomeTimer: 0
+  _donationIncomeInterval: 5
+  _followerIncomeTimer: 0
+  _followerIncomeInterval: 60
+  _illegalityTimer: 0
+  _illegalReductionInterval: 120
+  _trashTimer: 0
+  _trashTimerInterval: 3
+  _trashIncrementTimer: 0
+  _trashIncrementTimerInterval: 60
 --- !u!1 &1101403724
 GameObject:
   m_ObjectHideFlags: 0
@@ -12017,8 +12027,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1434164004}
+  - component: {fileID: 1434164005}
   m_Layer: 5
-  m_Name: LeftSideStats
+  m_Name: LeftPanel_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12046,6 +12057,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1434164005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434164003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cdeb46f4eb8f2944b951b8e8ecc801e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1442842548
 GameObject:
   m_ObjectHideFlags: 0
@@ -12869,7 +12892,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1096999222}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TimeController, Assembly-CSharp
         m_MethodName: PauseGameToggle
         m_Mode: 1
@@ -14394,41 +14417,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!1 &1652742582
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1652742583}
-  m_Layer: 5
-  m_Name: PlayerStat_UI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1652742583
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1652742582}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1920935007}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1668043021
 GameObject:
   m_ObjectHideFlags: 0
@@ -15540,7 +15528,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1096999222}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TimeController, Assembly-CSharp
         m_MethodName: UnpauseGame
         m_Mode: 1
@@ -15700,7 +15688,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1096999222}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TimeController, Assembly-CSharp
         m_MethodName: PauseGame
         m_Mode: 1
@@ -17302,7 +17290,6 @@ RectTransform:
   - {fileID: 1548426753}
   - {fileID: 432248033}
   - {fileID: 455028372}
-  - {fileID: 1652742583}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

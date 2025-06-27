@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class PlayerStatUI : MonoBehaviour
+public class LeftPanel : UI
 {
     GameManager gameManager;
 
-    private void Awake()
+    private void Start()
     {
         gameManager = GameManager.instance;
     }
@@ -18,12 +18,12 @@ public class PlayerStatUI : MonoBehaviour
         gameManager.followerIncomeSlider.maxValue = gameManager.followerIncomeInterval;
         gameManager.followerIncomeSlider.value = gameManager.followerIncomeTimer;
 
-        gameManager.illegalityReductionSlider.maxValue = gameManager.illegalReductionInterval;
+        gameManager.illegalityReductionSlider.maxValue = gameManager.illegalityReductionInterval;
         gameManager.illegalityReductionSlider.value = gameManager.illegalityTimer;
 
         gameManager.trashSlider.maxValue = gameManager.trashIncrementInterval;
         gameManager.trashSlider.value = gameManager.trashTimer;
         //gameManager.Upda
-        Debug.Log("updating UI");
+        Debug.Log("updating UI.LeftPanel");
     }
 }

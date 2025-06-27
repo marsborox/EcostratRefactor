@@ -11,14 +11,14 @@ public class GameManager : Singleton<GameManager>
     [Header ("Time")]
     private float oneDayInSec;
     public  float daysRemaining = 1825;
-    private float elapsedTime = 0;
+    public float elapsedTime = 0;
     /*public bool paused = true;*/
     //public int speed = 1;
 
     [Header ("Trash")]
     public float trashTimer = 0;
     [SerializeField] public float trashIncrementInterval = 3;
-    [SerializeField] private float trash = 0;
+    [SerializeField] private float trash = 10000;
 
 
     public float trashIncrementTimer = 0;//was private
@@ -31,20 +31,21 @@ public class GameManager : Singleton<GameManager>
 
     [Header ("Followers + Money")]
     private float donationTimer = 0;
+    private float donationIncomeInterval = 5;
 
     public float followerIncomeTimer = 0;
     public int followerIncomeInterval = 60;
+
     public float money = 500;
     public float followers = 0;
 
     private float donation = 0;
-    private float donationIntensity = 5;
     public float priceModifier = 1;
 
     [Header("Illegality")]
     public float illegalityTimer = 0;
 
-    public float illegalReductionInterval = 120;
+    public float illegalityReductionInterval = 120;
     public int illegalityIncrement = -5;
 
     [SerializeField] public float illegality = 0;
@@ -104,7 +105,6 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         Canvas.GetDefaultCanvasMaterial().enableInstancing = true;
-        ChangeStats(PlayerStat.Trash, 10000);
         foreach (var item in eventDatabase.events)
         {
             StartCoroutine(StartEventTimer(item, item.repeatTimes, false));
@@ -117,11 +117,11 @@ public class GameManager : Singleton<GameManager>
     }
     private void Update()
     {
-        if (TimeController.instance.paused)
+        if (MainTimer.instance.paused)
             return;
         TimerDisplay();
 
-        daysRemaining -= TimeController.instance.elapsedDeltaTime;
+        daysRemaining -= MainTimer.instance.elapsedDeltaTime;
         //gameTimer -= Time.deltaTime* speed;
         gameTimerSlider.value = daysRemaining;
         //this section goes to timeControl
@@ -135,41 +135,35 @@ public class GameManager : Singleton<GameManager>
         }
 
         //******
-        CalcAllTimers();
+        //CalcAllTimers();
     }
-    private void CalcAllTimers()
+    #region Moving to MainTimer
+    /*private void CalcAllTimers()
     {
-        GenericTimerSpawner(ref donationTimer,donationIntensity,MyEventHandler.instance.DonationTimerSpawnerEvent);
+        GenericTimerSpawner(ref donationTimer,donationIncomeInterval,MyEventHandler.instance.DonationTimerSpawnerEvent);
         GenericTimerSpawner(ref followerIncomeTimer,followerIncomeInterval, MyEventHandler.instance.FollowerIncomeTimerSpawner);
-        GenericTimerSpawner(ref illegalityTimer, illegalReductionInterval, MyEventHandler.instance.IllegalityTimerSpawner);
+        GenericTimerSpawner(ref illegalityTimer, illegalityReductionInterval, MyEventHandler.instance.IllegalityTimerSpawner);
         GenericTimerSpawner(ref trashTimer, trashIncrementInterval,MyEventHandler.instance.TrashTimerSpawner);
         GenericTimerSpawner(ref trashIncrementTimer, trashIncrementTimerInterval, MyEventHandler.instance.TrashIncrementTimeSpawner);
     }
     private void GenericTimerSpawner(ref float timer, float treshold, System.Action method)
     {
-        timer += TimeController.instance.elapsedDeltaTime;
+        timer += MainTimer.instance.elapsedDeltaTime;
         if (timer >= treshold)
         {
             timer -=treshold;
             method();
         }
-    }
+    }*/
     private void TimerDisplay()
     {
-        elapsedTime += TimeController.instance.elapsedDeltaTime;
-        //elapsedTime += Time.deltaTime * speed;
-        elapsedTimeText.text = GetTimeStamp();
-        /*
-        System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(elapsedTime);
-        elapsedTime += Time.deltaTime * speed;
-        elapsedTimeText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
-        */
+        elapsedTime += MainTimer.instance.elapsedDeltaTime;
+
+        elapsedTimeText.text = MainTimer.instance.GetTimeStamp();
+ 
     }
-    public string GetTimeStamp()
-    {
-        System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(elapsedTime);
-        return string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
-    }
+
+    #endregion
     
     public void AddMoney()
     {
@@ -258,7 +252,7 @@ public class GameManager : Singleton<GameManager>
                 illegality += modifier;
                 if (illegality < 0)
                     illegality = 0;
-                illegalityTimer = 0;
+                
                 Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.ILLEGALITY, modifier);
                 /*
                 text = Instantiate(floatingTextPrefab, illegalityFloatingText);
@@ -278,9 +272,9 @@ public class GameManager : Singleton<GameManager>
                 break;
 
             case PlayerStat.DonationIntensity:
-                donationIntensity += modifier;
-                if (donationIntensity < 0.1)
-                    donationIntensity = 0.1f;
+                donationIncomeInterval += modifier;
+                if (donationIncomeInterval < 0.1)
+                    donationIncomeInterval = 0.1f;
                 break;
 
             case PlayerStat.PriceModifier:
@@ -296,7 +290,7 @@ public class GameManager : Singleton<GameManager>
                 break;
 
             case PlayerStat.IlegalityReductionInterval:
-                illegalReductionInterval += modifier;
+                illegalityReductionInterval += modifier;
                 break;
 
             default:
@@ -307,7 +301,7 @@ public class GameManager : Singleton<GameManager>
             if (!illegalityGameOverEvent.activeInHierarchy)
             {
                 illegalityGameOverEvent.SetActive(true);
-                StartCoroutine(TimeController.instance.DelayedPause());
+                StartCoroutine(MainTimer.instance.DelayedPause());
             }
         }
         if (trash >= trashCapacity)
@@ -347,8 +341,8 @@ public class GameManager : Singleton<GameManager>
             time = eventData.time;
         while (time > 0)
         {
-            if (!TimeController.instance.paused)
-            time -= TimeController.instance.elapsedDeltaTime;
+            if (!MainTimer.instance.paused)
+            time -= MainTimer.instance.elapsedDeltaTime;
             //time -= Time.deltaTime * speed;
             yield return null;
         }
@@ -367,8 +361,8 @@ public class GameManager : Singleton<GameManager>
         float timer = 0;
         while (true)
         {
-            if (!TimeController.instance.paused)
-            timer += TimeController.instance.elapsedDeltaTime;
+            if (!MainTimer.instance.paused)
+            timer += MainTimer.instance.elapsedDeltaTime;
             //timer += Time.deltaTime * speed;
             if (timer >= 400)
             {
@@ -462,7 +456,7 @@ public class GameManager : Singleton<GameManager>
     {
         gameoverScreen.UpdateTexts(label, description);
         RadioSoundManager.instance.StopPlaying();
-        TimeController.instance.paused = true;
+        MainTimer.instance.paused = true;
     }
     public void MainMenu()
     {
@@ -470,13 +464,14 @@ public class GameManager : Singleton<GameManager>
     }
     public void UpdateUI()
     {
-        Debug.Log("updating UI");
+        Debug.Log("updating UI.gameManager");
         moneyText.text = ((int)money).ToString();
         followerText.text = followers.ToString();
         trashText.text = trash.ToString() + "/" + trashCapacity.ToString();
         illegalitySlider.maxValue = illegalCapacity;
         illegalitySlider.value = illegality;
         illegalityText.text = illegality + "/" + illegalCapacity;
+
     }
 }
     /*

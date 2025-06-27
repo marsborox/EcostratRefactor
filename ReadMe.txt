@@ -32,6 +32,8 @@ we created EventHandler that will Invoke events and other stuff will subscribe t
 	- Spawner - UI display of spawned text Methods used to Spawner class 
 		- Moved stuff to spawner class which should be there, shortened GetPointOnTerrain method
 		- 
+	- UI - some work on left panel - 
+
 	
 top buttons - 	 made into toggle group, made own class for SpeedButtons,-must redo this 
 		 assigned per interface w implemented InitiateButton method
@@ -47,7 +49,7 @@ Interfaces	- we have Interface for button initiation - does not have to be mothe
 
 To Do:
 
-
+events working move changestats accordingly, must move variables
 
 GameManager 	- Update must be divided - noto nly update
 		
@@ -55,23 +57,27 @@ GameManager 	- Update must be divided - noto nly update
 		- Separate Sound
 		- Update - to dissolve Update need Events, on their trigger all sorts of things will happen - subscribbed 
 			make GetTimestamp Interface, move timerDisplay to Timer class 
+
 			Events 		- migrate changeStats methods accordingly, move TIMECounting into TimeController? or own class / rename controller
 
 			 - Update and ChangeStats must be separated into methods doing only one resource/playerStat
+			 - All time related from Update should go to explicitly timeClass
 
 			- enum PlayerStat - rework this, probably instances of PlayerStat inheriting classes playerGameObject?
 		illegality and followerIncome is the same
 		- we can use one method for all slider display - can go to UI
 
-Playerstats broken 
+UI		- Left Panel	- move spawning floating text here, need to think about how will we display all
+		- Opportunity for DirtyFlag??
+		- Bug with ilegality bar - when raised should be red when reduced green color
 
 lets move Time counting into time prob.+
 
 notes for PlayerStats
 Moving TImerSpawner - Donation Income, FOllowerIncome, Illegality,trashTimer,TrashIncrement,
 
-
-
+mabye
+???
 
 can we do something with performance - instantiation mabye spawning (not pixel but coords/ object		
 
@@ -81,12 +87,11 @@ buttons need fixing all of them
 
 mute music option-mabye even ingame button
 
-UI does not refresh immediately - because time is postponed, 
+UI does not refresh immediately - because time is postponed??, 
 
 mabye UI class and rest will inherit from it
 
-mabye
-???
+
 change PlayClip methods (playOneShot) to LINQ
 
 - mabye try to remove the static new .... instance from singleton statement

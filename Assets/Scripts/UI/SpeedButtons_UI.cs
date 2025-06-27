@@ -11,12 +11,12 @@ public class SpeedButtons_UI : MonoBehaviour,I_InitiateButton
     [SerializeField] Toggle _toggleX3;
 
     [SerializeField] GameManager _gameManager;
-    [SerializeField] TimeController _timeController;
+    [SerializeField] MainTimer _timeController;
     void Start()
     {
-        ((I_InitiateButton)this).InitiateToggle(_toggleX1, TimeController.instance.TimeX1);
-        ((I_InitiateButton)this).InitiateToggle(_toggleX2, TimeController.instance.TimeX2);
-        ((I_InitiateButton)this).InitiateToggle(_toggleX3, TimeController.instance.TimeX3);
+        ((I_InitiateButton)this).InitiateToggle(_toggleX1, MainTimer.instance.TimeX1);
+        ((I_InitiateButton)this).InitiateToggle(_toggleX2, MainTimer.instance.TimeX2);
+        ((I_InitiateButton)this).InitiateToggle(_toggleX3, MainTimer.instance.TimeX3);
         /*
         _toggleX2.isOn = true;
 

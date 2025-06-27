@@ -15,7 +15,7 @@ public class PauseMenu : MonoBehaviour
     public void ToggleWindow()
     {
         window.SetActive(!window.activeSelf);
-        TimeController.instance.PauseGameToggle();
+        MainTimer.instance.PauseGameToggle();
     }
     public void Quit()
     {

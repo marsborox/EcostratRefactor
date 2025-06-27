@@ -21,10 +21,10 @@ public class Event : MonoBehaviour
     }
     private void Update()
     {
-        if (TimeController.instance.paused || eventData.name == "Amogus")
+        if (MainTimer.instance.paused || eventData.name == "Amogus")
             return;
         //timer -= Time.deltaTime * GameManager.instance.speed; // timer refactor
-        timer -= TimeController.instance.elapsedDeltaTime;
+        timer -= MainTimer.instance.elapsedDeltaTime;
         timer -= Time.deltaTime;
 
         slider.value = timer;

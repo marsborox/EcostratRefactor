@@ -22,7 +22,7 @@ public class News : Singleton<News>
     public void AddMessage(string message)
     {
         RadioSoundManager.instance.PlayRadioSound();
-        textContent.text += "\n\n[" + GameManager.instance.GetTimeStamp() + "] " + message;
+        textContent.text += "\n\n[" + MainTimer.instance.GetTimeStamp() + "] " + message;
         Canvas.ForceUpdateCanvases();
 
         GetComponentInChildren<VerticalLayoutGroup>().CalculateLayoutInputVertical();

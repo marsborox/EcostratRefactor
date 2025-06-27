@@ -38,12 +38,12 @@ public class EventWindow : Singleton<EventWindow>
     }
     public void Show()
     {
-        TimeController.instance.PauseGameToggle();
+        MainTimer.instance.PauseGameToggle();
         gameObject.SetActive(true);
     }
     public void Hide()
     {
-        TimeController.instance.PauseGameToggle();
+        MainTimer.instance.PauseGameToggle();
         gameObject.SetActive(false);
     }
     public void EventResolved()
