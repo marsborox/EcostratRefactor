@@ -137,7 +137,6 @@ public class GameManager : Singleton<GameManager>
         //******
         //CalcAllTimers();
     }
-    #region Moving to MainTimer
     /*private void CalcAllTimers()
     {
         GenericTimerSpawner(ref donationTimer,donationIncomeInterval,MyEventHandler.instance.DonationTimerSpawnerEvent);
@@ -162,6 +161,7 @@ public class GameManager : Singleton<GameManager>
         elapsedTimeText.text = MainTimer.instance.GetTimeStamp();
  
     }
+    #region Moving to MainTimer
 
     #endregion
     
@@ -464,7 +464,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void UpdateUI()
     {
-        Debug.Log("updating UI.gameManager");
+        Debug.Log("updating UI._gameManager");
         moneyText.text = ((int)money).ToString();
         followerText.text = followers.ToString();
         trashText.text = trash.ToString() + "/" + trashCapacity.ToString();

@@ -1,3 +1,5 @@
+NEXT: UI for time, days illegality, move these timestuff to MainTimer
+
 Unity ver 6000.1.0a7
 Itch:	h		ttps://ecostrat.itch.io/ecostrat
 Original codebase:	https://github.com/marsborox/EcostratOriginal/
@@ -23,7 +25,7 @@ we created EventHandler that will Invoke events and other stuff will subscribe t
 	Events work fine w subscribed methods;
 
 	-MainTimer - Separate Timer/TimeControl - , moved all time relateed variables to TimeController
-			- we added counting time to spawn event for stat value manipulation,
+			- we added counting time to spawn event for stat value manipulation
 
 	-Update	- News relocated into news class, methods that add time to counter if treshold full do method - 
 	we are using the generic one and it will invoke events, NEXT TIME SUBSCRIBE 
@@ -32,7 +34,8 @@ we created EventHandler that will Invoke events and other stuff will subscribe t
 	- Spawner - UI display of spawned text Methods used to Spawner class 
 		- Moved stuff to spawner class which should be there, shortened GetPointOnTerrain method
 		- 
-	- UI - some work on left panel - 
+	- UI - some work on left panel - spawning of that pop up text reworked
+		- did some cleaning of UI GameObjects, created classes, moved methods to (LEFT PANEL) future UI something
 
 	
 top buttons - 	 made into toggle group, made own class for SpeedButtons,-must redo this 
@@ -49,7 +52,8 @@ Interfaces	- we have Interface for button initiation - does not have to be mothe
 
 To Do:
 
-events working move changestats accordingly, must move variables
+Problems : spawning of trash bubbles in begining of game
+		UI all sliders why get minus
 
 GameManager 	- Update must be divided - noto nly update
 		
@@ -58,7 +62,7 @@ GameManager 	- Update must be divided - noto nly update
 		- Update - to dissolve Update need Events, on their trigger all sorts of things will happen - subscribbed 
 			make GetTimestamp Interface, move timerDisplay to Timer class 
 
-			Events 		- migrate changeStats methods accordingly, move TIMECounting into TimeController? or own class / rename controller
+			Events 		- migrate changeStats methods accordingly, rename controller
 
 			 - Update and ChangeStats must be separated into methods doing only one resource/playerStat
 			 - All time related from Update should go to explicitly timeClass

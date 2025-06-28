@@ -19,7 +19,7 @@ public class PlayerStatsNew : MonoBehaviour
     [Header("TrashIncrement")]
     public float trashIncrementTimer;
     public int trashIncrementTimerInterval;
-    public int trashIncrementAmmount_____;
+    //public int trashIncrementAmmount_____;
     public int trashIncrement_increment;
 
     [Header("IncomeFromFollowers")]

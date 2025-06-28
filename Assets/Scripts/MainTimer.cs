@@ -8,33 +8,34 @@ public class MainTimer : Singleton<MainTimer>
     public static new MainTimer instance => Singleton<MainTimer>.instance;
 
     public float elapsedDeltaTime = 0;
-    public int timeSpeed=1;
-    public int pauseTimeSpeedReference=1;
+    public int timeSpeed = 1;
+    public int pauseTimeSpeedReference = 1;
     public bool paused = true;
 
 
-    [Header ("Time")]
+    [Header("TimeMeasure")]
 
     [SerializeField] private float _daysRemaining = 1825;
     [SerializeField] private float _elapsedTime = 0;
     [SerializeField] TextMeshProUGUI elapsedTimeText;
 
 
-    [Header ("StatTimers")]
-    [SerializeField] private float _donationIncomeTimer = 0;
-    [SerializeField] private float _donationIncomeInterval = 5;
+    [Header("StatTimers")]
+    [SerializeField] public float donationIncomeTimer = 0;
+    [SerializeField] public float donationIncomeInterval = 5;
 
-    [SerializeField] private float _followerIncomeTimer = 0;
-    [SerializeField] private float _followerIncomeInterval = 60;
+    [SerializeField] public float followerIncomeTimer = 0;
+    [SerializeField] public float followerIncomeInterval = 60;
 
-    [SerializeField] private float _illegalityTimer = 0;
-    [SerializeField] private float _illegalReductionInterval = 120;
+    [SerializeField] public float illegalityTimer = 0;
+    [SerializeField] public float illegalReductionInterval = 120;
 
-    [SerializeField] private float _trashTimer = 0;
-    [SerializeField] private float _trashTimerInterval = 3;
+    [SerializeField] public float trashTimer = 0;
+    [SerializeField] public float trashTimerInterval = 3;
 
-    [SerializeField] private float _trashIncrementTimer = 0;
-    [SerializeField] private float _trashIncrementTimerInterval = 60;
+    [SerializeField] public float trashIncrementTimer = 0;
+    [SerializeField] public float trashIncrementTimerInterval = 60;
+
 
     protected override void Awake()
     {
@@ -51,13 +52,37 @@ public class MainTimer : Singleton<MainTimer>
     {
         if (paused)
             return;
-        elapsedDeltaTime = Time.deltaTime*timeSpeed;
+        elapsedDeltaTime = Time.deltaTime * timeSpeed;
+        CheckIfGameTooLong();
         CalcAllTimers();
     }
     public void UnpauseGame()
     {
         timeSpeed = pauseTimeSpeedReference;
         paused = false;
+    }
+    private void CheckIfGameTooLong()
+    {
+
+    }
+
+    void Rewrite()
+    {
+        TimerDisplay();
+        /*
+        daysRemaining -= MainTimer.instance.elapsedDeltaTime;
+        //gameTimer -= Time.deltaTime* speed;
+        gameTimerSlider.value = daysRemaining;
+        //this section goes to timeControl
+        dayText.text = (int)(daysRemaining / oneDayInSec) + " days left";
+
+        if (daysRemaining <= 0)
+        {
+            SoundManager.instance.Defeat();
+            GameOver("Your time to save planet Earth has just run out.",
+                "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
+        }
+        */
     }
     public void PauseGame()
     {
@@ -100,13 +125,21 @@ public class MainTimer : Singleton<MainTimer>
     }
     private void CalcAllTimers()
     {
-        GenericTimerSpawner(ref _donationIncomeTimer, _donationIncomeInterval, MyEventHandler.instance.DonationTimerSpawnerEvent);
-        GenericTimerSpawner(ref _followerIncomeTimer, _followerIncomeInterval, MyEventHandler.instance.FollowerIncomeTimerSpawner);
-        GenericTimerSpawner(ref _illegalityTimer, _illegalReductionInterval, MyEventHandler.instance.IllegalityTimerSpawner);
-        GenericTimerSpawner(ref _trashTimer, _trashTimerInterval, MyEventHandler.instance.TrashTimerSpawner);
-        GenericTimerSpawner(ref _trashIncrementTimer, _trashIncrementTimerInterval, MyEventHandler.instance.TrashIncrementTimeSpawner);
-    }
+        GenericTimerSpawner(ref donationIncomeTimer, donationIncomeInterval, MyEventHandler.instance.DonationTimerSpawnerEvent);
+        GenericTimerSpawner(ref followerIncomeTimer, followerIncomeInterval, MyEventHandler.instance.FollowerIncomeTimerSpawner);
+        GenericTimerSpawner(ref illegalityTimer, illegalReductionInterval, MyEventHandler.instance.IllegalityTimerSpawner);
+        GenericTimerSpawner(ref trashTimer, trashTimerInterval, MyEventHandler.instance.TrashTimerSpawner);
+        GenericTimerSpawner(ref trashIncrementTimer, trashIncrementTimerInterval, MyEventHandler.instance.TrashIncrementTimeSpawner);
 
+
+    }
+    private void TimerDisplay()
+    {
+        //elapsedTime += elapsedDeltaTime;
+
+        elapsedTimeText.text = GetTimeStamp();
+
+    }
     private void GenericTimerSpawner(ref float timer, float treshold, System.Action method)
     {
         timer += elapsedDeltaTime;

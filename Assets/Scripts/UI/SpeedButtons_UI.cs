@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
-using System.Collections;
+
 
 public class SpeedButtons_UI : MonoBehaviour,I_InitiateButton
 {

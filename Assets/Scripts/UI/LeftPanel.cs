@@ -13,7 +13,7 @@ public class LeftPanel : UI
         TrackStatProgressBars();
     }
 
-    void TrackStatProgressBars()
+    private void TrackStatProgressBars()
     {//will move this to some UI class we dont know yet??
         gameManager.followerIncomeSlider.maxValue = gameManager.followerIncomeInterval;
         gameManager.followerIncomeSlider.value = gameManager.followerIncomeTimer;
@@ -23,6 +23,7 @@ public class LeftPanel : UI
 
         gameManager.trashSlider.maxValue = gameManager.trashIncrementInterval;
         gameManager.trashSlider.value = gameManager.trashTimer;
+
         //gameManager.Upda
         Debug.Log("updating UI.LeftPanel");
     }
