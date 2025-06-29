@@ -1,4 +1,4 @@
-NEXT: UI for time, days illegality, move these timestuff to MainTimer
+NEXT: fix texts on sliders, move pop up value to UI class
 
 Unity ver 6000.1.0a7
 Itch:	h		ttps://ecostrat.itch.io/ecostrat
@@ -26,6 +26,7 @@ we created EventHandler that will Invoke events and other stuff will subscribe t
 
 	-MainTimer - Separate Timer/TimeControl - , moved all time relateed variables to TimeController
 			- we added counting time to spawn event for stat value manipulation
+			
 
 	-Update	- News relocated into news class, methods that add time to counter if treshold full do method - 
 	we are using the generic one and it will invoke events, NEXT TIME SUBSCRIBE 
@@ -35,8 +36,8 @@ we created EventHandler that will Invoke events and other stuff will subscribe t
 		- Moved stuff to spawner class which should be there, shortened GetPointOnTerrain method
 		- 
 	- UI - some work on left panel - spawning of that pop up text reworked
-		- did some cleaning of UI GameObjects, created classes, moved methods to (LEFT PANEL) future UI something
-
+		- Moved sliders it is working
+		- all sliders except days is done
 	
 top buttons - 	 made into toggle group, made own class for SpeedButtons,-must redo this 
 		 assigned per interface w implemented InitiateButton method
@@ -49,6 +50,8 @@ Singleton 	- we have Singleton<T> class and SingletonPresistent<T> class (second
 
 Interfaces	- we have Interface for button initiation - does not have to be motherClass
 		- its our standard InitiateButton, with playSound bonus
+
+Notes: need to fix upgrade the thing that extends time
 
 To Do:
 
@@ -74,6 +77,7 @@ GameManager 	- Update must be divided - noto nly update
 UI		- Left Panel	- move spawning floating text here, need to think about how will we display all
 		- Opportunity for DirtyFlag??
 		- Bug with ilegality bar - when raised should be red when reduced green color
+		
 
 lets move Time counting into time prob.+
 

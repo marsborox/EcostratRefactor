@@ -49,7 +49,7 @@ public class GameManager : Singleton<GameManager>
     public int illegalityIncrement = -5;
 
     [SerializeField] public float illegality = 0;
-    private int illegalCapacity = 100;
+    public int illegalCapacity = 100;
 
     [Header ("Upgrades")]
     private int negotiationLevel = 0;
@@ -468,10 +468,11 @@ public class GameManager : Singleton<GameManager>
         moneyText.text = ((int)money).ToString();
         followerText.text = followers.ToString();
         trashText.text = trash.ToString() + "/" + trashCapacity.ToString();
+        /* //moved to sliderAndVlaues
         illegalitySlider.maxValue = illegalCapacity;
         illegalitySlider.value = illegality;
         illegalityText.text = illegality + "/" + illegalCapacity;
-
+        */
     }
 }
     /*

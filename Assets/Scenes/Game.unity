@@ -2921,6 +2921,7 @@ MonoBehaviour:
   illegalityReductionInterval: 120
   illegalityIncrement: -5
   illegality: 0
+  illegalCapacity: 100
   hints: 0
   specialEventDatabase: {fileID: 11400000, guid: 1acabb3c13918a14da04a2de7dce2757, type: 2}
   mapSprite: {fileID: 2800000, guid: 26351b75dc6ce9148a63b60d591ec706, type: 3}
@@ -5852,7 +5853,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.508
+  m_FillAmount: 0.28
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -9854,7 +9855,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.508
+  m_Value: 0.28
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -10444,7 +10445,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 1
+  m_FillAmount: 0.598
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -10626,7 +10627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -96.2}
+  m_AnchoredPosition: {x: -96.2, y: 0}
   m_SizeDelta: {x: 52.5804, y: 52.5804}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1214711507
@@ -12146,7 +12147,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1434164004}
-  - component: {fileID: 1434164005}
   m_Layer: 5
   m_Name: DisplayStats
   m_TagString: Untagged
@@ -12167,8 +12167,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1101403725}
-  - {fileID: 1945219028}
   - {fileID: 1898327615}
+  - {fileID: 1945219028}
   m_Father: {fileID: 274627920}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -12176,18 +12176,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1434164005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1434164003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cdeb46f4eb8f2944b951b8e8ecc801e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1442842548
 GameObject:
   m_ObjectHideFlags: 0
@@ -17174,7 +17162,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0.598
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

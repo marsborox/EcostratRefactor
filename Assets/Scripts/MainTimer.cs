@@ -14,11 +14,12 @@ public class MainTimer : Singleton<MainTimer>
 
 
     [Header("TimeMeasure")]
-
-    [SerializeField] private float _daysRemaining = 1825;
+    [SerializeField] private float _daysRemainingMax = 1825;
+    [SerializeField] private float _daysRemaining;
     [SerializeField] private float _elapsedTime = 0;
-    [SerializeField] TextMeshProUGUI elapsedTimeText;
-
+    
+    [SerializeField] private float _oneDayInSec;
+    [SerializeField] private int _dayCoeficient=365;
 
     [Header("StatTimers")]
     [SerializeField] public float donationIncomeTimer = 0;
@@ -47,6 +48,7 @@ public class MainTimer : Singleton<MainTimer>
     private void Start()
     {
         paused = true;//game is paused must click the button in tutorial to unpause - buzttons need to be reworked
+        _daysRemaining = _daysRemainingMax;
     }
     private void Update()
     {
@@ -61,29 +63,10 @@ public class MainTimer : Singleton<MainTimer>
         timeSpeed = pauseTimeSpeedReference;
         paused = false;
     }
-    private void CheckIfGameTooLong()
-    {
 
-    }
 
-    void Rewrite()
-    {
-        TimerDisplay();
-        /*
-        daysRemaining -= MainTimer.instance.elapsedDeltaTime;
-        //gameTimer -= Time.deltaTime* speed;
-        gameTimerSlider.value = daysRemaining;
-        //this section goes to timeControl
-        dayText.text = (int)(daysRemaining / oneDayInSec) + " days left";
 
-        if (daysRemaining <= 0)
-        {
-            SoundManager.instance.Defeat();
-            GameOver("Your time to save planet Earth has just run out.",
-                "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
-        }
-        */
-    }
+
     public void PauseGame()
     {
         pauseTimeSpeedReference=timeSpeed;
@@ -137,7 +120,7 @@ public class MainTimer : Singleton<MainTimer>
     {
         //elapsedTime += elapsedDeltaTime;
 
-        elapsedTimeText.text = GetTimeStamp();
+        //elapsedTimeText.text = GetTimeStamp();
 
     }
     private void GenericTimerSpawner(ref float timer, float treshold, System.Action method)
@@ -149,5 +132,15 @@ public class MainTimer : Singleton<MainTimer>
             method();
         }
     }
-    
+    private void CheckIfGameTooLong()
+    {
+        _daysRemaining -= elapsedDeltaTime;
+        if (_daysRemaining <= 0)
+        {
+            SoundManager.instance.Defeat();
+            GameManager.instance.GameOver("Your time to save planet Earth has just run out.",
+                "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
+        }
+    }
+
 }
