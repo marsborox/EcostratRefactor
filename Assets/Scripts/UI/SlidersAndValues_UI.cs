@@ -17,7 +17,7 @@ public class SlidersAndValues_UI : MonoBehaviour
     [SerializeField] private Slider _daysLeftSlider;
 
 
-
+    [SerializeField] private int _dayCoeficient = 5;
 
     private GameManager _gameManager;//will eventually remove
 
@@ -29,6 +29,7 @@ public class SlidersAndValues_UI : MonoBehaviour
     {
         //TrackStatProgressBars();
         SetAllSliders();
+        SetAllTexts();
     }
 
     private void SetDaysLeftText()
@@ -49,11 +50,12 @@ public class SlidersAndValues_UI : MonoBehaviour
         SetSlider(ref _followerInomeSlider, MainTimer.instance.followerIncomeInterval, MainTimer.instance.followerIncomeTimer);
         SetSlider(ref _illegalitySlider, _gameManager.illegalCapacity, _gameManager.illegality);
         SetSlider(ref _trashSlider, MainTimer.instance.trashTimerInterval, MainTimer.instance.trashTimer);
-        //SetSlider days left
+        SetSlider(ref _daysLeftSlider, MainTimer.instance.daysLeftMax, MainTimer.instance.daysLeft);
     }
     void SetAllTexts()
     { 
-    
+        _daysLeftText.text = ((int)MainTimer.instance.daysLeft/ _dayCoeficient + " days Left");
+        _elapsedTimeText.text = MainTimer.instance.GetTimeStamp();
     }
     private void SetSlider(ref Slider slider,float sliderMaxVal, float sliderVal)
     {
@@ -65,5 +67,17 @@ public class SlidersAndValues_UI : MonoBehaviour
     {
         textField.text = displayValue.ToString();
     }
-
+    public void UpdateUI()
+    {/*
+        Debug.Log("updating UI._gameManager");
+        moneyText.text = ((int)money).ToString();
+        followerText.text = followers.ToString();
+        trashText.text = trash.ToString() + "/" + trashCapacity.ToString();
+        */
+        /* //moved to sliderAndVlaues
+        illegalitySlider.maxValue = illegalCapacity;
+        illegalitySlider.value = illegality;
+        illegalityText.text = illegality + "/" + illegalCapacity;
+        */
+    }
 }

@@ -8,43 +8,27 @@ using System;
 public class GameManager : Singleton<GameManager>
 {
     public static new GameManager instance => Singleton<GameManager>.instance;
-    [Header ("Time")]
-    private float oneDayInSec;
-    public  float daysRemaining = 1825;
-    public float elapsedTime = 0;
-    /*public bool paused = true;*/
-    //public int speed = 1;
+    
 
     [Header ("Trash")]
-    public float trashTimer = 0;
+
     [SerializeField] public float trashIncrementInterval = 3;
     [SerializeField] private float trash = 10000;
 
-
-    public float trashIncrementTimer = 0;//was private
     [SerializeField] public float trashIncrementAmount = 10;
     public int trashIncrement_increment = 5;
-    public int trashIncrementTimerInterval = 60;
-
     public List<GameObject> trashBubbles = new();
     private float trashCapacity = 20000;
 
     [Header ("Followers + Money")]
-    private float donationTimer = 0;
     private float donationIncomeInterval = 5;
-
-    public float followerIncomeTimer = 0;
-    public int followerIncomeInterval = 60;
-
     public float money = 500;
     public float followers = 0;
-
     private float donation = 0;
     public float priceModifier = 1;
 
     [Header("Illegality")]
-    public float illegalityTimer = 0;
-
+    
     public float illegalityReductionInterval = 120;
     public int illegalityIncrement = -5;
 
@@ -111,59 +95,12 @@ public class GameManager : Singleton<GameManager>
         }
         
         StartCoroutine(SpecialEventsCoroutine());
-        oneDayInSec = daysRemaining / 365;
+        //oneDayInSec = daysRemaining / 365;//going timer
         UpdateUI();
-        
     }
-    private void Update()
-    {
-        if (MainTimer.instance.paused)
-            return;
-        TimerDisplay();
+    
+    
 
-        daysRemaining -= MainTimer.instance.elapsedDeltaTime;
-        //gameTimer -= Time.deltaTime* speed;
-        gameTimerSlider.value = daysRemaining;
-        //this section goes to timeControl
-        dayText.text = (int)(daysRemaining / oneDayInSec) + " days left";
-
-        if (daysRemaining <= 0)
-        {
-            SoundManager.instance.Defeat();
-            GameOver("Your time to save planet Earth has just run out.",
-                "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
-        }
-
-        //******
-        //CalcAllTimers();
-    }
-    /*private void CalcAllTimers()
-    {
-        GenericTimerSpawner(ref donationTimer,donationIncomeInterval,MyEventHandler.instance.DonationTimerSpawnerEvent);
-        GenericTimerSpawner(ref followerIncomeTimer,followerIncomeInterval, MyEventHandler.instance.FollowerIncomeTimerSpawner);
-        GenericTimerSpawner(ref illegalityTimer, illegalityReductionInterval, MyEventHandler.instance.IllegalityTimerSpawner);
-        GenericTimerSpawner(ref trashTimer, trashIncrementInterval,MyEventHandler.instance.TrashTimerSpawner);
-        GenericTimerSpawner(ref trashIncrementTimer, trashIncrementTimerInterval, MyEventHandler.instance.TrashIncrementTimeSpawner);
-    }
-    private void GenericTimerSpawner(ref float timer, float treshold, System.Action method)
-    {
-        timer += MainTimer.instance.elapsedDeltaTime;
-        if (timer >= treshold)
-        {
-            timer -=treshold;
-            method();
-        }
-    }*/
-    private void TimerDisplay()
-    {
-        elapsedTime += MainTimer.instance.elapsedDeltaTime;
-
-        elapsedTimeText.text = MainTimer.instance.GetTimeStamp();
- 
-    }
-    #region Moving to MainTimer
-
-    #endregion
     
     public void AddMoney()
     {
@@ -205,8 +142,8 @@ public class GameManager : Singleton<GameManager>
                 break;
 
             case PlayerStat.Timer:
-                daysRemaining += modifier;
-                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TIME, modifier);
+                /*daysRemaining += modifier;
+                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TIME, modifier);*/
                 /*
                 text = Instantiate(floatingTextPrefab, timeFloatingText);
                 text.UpdateText(((int)modifier).ToString("+#;-#;0") + " seconds", modifier > 0, false);
@@ -316,7 +253,7 @@ public class GameManager : Singleton<GameManager>
             GameOver("All Clean!",
                 "You managed to clear all the trash and made our planet a clean place again, where we can live together in harmony with nature as one complete humanity! Now is the time to rest and enjoy the success of your deeds for our planet!");
         }
-        UpdateUI();
+        //UpdateUI();//*******************************************************
     }
     public bool TestChangeStats(PlayerStat stat, float modifier)
     {
@@ -475,187 +412,236 @@ public class GameManager : Singleton<GameManager>
         */
     }
 }
-    /*
+
+/*[Header ("Time")]
+private float oneDayInSec;
+public  float daysRemaining = 1825;
+public float elapsedTime = 0;*/
+
+/*private void Update()
+    {
+        if (MainTimer.instance.paused)
+            return;
+    }
+    */
+//TimerDisplay();
+
+//daysRemaining -= MainTimer.instance.elapsedDeltaTime;//going timer
+//gameTimer -= Time.deltaTime* speed;
+//gameTimerSlider.value = daysRemaining;//going UI
+//this section goes to timeControl
+//dayText.text = (int)(daysRemaining / oneDayInSec) + " days left";
+
+
+//******
+//CalcAllTimers();
+/*private void CalcAllTimers()
+{
+    GenericTimerSpawner(ref donationTimer,donationIncomeInterval,MyEventHandler.instance.DonationTimerSpawnerEvent);
+    GenericTimerSpawner(ref followerIncomeTimer,followerIncomeInterval, MyEventHandler.instance.FollowerIncomeTimerSpawner);
+    GenericTimerSpawner(ref illegalityTimer, illegalityReductionInterval, MyEventHandler.instance.IllegalityTimerSpawner);
+    GenericTimerSpawner(ref trashTimer, trashIncrementInterval,MyEventHandler.instance.TrashTimerSpawner);
+    GenericTimerSpawner(ref trashIncrementTimer, trashIncrementTimerInterval, MyEventHandler.instance.TrashIncrementTimeSpawner);
+}
+private void GenericTimerSpawner(ref float timer, float treshold, System.Action method)
+{
+    timer += MainTimer.instance.elapsedDeltaTime;
+    if (timer >= treshold)
+    {
+        timer -=treshold;
+        method();
+    }
+}*/
+/*
+private void TimerDisplay()
+{
+    //elapsedTime += MainTimer.instance.elapsedDeltaTime;
+
+    elapsedTimeText.text = MainTimer.instance.GetTimeStamp();
+
+}*/
+
+/*
 private IEnumerator DelayedPause(bool value)
 {
-    yield return new WaitForSeconds(1);
-    PauseGameToggle(value);
+yield return new WaitForSeconds(1);
+PauseGameToggle(value);
 }*/
-    /*
-    public void PauseGameToggle(bool value)
-    {
-        paused = value;
-    }*/
-    /*
-    public void ChangeGameSpeed(int speed)
-    {
-        TimeController.instance.timeSpeed=speed;
-        //this.speed = speed;
-        SoundManager.instance.Speed(speed);
-    }*/
-    /*
-    private IEnumerator GameNewsCoroutine()
-    {
-        yield return new WaitUntil(() => gameTimer < 1350);
-        News.instance.AddMessage("There are 273 days remaining. If you plan to save the Earth, you better get moving!");
-        yield return new WaitUntil(() => gameTimer < 900);
-        News.instance.AddMessage("You have exactly half of the time remaining, exactly 182 and a half days. I don’t want to be smart, but I think you really should start making changes for the better if you haven’t realised it yet!");
-        yield return new WaitUntil(() => gameTimer < 450);
-        News.instance.AddMessage("There are 91 days remaining. I don’t care how you want to calculate it, the important thing is that you understand we don’t have any time to waste anymore!");
-        yield return new WaitUntil(() => gameTimer < 300);
-        News.instance.AddMessage("You have 60 days left, i.e. 2 months. Don't forget to check the upgrades for some more time, if needed.");
-        yield return new WaitUntil(() => gameTimer < 150);
-        News.instance.AddMessage("One month remaining! Get moving, otherwise it will be not only Game Over, but also forget about the future of humanity on the Earth.");
-        yield return new WaitUntil(() => gameTimer < 90);
-        News.instance.AddMessage("One week remaining. Garbage is flooding the cities. Doomsday is knocking on the door.");
-        yield return new WaitUntil(() => gameTimer < 30);
-        News.instance.AddMessage("6 days and it’s all over. Thousands of dead fish suffocated are being washed up from the seas and the oceans. Do something about it!");
-        yield return new WaitUntil(() => gameTimer < 15);
-        News.instance.AddMessage("Last rescue task - last 3 days. The whole world is infested with garbage, Doomsday is here!");
-    }
-    private IEnumerator IllegalityNewsCoroutine()
-    {
-        yield return new WaitUntil(() => illegality >= 20);
-        News.instance.AddMessage("Your friend Johny has been summoned for questioning. Be careful so you don’t end up the same!");
-        yield return new WaitUntil(() => illegality >= 40);
-        News.instance.AddMessage("You have been summoned for questioning! No worries, you are well covered, so you are not at risk of any major problems.");
-        yield return new WaitUntil(() => illegality >= 60);
-        News.instance.AddMessage("Black BMWs start to appear suspiciously often around your apartment. It’s starting to look like the cops are watching us.");
-        yield return new WaitUntil(() => illegality >= 80);
-        News.instance.AddMessage("Breaking News! The Green Inc. - helping the planet or a criminal organisation?!");
-    }*/
+/*
+public void PauseGameToggle(bool value)
+{
+    paused = value;
+}*/
+/*
+public void ChangeGameSpeed(int speed)
+{
+    TimeController.instance.timeSpeed=speed;
+    //this.speed = speed;
+    SoundManager.instance.Speed(speed);
+}*/
+/*
+private IEnumerator GameNewsCoroutine()
+{
+    yield return new WaitUntil(() => gameTimer < 1350);
+    News.instance.AddMessage("There are 273 days remaining. If you plan to save the Earth, you better get moving!");
+    yield return new WaitUntil(() => gameTimer < 900);
+    News.instance.AddMessage("You have exactly half of the time remaining, exactly 182 and a half days. I don’t want to be smart, but I think you really should start making changes for the better if you haven’t realised it yet!");
+    yield return new WaitUntil(() => gameTimer < 450);
+    News.instance.AddMessage("There are 91 days remaining. I don’t care how you want to calculate it, the important thing is that you understand we don’t have any time to waste anymore!");
+    yield return new WaitUntil(() => gameTimer < 300);
+    News.instance.AddMessage("You have 60 days left, i.e. 2 months. Don't forget to check the upgrades for some more time, if needed.");
+    yield return new WaitUntil(() => gameTimer < 150);
+    News.instance.AddMessage("One month remaining! Get moving, otherwise it will be not only Game Over, but also forget about the future of humanity on the Earth.");
+    yield return new WaitUntil(() => gameTimer < 90);
+    News.instance.AddMessage("One week remaining. Garbage is flooding the cities. Doomsday is knocking on the door.");
+    yield return new WaitUntil(() => gameTimer < 30);
+    News.instance.AddMessage("6 days and it’s all over. Thousands of dead fish suffocated are being washed up from the seas and the oceans. Do something about it!");
+    yield return new WaitUntil(() => gameTimer < 15);
+    News.instance.AddMessage("Last rescue task - last 3 days. The whole world is infested with garbage, Doomsday is here!");
+}
+private IEnumerator IllegalityNewsCoroutine()
+{
+    yield return new WaitUntil(() => illegality >= 20);
+    News.instance.AddMessage("Your friend Johny has been summoned for questioning. Be careful so you don’t end up the same!");
+    yield return new WaitUntil(() => illegality >= 40);
+    News.instance.AddMessage("You have been summoned for questioning! No worries, you are well covered, so you are not at risk of any major problems.");
+    yield return new WaitUntil(() => illegality >= 60);
+    News.instance.AddMessage("Black BMWs start to appear suspiciously often around your apartment. It’s starting to look like the cops are watching us.");
+    yield return new WaitUntil(() => illegality >= 80);
+    News.instance.AddMessage("Breaking News! The Green Inc. - helping the planet or a criminal organisation?!");
+}*/
 
-    #region moveToSpawn
-    /*
-    private void CreateBubble()
+#region moveToSpawn
+/*
+private void CreateBubble()
+{
+    Button bubbleInstance = Instantiate(bubblePrefab, interactiveCanvas.transform);
+    bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(false);
+}
+private void CreateTrashBubble()
+{
+    GameObject bubbleInstance = Instantiate(trashBubblePrefab, mapCanvas.transform);
+    bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(true);
+    float random = UnityEngine.Random.Range(0.8f, 1.5f);
+    bubbleInstance.GetComponent<RectTransform>().localScale = new Vector3(random, random, random);
+    trashBubbles.Add(bubbleInstance);
+}
+private void RemoveTrashBubble()
+{
+    if (trashBubbles.Count > 0)
     {
-        Button bubbleInstance = Instantiate(bubblePrefab, interactiveCanvas.transform);
-        bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(false);
+        GameObject obj = trashBubbles[trashBubbles.Count - 1];
+        trashBubbles.Remove(obj);
+        Destroy(obj);
     }
-    private void CreateTrashBubble()
+}
+private Vector2 GetPointOnTerrain(bool isTrashBubble)
+{
+    Vector2 targetPos;
+    if (isTrashBubble)
+        targetPos = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080));
+    else
+        targetPos = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253));
+
+    Color color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
+    while (color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582)    // Sea Color: R 204 G 412 B 480
     {
-        GameObject bubbleInstance = Instantiate(trashBubblePrefab, mapCanvas.transform);
-        bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(true);
-        float random = UnityEngine.Random.Range(0.8f, 1.5f);
-        bubbleInstance.GetComponent<RectTransform>().localScale = new Vector3(random, random, random);
-        trashBubbles.Add(bubbleInstance);
-    }
-    private void RemoveTrashBubble()
-    {
-        if (trashBubbles.Count > 0)
-        {
-            GameObject obj = trashBubbles[trashBubbles.Count - 1];
-            trashBubbles.Remove(obj);
-            Destroy(obj);
-        }
-    }
-    private Vector2 GetPointOnTerrain(bool isTrashBubble)
-    {
-        Vector2 targetPos;
         if (isTrashBubble)
             targetPos = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080));
         else
             targetPos = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253));
-
-        Color color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
-        while (color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582)    // Sea Color: R 204 G 412 B 480
-        {
-            if (isTrashBubble)
-                targetPos = new Vector2(UnityEngine.Random.Range(0, 1920), UnityEngine.Random.Range(0, 1080));
-            else
-                targetPos = new Vector2(UnityEngine.Random.Range(0, 1920 - 164), UnityEngine.Random.Range(0, 1080 - 253));
-            color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
-        }
-        return targetPos;
+        color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
     }
-    private Vector2 GetPointOnWater()
+    return targetPos;
+}
+private Vector2 GetPointOnWater()
+{
+    Vector2 targetPos = new Vector2(UnityEngine.Random.Range(0, mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, mapCanvas.pixelRect.height));
+    Color color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
+    while (!(color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582))
     {
-        Vector2 targetPos = new Vector2(UnityEngine.Random.Range(0, mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, mapCanvas.pixelRect.height));
-        Color color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
-        while (!(color.r >= 0.202 && color.r <= 0.206 && color.g >= 0.410 && color.g <= 0.414 && color.b >= 0.578 && color.b <= 0.582))
-        {
-            targetPos = new Vector2(UnityEngine.Random.Range(0, mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, mapCanvas.pixelRect.height));
-            color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
-        }
-        return targetPos;
-    }*/
-    #endregion
-    #region WhatWasInUpdate
-    
-    /*
-    void Update2() 
-    {//this was in update
-        
-        DonationTimerSpawner();
-        FollowerIncomeTimerSpawner();
-        IllegalityTimerSpawner();
-        TrashTimerSpawner();
-        TrashIncrementTimeSpawner();
-        
+        targetPos = new Vector2(UnityEngine.Random.Range(0, mapCanvas.pixelRect.width), UnityEngine.Random.Range(0, mapCanvas.pixelRect.height));
+        color = mapSprite.GetPixel((int)targetPos.x * 4, (int)targetPos.y * 4);
     }
-    private void DonationTimerSpawner()
+    return targetPos;
+}*/
+#endregion
+#region WhatWasInUpdate
+
+/*
+void Update2() 
+{//this was in update
+
+    DonationTimerSpawner();
+    FollowerIncomeTimerSpawner();
+    IllegalityTimerSpawner();
+    TrashTimerSpawner();
+    TrashIncrementTimeSpawner();
+
+}
+private void DonationTimerSpawner()
+{
+    donationTimer += TimeController.instance.elapsedDeltaTime;
+    //donationTimer += Time.deltaTime * speed;
+    if (donationTimer >= donationIntensity)
     {
-        donationTimer += TimeController.instance.elapsedDeltaTime;
-        //donationTimer += Time.deltaTime * speed;
-        if (donationTimer >= donationIntensity)
-        {
-            donationTimer -=donationIntensity;
-            Spawner.instance.CreateBubble();
-        }
+        donationTimer -=donationIntensity;
+        Spawner.instance.CreateBubble();
     }
-    private void FollowerIncomeTimerSpawner()
+}
+private void FollowerIncomeTimerSpawner()
+{
+    followerIncomeTimer += TimeController.instance.elapsedDeltaTime;
+    //followerIncomeTimer += Time.deltaTime * speed;
+
+    if (followerIncomeTimer >= followerIncomeInterval)
     {
-        followerIncomeTimer += TimeController.instance.elapsedDeltaTime;
-        //followerIncomeTimer += Time.deltaTime * speed;
+        SoundManager.instance.Income();
 
-        if (followerIncomeTimer >= followerIncomeInterval)
-        {
-            SoundManager.instance.Income();
-
-            followerIncomeTimer -= followerIncomeInterval;
-            ChangeStats(PlayerStat.Money, followers);
-        }
-        followerIncomeSlider.maxValue = followerIncomeInterval;
-        followerIncomeSlider.value = followerIncomeTimer;
-        
+        followerIncomeTimer -= followerIncomeInterval;
+        ChangeStats(PlayerStat.Money, followers);
     }
+    followerIncomeSlider.maxValue = followerIncomeInterval;
+    followerIncomeSlider.value = followerIncomeTimer;
 
-    private void IllegalityTimerSpawner()
-    {
-            illegalityTimer += TimeController.instance.elapsedDeltaTime;
-            //illegalityTimer += Time.deltaTime * speed;
-            if (illegalityTimer >= illegalReductionInterval)
-            {
-                ChangeStats(PlayerStat.Illegality, illegalityIncrement);
-                illegalityTimer -= illegalReductionInterval;
-            }
-            illegalityReductionSlider.maxValue = illegalReductionInterval;
-            illegalityReductionSlider.value = illegalityTimer;
-    }
+}
 
-    private void TrashTimerSpawner()
-    {
-        //trashTimer += Time.deltaTime * speed;
-        if (trashTimer >= trashIncrementInterval)
+private void IllegalityTimerSpawner()
+{
+        illegalityTimer += TimeController.instance.elapsedDeltaTime;
+        //illegalityTimer += Time.deltaTime * speed;
+        if (illegalityTimer >= illegalReductionInterval)
         {
-            trashTimer += trashIncrementInterval;
-            ChangeStats(PlayerStat.Trash, trashIncrementAmount);
+            ChangeStats(PlayerStat.Illegality, illegalityIncrement);
+            illegalityTimer -= illegalReductionInterval;
         }
-        //UI
-        trashSlider.maxValue = trashIncrementInterval;
-        trashSlider.value = trashTimer;
-    }
+        illegalityReductionSlider.maxValue = illegalReductionInterval;
+        illegalityReductionSlider.value = illegalityTimer;
+}
 
-    
-
-    private void TrashIncrementTimeSpawner()
+private void TrashTimerSpawner()
+{
+    //trashTimer += Time.deltaTime * speed;
+    if (trashTimer >= trashIncrementInterval)
     {
-        trashIncrementTimer += TimeController.instance.elapsedDeltaTime;
-        //trashIncrementAmountIncreaseTimer += Time.deltaTime * speed;
-        if (trashIncrementTimer >= trashIncrementTimerInterval)
-        {
-            trashIncrementTimer -= trashIncrementTimerInterval;
-            ChangeStats(PlayerStat.TrashIncrement, trashIncrement_increment);
-        }
-    }*/
-    #endregion
+        trashTimer += trashIncrementInterval;
+        ChangeStats(PlayerStat.Trash, trashIncrementAmount);
+    }
+    //UI
+    trashSlider.maxValue = trashIncrementInterval;
+    trashSlider.value = trashTimer;
+}
+
+
+
+private void TrashIncrementTimeSpawner()
+{
+    trashIncrementTimer += TimeController.instance.elapsedDeltaTime;
+    //trashIncrementAmountIncreaseTimer += Time.deltaTime * speed;
+    if (trashIncrementTimer >= trashIncrementTimerInterval)
+    {
+        trashIncrementTimer -= trashIncrementTimerInterval;
+        ChangeStats(PlayerStat.TrashIncrement, trashIncrement_increment);
+    }
+}*/
+#endregion

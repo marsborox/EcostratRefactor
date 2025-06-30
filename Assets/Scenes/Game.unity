@@ -2141,10 +2141,14 @@ MonoBehaviour:
   _daysLeftText: {fileID: 409809416}
   _illegalityText: {fileID: 674031390}
   _elapsedTimeText: {fileID: 1693694350}
+  _moneyText: {fileID: 290423478}
+  _followerText: {fileID: 1962938422}
+  _trashText: {fileID: 782628088}
   _followerInomeSlider: {fileID: 1898327618}
   _illegalitySlider: {fileID: 547163833}
   _trashSlider: {fileID: 1101403728}
-  _daysLeftSlider: {fileID: 0}
+  _daysLeftSlider: {fileID: 1060614558}
+  _dayCoeficient: 365
 --- !u!1 &280507680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2370,7 +2374,7 @@ GameObject:
   - component: {fileID: 290423479}
   - component: {fileID: 290423478}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MoneyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2904,20 +2908,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   daysRemaining: 1825
   elapsedTime: 0
-  trashTimer: 0
   trashIncrementInterval: 3
   trash: 10000
   trashIncrementTimer: 0
   trashIncrementAmount: 10
   trashIncrement_increment: 5
-  trashIncrementTimerInterval: 60
   trashBubbles: []
-  followerIncomeTimer: 0
-  followerIncomeInterval: 60
   money: 1000
   followers: 0
   priceModifier: 1
-  illegalityTimer: 0
   illegalityReductionInterval: 120
   illegalityIncrement: -5
   illegality: 0
@@ -7368,7 +7367,7 @@ GameObject:
   - component: {fileID: 782628089}
   - component: {fileID: 782628088}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TrashText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9717,9 +9716,10 @@ MonoBehaviour:
   timeSpeed: 1
   pauseTimeSpeedReference: 1
   paused: 1
-  _daysRemaining: 1825
+  daysLeft: 0
+  daysLeftMax: 1825
   _elapsedTime: 0
-  elapsedTimeText: {fileID: 0}
+  _oneDayInSec: 0
   donationIncomeTimer: 0
   donationIncomeInterval: 5
   followerIncomeTimer: 0
@@ -18166,7 +18166,7 @@ GameObject:
   - component: {fileID: 1962938423}
   - component: {fileID: 1962938422}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: FollowerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -6,20 +6,20 @@ using UnityEngine;
 public class MainTimer : Singleton<MainTimer>
 {
     public static new MainTimer instance => Singleton<MainTimer>.instance;
-
+    
     public float elapsedDeltaTime = 0;
     public int timeSpeed = 1;
     public int pauseTimeSpeedReference = 1;
     public bool paused = true;
-
+    
 
     [Header("TimeMeasure")]
-    [SerializeField] private float _daysRemainingMax = 1825;
-    [SerializeField] private float _daysRemaining;
+    [SerializeField] public float daysLeft;
+    [SerializeField] public float daysLeftMax = 1825;
     [SerializeField] private float _elapsedTime = 0;
     
     [SerializeField] private float _oneDayInSec;
-    [SerializeField] private int _dayCoeficient=365;
+    //[SerializeField] private int _dayCoeficient=365;
 
     [Header("StatTimers")]
     [SerializeField] public float donationIncomeTimer = 0;
@@ -48,13 +48,13 @@ public class MainTimer : Singleton<MainTimer>
     private void Start()
     {
         paused = true;//game is paused must click the button in tutorial to unpause - buzttons need to be reworked
-        _daysRemaining = _daysRemainingMax;
+        daysLeft = daysLeftMax;
     }
     private void Update()
     {
         if (paused)
             return;
-        elapsedDeltaTime = Time.deltaTime * timeSpeed;
+        DoBasicTimeStuff();
         CheckIfGameTooLong();
         CalcAllTimers();
     }
@@ -63,9 +63,6 @@ public class MainTimer : Singleton<MainTimer>
         timeSpeed = pauseTimeSpeedReference;
         paused = false;
     }
-
-
-
 
     public void PauseGame()
     {
@@ -103,8 +100,14 @@ public class MainTimer : Singleton<MainTimer>
     }
     public string GetTimeStamp()
     {
-        System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(GameManager.instance.elapsedTime);
+        System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(_elapsedTime);
         return string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+    }
+    private void DoBasicTimeStuff()
+    {
+        elapsedDeltaTime = Time.deltaTime * timeSpeed;
+        daysLeft -= elapsedDeltaTime;
+        _elapsedTime += elapsedDeltaTime;
     }
     private void CalcAllTimers()
     {
@@ -113,16 +116,9 @@ public class MainTimer : Singleton<MainTimer>
         GenericTimerSpawner(ref illegalityTimer, illegalReductionInterval, MyEventHandler.instance.IllegalityTimerSpawner);
         GenericTimerSpawner(ref trashTimer, trashTimerInterval, MyEventHandler.instance.TrashTimerSpawner);
         GenericTimerSpawner(ref trashIncrementTimer, trashIncrementTimerInterval, MyEventHandler.instance.TrashIncrementTimeSpawner);
-
-
     }
-    private void TimerDisplay()
-    {
-        //elapsedTime += elapsedDeltaTime;
 
-        //elapsedTimeText.text = GetTimeStamp();
 
-    }
     private void GenericTimerSpawner(ref float timer, float treshold, System.Action method)
     {
         timer += elapsedDeltaTime;
@@ -132,15 +128,17 @@ public class MainTimer : Singleton<MainTimer>
             method();
         }
     }
+
     private void CheckIfGameTooLong()
     {
-        _daysRemaining -= elapsedDeltaTime;
-        if (_daysRemaining <= 0)
+        if (daysLeft <= 0)
         {
             SoundManager.instance.Defeat();
             GameManager.instance.GameOver("Your time to save planet Earth has just run out.",
                 "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
         }
     }
+
+
 
 }

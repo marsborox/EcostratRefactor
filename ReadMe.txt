@@ -1,15 +1,11 @@
-NEXT: fix texts on sliders, move pop up value to UI class
-
 Unity ver 6000.1.0a7
-Itch:	h		ttps://ecostrat.itch.io/ecostrat
+Itch:			ttps://ecostrat.itch.io/ecostrat
 Original codebase:	https://github.com/marsborox/EcostratOriginal/
-
 
 Done:
 
 MainMenu 	- Somewhat fixed main menu (buttons not displayed, background is disabled tho)
 		- MainMenu_UI class, subscribing methods to events triggered by buttons //***** mabye own category??
-
 
 Added Text explaining "Press Esc to skip intro"
 Renamed Camera Canvas to UI Canvas (makes more sense)
@@ -18,18 +14,20 @@ Trash increment amount - was being increased same rate disregard the game speed 
 When closing event window - for some reason Hide was triggered twice, causing bug - fixed
 Fixed text for add display time
 
-GameManager 
-
 Events
 we created EventHandler that will Invoke events and other stuff will subscribe to them,
 	Events work fine w subscribed methods;
+
+GameManager
 
 	-MainTimer - Separate Timer/TimeControl - , moved all time relateed variables to TimeController
 			- we added counting time to spawn event for stat value manipulation
 			
 
 	-Update	- News relocated into news class, methods that add time to counter if treshold full do method - 
-	we are using the generic one and it will invoke events, NEXT TIME SUBSCRIBE 
+	we are using the generic one and it will invoke events, Timer stuff moved to MainTimer, 
+	UI to UI - Update is removed, 
+
 		
 		
 	- Spawner - UI display of spawned text Methods used to Spawner class 
@@ -38,6 +36,7 @@ we created EventHandler that will Invoke events and other stuff will subscribe t
 	- UI - some work on left panel - spawning of that pop up text reworked
 		- Moved sliders it is working
 		- all sliders except days is done
+		- Time related texts are moved
 	
 top buttons - 	 made into toggle group, made own class for SpeedButtons,-must redo this 
 		 assigned per interface w implemented InitiateButton method
@@ -55,8 +54,12 @@ Notes: need to fix upgrade the thing that extends time
 
 To Do:
 
+NEXT: fix texts on sliders, move pop up value to UI class, doTexts, move stats to player
+
 Problems : spawning of trash bubbles in begining of game
 		UI all sliders why get minus
+
+Upgrades - needs rework, must fix dependencies
 
 GameManager 	- Update must be divided - noto nly update
 		
