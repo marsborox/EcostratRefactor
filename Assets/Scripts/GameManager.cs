@@ -12,28 +12,29 @@ public class GameManager : Singleton<GameManager>
 
     [Header ("Trash")]
 
-    [SerializeField] public float trashIncrementInterval = 3;
-    [SerializeField] private float trash = 10000;
+    //[SerializeField] public float trashIncrementInterval = 3;
+    [SerializeField] private float trash = 10000;//moved
 
-    [SerializeField] public float trashIncrementAmount = 10;
-    public int trashIncrement_increment = 5;
+    [SerializeField] public float trashIncrementAmount = 10;//moved
+    public int trashIncrement_increment = 5;//moved
     public List<GameObject> trashBubbles = new();
-    private float trashCapacity = 20000;
+    private float trashCapacity = 20000;//moved
 
-    [Header ("Followers + Money")]
-    private float donationIncomeInterval = 5;
-    public float money = 500;
+    [Header ("Followers + PopUpIncome")]
+
+    //private float donationIncomeInterval = 5;
+    public float money = 500;//moved
     public float followers = 0;
     private float donation = 0;
     public float priceModifier = 1;
 
     [Header("Illegality")]
-    
+    //these 2 should/might be in time already_
     public float illegalityReductionInterval = 120;
-    public int illegalityIncrement = -5;
+    public int illegalityIncrement = -5;//moved
 
-    [SerializeField] public float illegality = 0;
-    public int illegalCapacity = 100;
+    [SerializeField] public float illegality = 0;//moved
+    public int illegalCapacity = 100;//moved
 
     [Header ("Upgrades")]
     private int negotiationLevel = 0;
@@ -104,7 +105,7 @@ public class GameManager : Singleton<GameManager>
     
     public void AddMoney()
     {
-        ChangeStats(PlayerStat.Money, UnityEngine.Random.Range(10, 51) + donation);
+        ChangeStats(PlayerStat.PopUpIncome, UnityEngine.Random.Range(10, 51) + donation);
     }
 
     public void ChangeStats(PlayerStat stat, float modifier)
@@ -113,6 +114,7 @@ public class GameManager : Singleton<GameManager>
         switch (stat)
         {
             case PlayerStat.Followers:
+                //moved
                 followers += modifier;
                 if (followers < 0)
                     followers = 0;
@@ -122,7 +124,8 @@ public class GameManager : Singleton<GameManager>
                 text.UpdateText("<sprite=3>" + ((int)modifier).ToString("+#;-#;0"), modifier > 0, true);*/
                 break;
 
-            case PlayerStat.Money:
+            case PlayerStat.PopUpIncome:
+                //moved
                 money += modifier;
                 if (money < 0)
                     money = 0;
@@ -141,6 +144,19 @@ public class GameManager : Singleton<GameManager>
                 }
                 break;
 
+            case PlayerStat.Illegality:
+                illegality += modifier;
+                if (illegality < 0)
+                    illegality = 0;
+                
+                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.ILLEGALITY, modifier);
+                /*
+                text = Instantiate(floatingTextPrefab, illegalityFloatingText);
+                text.UpdateText("<sprite=4>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
+                */
+                SoundManager.instance.Illegality();
+                break;
+
             case PlayerStat.Timer:
                 /*daysRemaining += modifier;
                 Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TIME, modifier);*/
@@ -151,6 +167,7 @@ public class GameManager : Singleton<GameManager>
                 break;
 
             case PlayerStat.Trash:
+                //moved
                 trash += modifier;
                 if (modifier > 0)
                     for (int i = 0; i < modifier; i++)
@@ -173,30 +190,19 @@ public class GameManager : Singleton<GameManager>
                 break;
 
             case PlayerStat.TrashIncrement:
+                //moved
                 trashIncrementAmount += modifier;
                 Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TRASH, modifier);
-                /*
-                text = Instantiate(floatingTextPrefab, trashFloatingText);
-                text.UpdateText("<sprite=2>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
-                */
+                
+                //text = Instantiate(floatingTextPrefab, trashFloatingText);
+                //text.UpdateText("<sprite=2>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
+                
                 break;
-
+/*
             case PlayerStat.TrashIncrementInterval:
                 trashIncrementInterval += modifier;
                 break;
-
-            case PlayerStat.Illegality:
-                illegality += modifier;
-                if (illegality < 0)
-                    illegality = 0;
-                
-                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.ILLEGALITY, modifier);
-                /*
-                text = Instantiate(floatingTextPrefab, illegalityFloatingText);
-                text.UpdateText("<sprite=4>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
-                */
-                SoundManager.instance.Illegality();
-                break;
+*/
 
             case PlayerStat.Hint:
                 hints += modifier;
@@ -207,12 +213,12 @@ public class GameManager : Singleton<GameManager>
             case PlayerStat.Donation:
                 donation += modifier;
                 break;
-
+                /* //not used
             case PlayerStat.DonationIntensity:
                 donationIncomeInterval += modifier;
                 if (donationIncomeInterval < 0.1)
                     donationIncomeInterval = 0.1f;
-                break;
+                break;*/
 
             case PlayerStat.PriceModifier:
                 priceModifier += modifier;
@@ -259,7 +265,7 @@ public class GameManager : Singleton<GameManager>
     {
         switch (stat)
         {
-            case PlayerStat.Money:
+            case PlayerStat.PopUpIncome:
                 if (money + (modifier * priceModifier) < 0)
                     return false;
                 break;

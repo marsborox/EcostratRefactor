@@ -27,7 +27,7 @@ GameManager
 	-Update	- News relocated into news class, methods that add time to counter if treshold full do method - 
 	we are using the generic one and it will invoke events, Timer stuff moved to MainTimer, 
 	UI to UI - Update is removed, 
-
+	- 
 		
 		
 	- Spawner - UI display of spawned text Methods used to Spawner class 
@@ -40,6 +40,9 @@ GameManager
 	
 top buttons - 	 made into toggle group, made own class for SpeedButtons,-must redo this 
 		 assigned per interface w implemented InitiateButton method
+
+Player		- there is a Player object w Player and PlayerStatsNew classes, this player stats has trash money, 
+		follower and illegality variables and methods - must check if working
 
 Singleton 	- we have Singleton<T> class and SingletonPresistent<T> class (second inherits from first)
 		- implemented on MySceneManager(Perma), 
@@ -54,10 +57,12 @@ Notes: need to fix upgrade the thing that extends time
 
 To Do:
 
-NEXT: fix texts on sliders, move pop up value to UI class, doTexts, move stats to player
+NEXT: fix texts on sliders, move pop up value to UI class, doTexts, remove all stats (trash money illegality, followers) from GameManager
 
 Problems : spawning of trash bubbles in begining of game
 		UI all sliders why get minus
+
+Game Events (Events) will need some work most probably a lot of work
 
 Upgrades - needs rework, must fix dependencies
 
@@ -66,7 +71,7 @@ GameManager 	- Update must be divided - noto nly update
 		- Separate UI
 		- Separate Sound
 		- Update - to dissolve Update need Events, on their trigger all sorts of things will happen - subscribbed 
-			make GetTimestamp Interface, move timerDisplay to Timer class 
+			make GetTimestamp Interface,
 
 			Events 		- migrate changeStats methods accordingly, rename controller
 

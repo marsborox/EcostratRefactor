@@ -10,12 +10,12 @@ public class SetInactive : MonoBehaviour
     }
     private void Start()
     {
-        if (!GameManager.instance.TestChangeStats(PlayerStat.Money, -50000))
+        if (!GameManager.instance.TestChangeStats(PlayerStat.PopUpIncome, -50000))
             GetComponent<Button>().interactable = false;
     }
     private void TakeMoney()
     {
         GameManager.instance.ChangeStats(PlayerStat.Illegality, -50);
-        GameManager.instance.ChangeStats(PlayerStat.Money, -50000);
+        GameManager.instance.ChangeStats(PlayerStat.PopUpIncome, -50000);
     }
 }
