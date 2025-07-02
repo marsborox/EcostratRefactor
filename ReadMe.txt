@@ -26,7 +26,7 @@ GameManager
 
 	-Update	- News relocated into news class, methods that add time to counter if treshold full do method - 
 	we are using the generic one and it will invoke events, Timer stuff moved to MainTimer, 
-	UI to UI - Update is removed, 
+	UI to UI - Update is removed, moved lesserStats to player-vars and methods
 	- 
 		
 		
@@ -41,9 +41,7 @@ GameManager
 top buttons - 	 made into toggle group, made own class for SpeedButtons,-must redo this 
 		 assigned per interface w implemented InitiateButton method
 
-Player		- there is a Player object w Player and PlayerStatsNew classes, this player stats has trash money, 
-		follower and illegality variables and methods - must check if working
-
+Player		- there is a Player object w Player and PlayerStatsNew classes, all methods and stats are moved here, for now broken
 Singleton 	- we have Singleton<T> class and SingletonPresistent<T> class (second inherits from first)
 		- implemented on MySceneManager(Perma), 
 		- SoundManager(Perma), RadioSoundManager,  TimeController, 
@@ -57,7 +55,10 @@ Notes: need to fix upgrade the thing that extends time
 
 To Do:
 
-NEXT: fix texts on sliders, move pop up value to UI class, doTexts, remove all stats (trash money illegality, followers) from GameManager
+NEXT: AChangeStats, ReactionData, SetInactive, EventWindow -> 
+
+FollowUp: fix texts on sliders, move pop up value to UI class, doTexts, remove all stats (trash money illegality, followers) from GameManager
+(need to move all stats to newPlayerStats first)
 
 Problems : spawning of trash bubbles in begining of game
 		UI all sliders why get minus

@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using UnityEditor.Search;
 
 public class PlayerStatsNew : MonoBehaviour
 {
@@ -31,6 +32,11 @@ public class PlayerStatsNew : MonoBehaviour
     public int illegalityMax = 100;
     GameManager gameManager;//temporary because i dont want to type this much remove when Change stats fully migrated
 
+    [Header("SecondaryStats")]
+
+    [SerializeField] public int _hints = 0;
+    [SerializeField] public int _donation = 0;//not sure if used
+    [SerializeField] public float _priceModifier = 0;//might be int
     public void Start()
     {
         gameManager = GameManager.instance;
@@ -67,14 +73,11 @@ public class PlayerStatsNew : MonoBehaviour
         MyEventHandler.instance.OnFollowerIncome -= ChangeFollowerIncome;
         MyEventHandler.instance.OnIllegalityTimer -= ChangeIllegality;
 
-
     }
     void AddStats()
     {
 
     }
-
-
 
     private void StatAddTimer(ref float timer,int treshold,System.Action method)
     {
@@ -85,6 +88,7 @@ public class PlayerStatsNew : MonoBehaviour
             method();
         }
     }
+    #region mainStats
     private void DonationIncome()
     {
         Spawner.instance.CreateBubble();
@@ -168,9 +172,38 @@ public class PlayerStatsNew : MonoBehaviour
         Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TRASH, trashIncrement_increment);
         gameManager.ChangeStats(PlayerStat.TrashIncrement, gameManager.trashIncrement_increment);
     }
+    #endregion
+
+    #region lesserStats
+
+    private void ChangeHint(int increment)
+    {
+        _hints += increment;
+        if (_hints < 0)
+            _hints = 0;
+    }
+    private void ChangeDonation(int increment)
+    {//not sure if used
+        _donation += increment;
+    }
+    private void ChangePriceModifier(float increment)
+    { 
+        _priceModifier += increment;
+    }
+    private void ChangeTrashCapatiy(int increment)
+    {
+        trashCapacity += increment;
+    }
+    private void ChangeIllegalityMax(int increment)
+    {//most prob not used
+        illegalityMax += increment;
+    }
 
     void ChangeStat(ref int stat, int modifier)
     {
         stat += modifier;
     }
+
+    #endregion
+
 }

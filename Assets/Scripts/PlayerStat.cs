@@ -1,4 +1,5 @@
 public enum PlayerStat
 {
-    Followers, PopUpIncome, Timer, Trash, TrashIncrement, TrashIncrementInterval, Illegality, Hint, Donation, DonationIntensity, PriceModifier, IlegalityCapacity, TrashCapacity, IlegalityReductionInterval
+    Followers, PopUpIncome, Timer, Trash, TrashIncrement, TrashIncrementInterval, TrashCapacity,
+    Illegality, IllegalityCapacity, Donation, DonationIntensity, Hint,  PriceModifier, IlegalityReductionInterval
 }

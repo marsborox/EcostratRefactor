@@ -9,7 +9,6 @@ public class GameManager : Singleton<GameManager>
 {
     public static new GameManager instance => Singleton<GameManager>.instance;
     
-
     [Header ("Trash")]
 
     //[SerializeField] public float trashIncrementInterval = 3;
@@ -47,7 +46,7 @@ public class GameManager : Singleton<GameManager>
     private int blackmailLevel = 0;
     private int vandalismLevel = 0;
     private int landfillsLevel = 0;
-    public float hints = 0;
+    public float hints = 0;//moved
 
     [Header("Prefabs")]
     public SpecialEventDatabase specialEventDatabase;
@@ -100,9 +99,6 @@ public class GameManager : Singleton<GameManager>
         UpdateUI();
     }
     
-    
-
-    
     public void AddMoney()
     {
         ChangeStats(PlayerStat.PopUpIncome, UnityEngine.Random.Range(10, 51) + donation);
@@ -115,25 +111,27 @@ public class GameManager : Singleton<GameManager>
         {
             case PlayerStat.Followers:
                 //moved
-                followers += modifier;
+                /*followers += modifier;
                 if (followers < 0)
                     followers = 0;
-                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.FOLLOWER,modifier);
+                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.FOLLOWER,modifier);*/
                 /*
                 text = Instantiate(floatingTextPrefab, followersFloatingText);
-                text.UpdateText("<sprite=3>" + ((int)modifier).ToString("+#;-#;0"), modifier > 0, true);*/
+                text.UpdateText("<sprite=3>" + ((int)modifier).ToString("+#;-#;0"), modifier > 0, true);
+                */
                 break;
 
             case PlayerStat.PopUpIncome:
-                //moved
-                money += modifier;
+                //moved/*
+                /*money += modifier;
                 if (money < 0)
                     money = 0;
-                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.MONEY,modifier);
+                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.MONEY,modifier);*/
                 /*
                 text = Instantiate(floatingTextPrefab, moneyFloatingText);
                 text.UpdateText("<sprite=1>" + ((int)modifier).ToString("+#;-#;0"), modifier > 0, true);
                 */
+                /*
                 foreach (var item in FindObjectsOfType<UpgradeButton>(true))
                 {//this should be done on open in / update of UpgradeUI
                     if (money >= item.currentUpgradeInfo.price)
@@ -141,20 +139,20 @@ public class GameManager : Singleton<GameManager>
                         upgradeBTNAnimator.SetTrigger("Highlight");
                         break;
                     }
-                }
+                }*/
                 break;
 
             case PlayerStat.Illegality:
-                illegality += modifier;
+                /*illegality += modifier;
                 if (illegality < 0)
-                    illegality = 0;
+                    illegality = 0;*/
                 
-                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.ILLEGALITY, modifier);
+                //Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.ILLEGALITY, modifier);
                 /*
                 text = Instantiate(floatingTextPrefab, illegalityFloatingText);
                 text.UpdateText("<sprite=4>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
                 */
-                SoundManager.instance.Illegality();
+                //SoundManager.instance.Illegality();
                 break;
 
             case PlayerStat.Timer:
@@ -168,7 +166,7 @@ public class GameManager : Singleton<GameManager>
 
             case PlayerStat.Trash:
                 //moved
-                trash += modifier;
+                /*trash += modifier;
                 if (modifier > 0)
                     for (int i = 0; i < modifier; i++)
                     {
@@ -179,38 +177,42 @@ public class GameManager : Singleton<GameManager>
                     {
                         Spawner.instance.RemoveTrashBubble();
                     }
-                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TRASH, modifier);
+                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TRASH, modifier);*/
                 /*
                 text = Instantiate(floatingTextPrefab, trashFloatingText);
                 text.UpdateText("<sprite=0>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
                 */
 
-                if (trash < 0)
-                    trash = 0;
+                /*if (trash < 0)
+                    trash = 0;*/
                 break;
 
             case PlayerStat.TrashIncrement:
                 //moved
-                trashIncrementAmount += modifier;
-                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TRASH, modifier);
+                /*trashIncrementAmount += modifier;
+                Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TRASH, modifier);*/
                 
                 //text = Instantiate(floatingTextPrefab, trashFloatingText);
                 //text.UpdateText("<sprite=2>" + ((int)modifier).ToString("+#;-#;0"), modifier < 0, true);
                 
                 break;
-/*
-            case PlayerStat.TrashIncrementInterval:
+                /*
+                case PlayerStat.TrashIncrementInterval:
                 trashIncrementInterval += modifier;
                 break;
-*/
+                */
 
             case PlayerStat.Hint:
+                //moved
                 hints += modifier;
                 if (hints < 0)
                     hints = 0;
                 break;
 
+            
+               //not used
             case PlayerStat.Donation:
+                //moved
                 donation += modifier;
                 break;
                 /* //not used
@@ -221,18 +223,22 @@ public class GameManager : Singleton<GameManager>
                 break;*/
 
             case PlayerStat.PriceModifier:
+                //moved
                 priceModifier += modifier;
                 break;
 
             case PlayerStat.TrashCapacity:
+                //moved
                 trashCapacity += modifier;
                 break;
 
-            case PlayerStat.IlegalityCapacity:
+            case PlayerStat.IllegalityCapacity:
+                //moved
                 illegalCapacity += (int)modifier;
                 break;
 
             case PlayerStat.IlegalityReductionInterval:
+                //not used
                 illegalityReductionInterval += modifier;
                 break;
 
