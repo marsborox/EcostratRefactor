@@ -18,7 +18,7 @@ public class EventDataScriptable : ScriptableObject
     [Tooltip("How can the player react to this? Create reactions and fill them with Actions, which are created in the File System.")]
     public List<ReactionData> reactions;
     [Tooltip("What happens if player chooses to ignore this event?")]
-    public List<Action> ignoreConsequences;
+    public List<PlayerAction> ignoreConsequences;
     public string ignoreMessage;
     [TextArea(3, 3)]
     public string eventDescription;

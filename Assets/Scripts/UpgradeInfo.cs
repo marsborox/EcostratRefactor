@@ -17,5 +17,5 @@ public class UpgradeInfo : ScriptableObject
     public string description;
     [TextArea(3, 3)]
     public string benefits;
-    public List<Action> actions = new();
+    public List<PlayerAction> actions = new();
 }

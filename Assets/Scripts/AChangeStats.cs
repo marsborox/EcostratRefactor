@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Actions/Stat Change")]
-public class AChangeStats : Action
+public class AChangeStats : PlayerAction
 {
     public PlayerStat stat;
     public float modifier;

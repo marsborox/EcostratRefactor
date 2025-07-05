@@ -55,7 +55,7 @@ Notes: need to fix upgrade the thing that extends time
 
 To Do:
 
-NEXT: AChangeStats, ReactionData, SetInactive, EventWindow -> 
+NEXT: AChangeStats, ReactionData, SetInactive, EventWindow, SOs - will operate switch statement for now
 
 FollowUp: fix texts on sliders, move pop up value to UI class, doTexts, remove all stats (trash money illegality, followers) from GameManager
 (need to move all stats to newPlayerStats first)

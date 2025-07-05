@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Actions/Chance")]
-public class AChance : Action
+public class AChance : PlayerAction
 {
     public List<int> chances;
-    public List<Action> actions;
+    public List<PlayerAction> actions;
     public override void Execute()
     {
         int random = Random.Range(1, 101);

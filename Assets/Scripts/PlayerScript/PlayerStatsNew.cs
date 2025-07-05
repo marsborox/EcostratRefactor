@@ -74,9 +74,54 @@ public class PlayerStatsNew : MonoBehaviour
         MyEventHandler.instance.OnIllegalityTimer -= ChangeIllegality;
 
     }
-    void AddStats()
+    public void ChangeStats(PlayerStat stat, float modifier)
     {
+        switch (stat)
+        {
+            case PlayerStat.Followers:
+                { 
+                
+                }
+                break;
+            case PlayerStat.PopUpIncome: break;
+            case PlayerStat.Illegality: break;
+            case PlayerStat.Timer: break;
+            case PlayerStat.Trash: break;
+            case PlayerStat.TrashIncrement: break;
+            case PlayerStat.Hint: break;
+            case PlayerStat.Donation: break;
+            case PlayerStat.PriceModifier: break;
+            case PlayerStat.TrashCapacity: break;
+            case PlayerStat.IllegalityCapacity: break;
+            case PlayerStat.IlegalityReductionInterval: break;
+            default: break;
+        }
 
+        CheckIfGGameOver();
+    }
+
+    private void CheckIfGGameOver()
+    {
+        if (illegalityAmmount >= illegalityMax)
+        {
+            if (!gameManager.illegalityGameOverEvent.activeInHierarchy)
+            {
+                gameManager.illegalityGameOverEvent.SetActive(true);
+                StartCoroutine(MainTimer.instance.DelayedPause());
+            }
+        }
+        if (trashAmmount >= trashCapacity)
+        {
+            SoundManager.instance.Defeat();
+            gameManager.GameOver("DOOMSDAY - The world is flooded with garbage!",
+                "The seas and oceans have returned to us what we have thrown into them all these years. People swim in the garbage that has flooded the streets of human dwellings. PRO TIP: It is important to make decisions that do not increase our garbage per interval too much, because that way we will get into a too large increase of garbage per day, which we will not be able to get rid of afterwards.");
+        }
+        if (trashAmmount <= 0)
+        {
+            SoundManager.instance.Victory();
+            gameManager.GameOver("All Clean!",
+                "You managed to clear all the trash and made our planet a clean place again, where we can live together in harmony with nature as one complete humanity! Now is the time to rest and enjoy the success of your deeds for our planet!");
+        }
     }
 
     private void StatAddTimer(ref float timer,int treshold,System.Action method)
@@ -118,7 +163,6 @@ public class PlayerStatsNew : MonoBehaviour
     }
     private void ChangeFollowerIncome()
     {
-
         moneyCurrent += followerAmmount;
         if (moneyCurrent < 0)
             moneyCurrent = 0;
@@ -135,7 +179,7 @@ public class PlayerStatsNew : MonoBehaviour
         gameManager.ChangeStats(PlayerStat.PopUpIncome, gameManager.followers);
         
     }
-    void ChangeIllegality()
+    private void ChangeIllegality()
     {
         illegalityAmmount += _illegalityIncrementAmmount;
         if (illegalityAmmount < 0)
@@ -146,7 +190,7 @@ public class PlayerStatsNew : MonoBehaviour
         gameManager.ChangeStats(PlayerStat.Illegality, gameManager.illegalityIncrement);
         
     }
-    void ChangeTrash()
+    private void ChangeTrash()
     {
         trashAmmount += trashIncrementAmmount;
         if (trashIncrementAmmount > 0)
@@ -165,7 +209,7 @@ public class PlayerStatsNew : MonoBehaviour
 
         gameManager.ChangeStats(PlayerStat.Trash, gameManager.trashIncrementAmount);
     }
-    void ChangeTrashIncrement()
+    private void ChangeTrashIncrement()
     {
         trashIncrementAmmount += trashIncrement_increment;
         //is this necessary?

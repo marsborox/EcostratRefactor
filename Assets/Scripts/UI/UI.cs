@@ -27,6 +27,4 @@ public class UI : MonoBehaviour
         Debug.Log("Hello!");
     }
 
-
-    
 }

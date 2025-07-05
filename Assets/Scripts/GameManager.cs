@@ -110,6 +110,7 @@ public class GameManager : Singleton<GameManager>
         switch (stat)
         {
             case PlayerStat.Followers:
+                
                 //moved
                 /*followers += modifier;
                 if (followers < 0)
@@ -143,6 +144,7 @@ public class GameManager : Singleton<GameManager>
                 break;
 
             case PlayerStat.Illegality:
+
                 /*illegality += modifier;
                 if (illegality < 0)
                     illegality = 0;*/
@@ -245,6 +247,7 @@ public class GameManager : Singleton<GameManager>
             default:
                 break;
         }
+
         if (illegality >= illegalCapacity)
         {
             if (!illegalityGameOverEvent.activeInHierarchy)
