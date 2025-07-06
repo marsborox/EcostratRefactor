@@ -51,7 +51,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Prefabs")]
     public SpecialEventDatabase specialEventDatabase;
     public Texture2D mapSprite;
-    public Button bubblePrefab;
+    public Bubble bubblePrefab;
     public GameObject trashBubblePrefab;
     public Event eventPrefab;
     public EventDatabase eventDatabase;
@@ -100,7 +100,7 @@ public class GameManager : Singleton<GameManager>
     }
     
     public void AddMoney()
-    {
+    {//soon to remove / moved to playerStats
         ChangeStats(PlayerStat.PopUpIncome, UnityEngine.Random.Range(10, 51) + donation);
     }
 
@@ -217,12 +217,14 @@ public class GameManager : Singleton<GameManager>
                 //moved
                 donation += modifier;
                 break;
-                /* //not used
+                 //not used
             case PlayerStat.DonationIntensity:
+                /*
                 donationIncomeInterval += modifier;
                 if (donationIncomeInterval < 0.1)
                     donationIncomeInterval = 0.1f;
-                break;*/
+                */
+                break;
 
             case PlayerStat.PriceModifier:
                 //moved

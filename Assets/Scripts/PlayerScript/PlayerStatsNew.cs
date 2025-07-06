@@ -129,7 +129,7 @@ public class PlayerStatsNew : MonoBehaviour
         timer += MainTimer.instance.elapsedDeltaTime;
         if (timer >= treshold)
         {
-            timer = -treshold;
+            timer =- treshold;
             method();
         }
     }
@@ -138,9 +138,9 @@ public class PlayerStatsNew : MonoBehaviour
     {
         Spawner.instance.CreateBubble();
     }
-    private void ChangePopUpIncome()
-    {
-        moneyCurrent += _incomeFromPopUps;
+    public void ChangePopUpIncome()
+    {//control this might be wrong
+        moneyCurrent += UnityEngine.Random.Range(10, 51) + _incomeFromPopUps;
         if (moneyCurrent < 0)
             moneyCurrent = 0;
         Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.MONEY, _incomeFromPopUps);

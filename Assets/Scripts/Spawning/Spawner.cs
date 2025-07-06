@@ -68,7 +68,7 @@ public class Spawner : Singleton<Spawner>
 
     public void CreateBubble()
     {
-        Button bubbleInstance = Instantiate(GameManager.instance.bubblePrefab, GameManager.instance.interactiveCanvas.transform);
+        Bubble bubbleInstance = Instantiate(GameManager.instance.bubblePrefab, GameManager.instance.interactiveCanvas.transform);
         bubbleInstance.GetComponent<RectTransform>().anchoredPosition = GetPointOnTerrain(false);
     }
     public void CreateTrashBubble()

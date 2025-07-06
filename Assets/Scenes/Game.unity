@@ -2664,25 +2664,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8712ce21db66ea7468c7f7e644976cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statTimer: 0
-  statTreshold: 0
-  statAmmount: 0
-  statIncrement: 0
-  trashTimer: 0
-  trashIncrementInterval: 0
+  _initialTrash: 10000
   trashAmmount: 0
   trashIncrementAmmount: 0
-  trashIncrementTimer: 0
-  trashIncrementTimerInterval: 0
+  trashCapacity: 20000
   trashIncrement_increment: 0
-  followerIncomeTimer: 0
-  followerIncomeTimerInterval: 0
-  followerIncomeAmmount: 0
   followerAmmount: 0
-  illegalityTimer: 0
-  illegalityTimerInterval: 0
+  initialMoney: 500
+  moneyCurrent: 0
+  _incomeFromPopUps: 0
   illegalityAmmount: 0
-  illegalityIncrementAmmount: 0
+  _illegalityIncrementAmmount: -5
+  illegalityMax: 100
+  _hints: 0
+  _donation: 0
+  _priceModifier: 0
 --- !u!114 &295448211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2906,11 +2902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7531f7d658c6c46a503c71aad87a97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  daysRemaining: 1825
-  elapsedTime: 0
-  trashIncrementInterval: 3
   trash: 10000
-  trashIncrementTimer: 0
   trashIncrementAmount: 10
   trashIncrement_increment: 5
   trashBubbles: []
@@ -2924,7 +2916,7 @@ MonoBehaviour:
   hints: 0
   specialEventDatabase: {fileID: 11400000, guid: 1acabb3c13918a14da04a2de7dce2757, type: 2}
   mapSprite: {fileID: 2800000, guid: 26351b75dc6ce9148a63b60d591ec706, type: 3}
-  bubblePrefab: {fileID: 6920311472419885847, guid: b0007dfa7e649864ba8260b195b79df6, type: 3}
+  bubblePrefab: {fileID: 8033102228973033515, guid: b0007dfa7e649864ba8260b195b79df6, type: 3}
   trashBubblePrefab: {fileID: 6978877060500683553, guid: 84e62fac365810848b687d168833945a, type: 3}
   eventPrefab: {fileID: 555002411652540200, guid: a2ecfeebdc9543847b6f35e0c7c74b78, type: 3}
   eventDatabase: {fileID: 11400000, guid: fd3fac1f0c8ea414c91309650334a649, type: 2}

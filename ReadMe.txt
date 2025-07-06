@@ -4,15 +4,20 @@ Original codebase:	https://github.com/marsborox/EcostratOriginal/
 
 Done:
 
-MainMenu 	- Somewhat fixed main menu (buttons not displayed, background is disabled tho)
-		- MainMenu_UI class, subscribing methods to events triggered by buttons //***** mabye own category??
-
 Added Text explaining "Press Esc to skip intro"
 Renamed Camera Canvas to UI Canvas (makes more sense)
 Fixed timer on ui (was running even when game paused)
 Trash increment amount - was being increased same rate disregard the game speed - fixed
 When closing event window - for some reason Hide was triggered twice, causing bug - fixed
 Fixed text for add display time
+
+Donation prefab redone so it spawns class not Button, moved whole donation / get  money from pop up
+
+
+MainMenu 	- Somewhat fixed main menu (buttons not displayed, background is disabled tho)
+		- MainMenu_UI class, subscribing methods to events triggered by buttons //***** mabye own category??
+
+
 
 Events
 we created EventHandler that will Invoke events and other stuff will subscribe to them,
@@ -51,11 +56,17 @@ Singleton 	- we have Singleton<T> class and SingletonPresistent<T> class (second
 Interfaces	- we have Interface for button initiation - does not have to be motherClass
 		- its our standard InitiateButton, with playSound bonus
 
+
+
+
+
 Notes: need to fix upgrade the thing that extends time
 
 To Do:
 
 NEXT: AChangeStats, ReactionData, SetInactive, EventWindow, SOs - will operate switch statement for now
+
+
 
 FollowUp: fix texts on sliders, move pop up value to UI class, doTexts, remove all stats (trash money illegality, followers) from GameManager
 (need to move all stats to newPlayerStats first)
