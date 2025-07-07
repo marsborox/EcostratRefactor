@@ -1,4 +1,4 @@
-using UnityEngine;
+using System;
 
 public class PlayerMain : Singleton<PlayerMain>
 {
@@ -10,16 +10,8 @@ public class PlayerMain : Singleton<PlayerMain>
 
     private void Awake()
     {
+        base.Awake();
         playerStats = GetComponent<PlayerStatsNew>();
     }
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

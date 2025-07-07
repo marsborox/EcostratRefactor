@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class SlidersAndValues_UI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _daysLeftText;
-    [SerializeField] private TextMeshProUGUI _illegalityText;
     [SerializeField] private TextMeshProUGUI _elapsedTimeText;
+    [SerializeField] private TextMeshProUGUI _illegalityText;
     [SerializeField] private TextMeshProUGUI _moneyText;
     [SerializeField] private TextMeshProUGUI _followerText;
     [SerializeField] private TextMeshProUGUI _trashText;
@@ -48,14 +48,19 @@ public class SlidersAndValues_UI : MonoBehaviour
     void SetAllSliders()
     {
         SetSlider(ref _followerInomeSlider, MainTimer.instance.followerIncomeInterval, MainTimer.instance.followerIncomeTimer);
-        SetSlider(ref _illegalitySlider, _gameManager.illegalCapacity, _gameManager.illegality);
+        SetSlider(ref _illegalitySlider, PlayerMain.instance.playerStats.illegalityAmmount, PlayerMain.instance.playerStats.illegalityMax);
         SetSlider(ref _trashSlider, MainTimer.instance.trashTimerInterval, MainTimer.instance.trashTimer);
         SetSlider(ref _daysLeftSlider, MainTimer.instance.daysLeftMax, MainTimer.instance.daysLeft);
     }
     void SetAllTexts()
-    { 
+    {
+        var playerStats = PlayerMain.instance.playerStats;
         _daysLeftText.text = ((int)MainTimer.instance.daysLeft/ _dayCoeficient + " days Left");
         _elapsedTimeText.text = MainTimer.instance.GetTimeStamp();
+        _illegalityText.text = playerStats.illegalityAmmount.ToString() + " / " + playerStats.illegalityMax.ToString();
+        _moneyText.text = playerStats.moneyCurrent.ToString();
+        _followerText.text = playerStats.followerAmmount.ToString();
+        _trashText.text = playerStats.trashAmmount.ToString();
     }
     private void SetSlider(ref Slider slider,float sliderMaxVal, float sliderVal)
     {

@@ -1,5 +1,3 @@
-using System.Data;
-
 using UnityEngine;
 
 public class MyEventHandler : Singleton<MyEventHandler>
@@ -31,26 +29,26 @@ public class MyEventHandler : Singleton<MyEventHandler>
     public void DonationTimerSpawnerEvent()
     {
         OnDonationTimer?.Invoke();
-        //Debug.Log(" donation event Invoked");
+        Debug.Log(" donation event Invoked");
     }
     public void FollowerIncomeTimerSpawner()
-    {
+    {        
         OnFollowerIncome?.Invoke();
-        //Debug.Log(" follower event Invoked");
+        Debug.Log(" follower event Invoked");
     }
     public void IllegalityTimerSpawner()
-    {
+    {        
         OnIllegalityTimer?.Invoke();
-        //Debug.Log(" illegality event Invoked");
+        Debug.Log(" illegality event Invoked");
     }
     public void TrashTimerSpawner()
-    {
+    {        
         OnTrashTimer?.Invoke();
-        //Debug.Log(" trash event Invoked");
+        Debug.Log(" trash event Invoked");
     }
     public void TrashIncrementTimeSpawner()
-    {
+    {        
         OnTrashIncrement?.Invoke();
-        //Debug.Log(" trash increment event Invoked");
+        Debug.Log(" trash increment event Invoked");
     }
 }

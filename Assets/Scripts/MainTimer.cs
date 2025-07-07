@@ -138,7 +138,4 @@ public class MainTimer : Singleton<MainTimer>
                 "Climate changes in the world are already so critical that it is impossible to continue your saving journey of planet Earth. PRO TIP: Gotta be faster next time! (Try to buy out some of Negotiation Perks to get more time!)");
         }
     }
-
-
-
 }

@@ -27,7 +27,7 @@ public class PlayerStatsNew : MonoBehaviour
     [SerializeField] private int _incomeFromPopUps;
 
     [Header("Illegality")]
-    public int illegalityAmmount;
+    public int illegalityAmmount = 0;
     [SerializeField] private int _illegalityIncrementAmmount = -5;
     public int illegalityMax = 100;
     GameManager gameManager;//temporary because i dont want to type this much remove when Change stats fully migrated
@@ -48,10 +48,13 @@ public class PlayerStatsNew : MonoBehaviour
         MyEventHandler.instance.OnFollowerIncome += ChangeFollowerIncome;
         MyEventHandler.instance.OnIllegalityTimer += ChangeIllegality;
 
+        InitialTrashSpawn();
+        moneyCurrent = initialMoney;
+
     }
     public void Update()
     {
-
+        CheckIfGGameOver();
     }
     private void OnEnable()
     {
@@ -97,7 +100,7 @@ public class PlayerStatsNew : MonoBehaviour
             default: break;
         }
 
-        CheckIfGGameOver();
+        
     }
 
     private void CheckIfGGameOver()
@@ -123,7 +126,14 @@ public class PlayerStatsNew : MonoBehaviour
                 "You managed to clear all the trash and made our planet a clean place again, where we can live together in harmony with nature as one complete humanity! Now is the time to rest and enjoy the success of your deeds for our planet!");
         }
     }
-
+    private void InitialTrashSpawn()
+    {
+        for (int i = 0; i < _initialTrash; i++)
+        {
+            Spawner.instance.CreateTrashBubble();
+            trashAmmount++;
+        }
+    }
     private void StatAddTimer(ref float timer,int treshold,System.Action method)
     {
         timer += MainTimer.instance.elapsedDeltaTime;
@@ -187,7 +197,7 @@ public class PlayerStatsNew : MonoBehaviour
 
         Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.ILLEGALITY, _illegalityIncrementAmmount);
         SoundManager.instance.Illegality();
-        gameManager.ChangeStats(PlayerStat.Illegality, gameManager.illegalityIncrement);
+        //gameManager.ChangeStats(PlayerStat.Illegality, gameManager.illegalityIncrement);
         
     }
     private void ChangeTrash()

@@ -2148,7 +2148,7 @@ MonoBehaviour:
   _illegalitySlider: {fileID: 547163833}
   _trashSlider: {fileID: 1101403728}
   _daysLeftSlider: {fileID: 1060614558}
-  _dayCoeficient: 365
+  _dayCoeficient: 5
 --- !u!1 &280507680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2666,9 +2666,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialTrash: 10000
   trashAmmount: 0
-  trashIncrementAmmount: 0
+  trashIncrementAmmount: 10
   trashCapacity: 20000
-  trashIncrement_increment: 0
+  trashIncrement_increment: 5
   followerAmmount: 0
   initialMoney: 500
   moneyCurrent: 0

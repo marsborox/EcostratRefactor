@@ -40,13 +40,16 @@ GameManager
 		- 
 	- UI - some work on left panel - spawning of that pop up text reworked
 		- Moved sliders it is working
-		- all sliders except days is done
+		- all sliders except days is done working
+		- UP panel texts working 
 		- Time related texts are moved
+
 	
 top buttons - 	 made into toggle group, made own class for SpeedButtons,-must redo this 
 		 assigned per interface w implemented InitiateButton method
 
-Player		- there is a Player object w Player and PlayerStatsNew classes, all methods and stats are moved here, for now broken
+Player		- there is a Player object w Player and PlayerStatsNew classes, all methods and stats are moved here, time even
+		update loop ais working fine,
 Singleton 	- we have Singleton<T> class and SingletonPresistent<T> class (second inherits from first)
 		- implemented on MySceneManager(Perma), 
 		- SoundManager(Perma), RadioSoundManager,  TimeController, 
@@ -64,12 +67,13 @@ Notes: need to fix upgrade the thing that extends time
 
 To Do:
 
-NEXT: AChangeStats, ReactionData, SetInactive, EventWindow, SOs - will operate switch statement for now
+NEXT: everything what is not stat manipulation defined by time must be adjusted to initiate events
 
 
 
 FollowUp: fix texts on sliders, move pop up value to UI class, doTexts, remove all stats (trash money illegality, followers) from GameManager
-(need to move all stats to newPlayerStats first)
+(need to move all stats to newPlayerStats first), News show wrong days remaining
+colors of some pop up texts do not match color
 
 Problems : spawning of trash bubbles in begining of game
 		UI all sliders why get minus
