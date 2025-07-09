@@ -65,18 +65,52 @@ Interfaces	- we have Interface for button initiation - does not have to be mothe
 
 Notes: need to fix upgrade the thing that extends time
 
+Upgrades: UI Upgrades
+
+A ChangeStats(inherits from PlayerActions) is used in pretty much everywhere
+switch - 
+
+we have now adjusted per order in switches
+Followers			ChangeFollowerAmmount
+PopUp Income			not done input variant
+*
+Timer				ChangeDaysLeft in Timer
+Trash				
+Trash Increment			not done input varian
+Hint				ChangeHint
+*
+*
+Price modifier			missing completely
+*
+Illegal Capacity		??? was really used?
+Illegality reduction interval	?? was really used?
+
+
+
+
+
+Trash Cap
+
+
+Donation Intensity
+
+
+
+
+
+
 To Do:
 
 NEXT: everything what is not stat manipulation defined by time must be adjusted to initiate events
 
 
-
 FollowUp: fix texts on sliders, move pop up value to UI class, doTexts, remove all stats (trash money illegality, followers) from GameManager
 (need to move all stats to newPlayerStats first), News show wrong days remaining
 colors of some pop up texts do not match color
+should take care of "inflation" price modifier
 
 Problems : spawning of trash bubbles in begining of game
-		UI all sliders why get minus
+		
 
 Game Events (Events) will need some work most probably a lot of work
 
