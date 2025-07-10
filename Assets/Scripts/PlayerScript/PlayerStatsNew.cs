@@ -6,7 +6,6 @@ using UnityEditor.Search;
 
 public class PlayerStatsNew : MonoBehaviour
 {
-
     [Header("Trash")]
     [SerializeField] private int _initialTrash = 10000;
     public int trashAmmount;//set in start
@@ -14,14 +13,14 @@ public class PlayerStatsNew : MonoBehaviour
     public int trashCapacity = 20000;
 
     [Header("TrashIncrement")]
-        //public int trashIncrementAmmount_____;
+    //public int trashIncrementAmmount_____;
     public int trashIncrement_increment =5;
 
     [Header("IncomeFromFollowers")]
     //public int followerIncomeAmmount;
     public int followerAmmount;
-    [Header("Money")]
 
+    [Header("Money")]
     public int initialMoney = 500;
     public int moneyCurrent;//set in start
     [SerializeField] private int _incomeFromPopUps;
@@ -47,6 +46,7 @@ public class PlayerStatsNew : MonoBehaviour
         MyEventHandler.instance.OnTrashIncrement += ChangeTrashIncrement;
         MyEventHandler.instance.OnFollowerIncome += ChangeFollowerIncome;
         MyEventHandler.instance.OnIllegalityTimer += ChangeIllegality;
+
 
         InitialTrashSpawn();
         moneyCurrent = initialMoney;
@@ -230,32 +230,32 @@ public class PlayerStatsNew : MonoBehaviour
 
     #region lesserStats
 
-    private void ChangeHint(int increment)
+    private void ChangeHint(float increment)
     {
-        _hints += increment;
+        _hints += (int)increment;
         if (_hints < 0)
             _hints = 0;
     }
-    private void ChangeDonation(int increment)
+    private void ChangeDonation(float increment)
     {//not sure if used
-        _donation += increment;
+        _donation += (int)increment;
     }
     private void ChangePriceModifier(float increment)
     { 
         _priceModifier += increment;
     }
-    private void ChangeTrashCapatiy(int increment)
+    private void ChangeTrashCapatiy(float increment)
     {
-        trashCapacity += increment;
+        trashCapacity += (int)increment;
     }
-    private void ChangeIllegalityMax(int increment)
+    private void ChangeIllegalityMax(float increment)
     {//most prob not used
-        illegalityMax += increment;
+        illegalityMax += (int)increment;
     }
 
-    void ChangeStat(ref int stat, int modifier)
+    void ChangeStat(ref int stat, float modifier)
     {
-        stat += modifier;
+        stat += (int)modifier;
     }
 
     #endregion

@@ -21,7 +21,14 @@ MainMenu 	- Somewhat fixed main menu (buttons not displayed, background is disab
 
 Events
 we created EventHandler that will Invoke events and other stuff will subscribe to them,
-	Events work fine w subscribed methods;
+	Events work fine w subscribed methods; Events for methods run from SOs created
+
+SOs	- all / msot of pop ups (events, bubbles, upgrades) are done by using SOs AChangeStats,
+these SOs have enum PlayerStats and value, was run over giant switch statement in GameManager
+	
+	we keep that logic but in AChangeStats will be switch statement - based on enum Run method in MyEventManager, 
+	and subscribe methods in PlayerStatsNew
+
 
 GameManager
 
@@ -71,37 +78,26 @@ A ChangeStats(inherits from PlayerActions) is used in pretty much everywhere
 switch - 
 
 we have now adjusted per order in switches
-Followers			ChangeFollowerAmmount
-PopUp Income			not done input variant
+Followers			ChangeFollowerAmmount	event created
+PopUp Income			not done input variant	event created
 *
-Timer				ChangeDaysLeft in Timer
+Timer				ChangeDaysLeft in Timer	event created
 Trash				
-Trash Increment			not done input varian
-Hint				ChangeHint
+Trash Increment			not done input varian	event created
+Hint				ChangeHint		event created
 *
 *
-Price modifier			missing completely
+Price modifier			missing completely	event created
 *
 Illegal Capacity		??? was really used?
 Illegality reduction interval	?? was really used?
 
-
-
-
-
 Trash Cap
-
-
 Donation Intensity
-
-
-
-
-
 
 To Do:
 
-NEXT: everything what is not stat manipulation defined by time must be adjusted to initiate events
+NEXT: everything what is not stat manipulation defined by time must be adjusted to initiate events - progress here, finish SOs stuff
 
 
 FollowUp: fix texts on sliders, move pop up value to UI class, doTexts, remove all stats (trash money illegality, followers) from GameManager

@@ -12,7 +12,14 @@ public class MyEventHandler : Singleton<MyEventHandler>
     public event StatChangeEvent OnTrashTimer;
     public event StatChangeEvent OnTrashIncrement;
 
-    public int numberrrr; 
+    public delegate void StatChangeEventInput(float inputModifier);
+    public event StatChangeEventInput OnFollowerChangeInput;
+    public event StatChangeEventInput OnPopUpInput;
+    public event StatChangeEventInput OnChangeDaysRemainingInput;
+    public event StatChangeEventInput OnTrashChangeInput;
+    public event StatChangeEventInput OnChangeHintAmmountInput;
+    public event StatChangeEventInput OnPriceModifierInput;
+    
     private void Awake()
     {
         base.Awake();
@@ -26,6 +33,34 @@ public class MyEventHandler : Singleton<MyEventHandler>
     {
         
     }
+    public void FollowerChangeInputEvent(float inputModifier)
+    {
+        OnFollowerChangeInput?.Invoke(inputModifier);
+    }
+    public void PopUpInputEvent(float inputModifier)
+    { 
+        OnPopUpInput?.Invoke(inputModifier);        
+    }
+    public void ChangeDaysRemainingInputEvent(float inputModifier)
+    {
+        OnChangeDaysRemainingInput?.Invoke(inputModifier);
+    }
+    public void TrashChangeInputEvent(float inputModifier)
+    {
+        OnTrashChangeInput?.Invoke(inputModifier);
+    }
+    public void HintInputEvent(float inputModifier)
+    {
+        OnChangeHintAmmountInput?.Invoke(inputModifier);
+    }
+    public void PriceModifierInputEvent(float inputModifier)
+    {
+        OnPriceModifierInput?.Invoke(inputModifier);
+    }
+
+
+
+
     public void DonationTimerSpawnerEvent()
     {
         OnDonationTimer?.Invoke();
@@ -51,4 +86,8 @@ public class MyEventHandler : Singleton<MyEventHandler>
         OnTrashIncrement?.Invoke();
         Debug.Log(" trash increment event Invoked");
     }
+
+
+
+
 }

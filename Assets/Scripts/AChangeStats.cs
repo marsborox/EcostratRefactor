@@ -30,7 +30,7 @@ public class AChangeStats : PlayerAction
         {
             case PlayerStat.Followers:
                 {
-
+                    MyEventHandler.instance.FollowerChangeInputEvent(modifier);
                 }
                 break;
             case PlayerStat.PopUpIncome: break;
