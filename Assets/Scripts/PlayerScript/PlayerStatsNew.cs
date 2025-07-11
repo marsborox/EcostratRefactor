@@ -148,7 +148,23 @@ public class PlayerStatsNew : MonoBehaviour
     {
         Spawner.instance.CreateBubble();
     }
-    public void ChangePopUpIncome()
+    public void PopUpIncome()
+    {//control this might be wrong
+        moneyCurrent += UnityEngine.Random.Range(10, 51) + _incomeFromPopUps;
+        if (moneyCurrent < 0)
+            moneyCurrent = 0;
+        Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.MONEY, _incomeFromPopUps);
+
+        foreach (var item in FindObjectsOfType<UpgradeButton>(true))
+        {//this should be done on open in / update of UpgradeUI
+            if (moneyCurrent >= item.currentUpgradeInfo.price)
+            {
+                GameManager.instance.upgradeBTNAnimator.SetTrigger("Highlight");
+                break;
+            }
+        }
+    }
+    public void PopUpIncome()
     {//control this might be wrong
         moneyCurrent += UnityEngine.Random.Range(10, 51) + _incomeFromPopUps;
         if (moneyCurrent < 0)

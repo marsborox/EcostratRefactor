@@ -33,14 +33,38 @@ public class AChangeStats : PlayerAction
                     MyEventHandler.instance.FollowerChangeInputEvent(modifier);
                 }
                 break;
-            case PlayerStat.PopUpIncome: break;
-            case PlayerStat.Illegality: break;
+            case PlayerStat.PopUpIncome:
+                {
+                    MyEventHandler.instance.PopUpInputEvent(modifier);
+                }
+                break;
+            case PlayerStat.Illegality:
+                { 
+                    //nothing
+                }
+                break;
             case PlayerStat.Timer: break;
-            case PlayerStat.Trash: break;
-            case PlayerStat.TrashIncrement: break;
-            case PlayerStat.Hint: break;
+            case PlayerStat.Trash:
+                {
+                    MyEventHandler.instance.TrashChangeInputEvent(modifier);
+                }
+                break;
+            case PlayerStat.TrashIncrement:
+                {
+                    MyEventHandler.instance.TrashIncrementChangeInputEvent(modifier);
+                }
+                break;
+            case PlayerStat.Hint:
+                {
+                    MyEventHandler.instance.HintInputEvent(modifier);
+                }
+                break;
             case PlayerStat.Donation: break;
-            case PlayerStat.PriceModifier: break;
+            case PlayerStat.PriceModifier:
+                {
+                    MyEventHandler.instance.PriceModifierInputEvent(modifier);
+                }
+                break;
             case PlayerStat.TrashCapacity: break;
             case PlayerStat.IllegalityCapacity: break;
             case PlayerStat.IlegalityReductionInterval: break;

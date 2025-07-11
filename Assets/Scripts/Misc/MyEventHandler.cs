@@ -17,6 +17,7 @@ public class MyEventHandler : Singleton<MyEventHandler>
     public event StatChangeEventInput OnPopUpInput;
     public event StatChangeEventInput OnChangeDaysRemainingInput;
     public event StatChangeEventInput OnTrashChangeInput;
+    public event StatChangeEventInput OnTrashIncrementInput;
     public event StatChangeEventInput OnChangeHintAmmountInput;
     public event StatChangeEventInput OnPriceModifierInput;
     
@@ -45,9 +46,14 @@ public class MyEventHandler : Singleton<MyEventHandler>
     {
         OnChangeDaysRemainingInput?.Invoke(inputModifier);
     }
+
     public void TrashChangeInputEvent(float inputModifier)
     {
         OnTrashChangeInput?.Invoke(inputModifier);
+    }
+    public void TrashIncrementChangeInputEvent(float inputModifier)
+    {
+        OnTrashIncrementInput?.Invoke(inputModifier);
     }
     public void HintInputEvent(float inputModifier)
     {

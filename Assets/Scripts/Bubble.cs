@@ -14,7 +14,7 @@ public class Bubble : MonoBehaviour
     private void Start()
     {
         button.onClick.AddListener(GameManager.instance.AddMoney);
-        button.onClick.AddListener(PlayerMain.instance.playerStats.ChangePopUpIncome);
+        button.onClick.AddListener(PlayerMain.instance.playerStats.PopUpIncome);
         button.onClick.AddListener(SoundManager.instance.Click);
     }
 
