@@ -1,8 +1,6 @@
 using UnityEngine;
 using System;
-using UnityEngine.UI;
-using System.Threading.Tasks;
-using UnityEditor.Search;
+
 
 public class PlayerStatsNew : MonoBehaviour
 {
@@ -40,14 +38,8 @@ public class PlayerStatsNew : MonoBehaviour
     {
         gameManager = GameManager.instance;
 
-        //does not work in OnEnable (initialisaiton order?
-        MyEventHandler.instance.OnDonationTimer += DonationIncome;
-        MyEventHandler.instance.OnTrashTimer += ChangeTrash;
-        MyEventHandler.instance.OnTrashIncrement += ChangeTrashIncrement;
-        MyEventHandler.instance.OnFollowerIncome += ChangeFollowerIncome;
-        MyEventHandler.instance.OnIllegalityTimer += ChangeIllegality;
 
-
+        SubscribeMethods();
         InitialTrashSpawn();
         moneyCurrent = initialMoney;
 
@@ -70,39 +62,45 @@ public class PlayerStatsNew : MonoBehaviour
     }
     private void OnDisable()
     {
+        UnsubscribeMethods();
+
+
+    }
+
+
+    private void SubscribeMethods()
+    {
+
+        //does not work in OnEnable (initialisaiton order?
+        MyEventHandler.instance.OnDonationTimer += DonationIncome;
+        MyEventHandler.instance.OnTrashTimer += ChangeTrash;
+        MyEventHandler.instance.OnTrashIncrement += ChangeTrashIncrement;
+        MyEventHandler.instance.OnFollowerIncome += ChangeFollowerIncome;
+        MyEventHandler.instance.OnIllegalityTimer += ChangeIllegality;
+
+        MyEventHandler.instance.OnFollowerChangeInput += ChangeFollowerAmmount;
+        MyEventHandler.instance.OnPopUpInput += PopUpIncome;
+        MyEventHandler.instance.OnTrashChangeInput += ChangeTrashInput;
+        MyEventHandler.instance.OnTrashIncrementInput += ChangeTrashIncrementInput;
+        MyEventHandler.instance.OnChangeHintAmmountInput += ChangeHint;
+
+    }
+
+    private void UnsubscribeMethods()
+    {
         MyEventHandler.instance.OnDonationTimer -= DonationIncome;
         MyEventHandler.instance.OnTrashTimer -= ChangeTrash;
         MyEventHandler.instance.OnTrashIncrement -= ChangeTrashIncrement;
         MyEventHandler.instance.OnFollowerIncome -= ChangeFollowerIncome;
         MyEventHandler.instance.OnIllegalityTimer -= ChangeIllegality;
 
-    }
-    public void ChangeStats(PlayerStat stat, float modifier)
-    {
-        switch (stat)
-        {
-            case PlayerStat.Followers:
-                { 
-                
-                }
-                break;
-            case PlayerStat.PopUpIncome: break;
-            case PlayerStat.Illegality: break;
-            case PlayerStat.Timer: break;
-            case PlayerStat.Trash: break;
-            case PlayerStat.TrashIncrement: break;
-            case PlayerStat.Hint: break;
-            case PlayerStat.Donation: break;
-            case PlayerStat.PriceModifier: break;
-            case PlayerStat.TrashCapacity: break;
-            case PlayerStat.IllegalityCapacity: break;
-            case PlayerStat.IlegalityReductionInterval: break;
-            default: break;
-        }
+        MyEventHandler.instance.OnFollowerChangeInput -= ChangeFollowerAmmount;
+        MyEventHandler.instance.OnPopUpInput -= PopUpIncome;
+        MyEventHandler.instance.OnTrashChangeInput -= ChangeTrashInput;
+        MyEventHandler.instance.OnTrashIncrementInput -= ChangeTrashIncrementInput;
+        MyEventHandler.instance.OnChangeHintAmmountInput -= ChangeHint;
 
-        
     }
-
     private void CheckIfGGameOver()
     {
         if (illegalityAmmount >= illegalityMax)
@@ -164,29 +162,8 @@ public class PlayerStatsNew : MonoBehaviour
             }
         }
     }
-    public void PopUpIncome()
-    {//control this might be wrong
-        moneyCurrent += UnityEngine.Random.Range(10, 51) + _incomeFromPopUps;
-        if (moneyCurrent < 0)
-            moneyCurrent = 0;
-        Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.MONEY, _incomeFromPopUps);
 
-        foreach (var item in FindObjectsOfType<UpgradeButton>(true))
-        {//this should be done on open in / update of UpgradeUI
-            if (moneyCurrent >= item.currentUpgradeInfo.price)
-            {
-                GameManager.instance.upgradeBTNAnimator.SetTrigger("Highlight");
-                break;
-            }
-        }
-    }
-    private void ChangeFollowerAmmount(int incrementOfFollowers)
-    {
-        followerAmmount += incrementOfFollowers;
-        if (followerAmmount < 0)
-            followerAmmount = 0;
-        Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.FOLLOWER, incrementOfFollowers);
-    }
+
     private void ChangeFollowerIncome()
     {
         moneyCurrent += followerAmmount;
@@ -244,8 +221,57 @@ public class PlayerStatsNew : MonoBehaviour
     }
     #endregion
 
-    #region lesserStats
+    #region StatsWInput
+    private void ChangeFollowerAmmount(float increment)
+    {
+        followerAmmount += (int)increment;
+        if (followerAmmount < 0)
+            followerAmmount = 0;
+        Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.FOLLOWER, increment);
+    }
+    private void PopUpIncome(float increment)
+    {//control this might be wrong
+        moneyCurrent += UnityEngine.Random.Range(10, 51) + (int)increment;
+        if (moneyCurrent < 0)
+            moneyCurrent = 0;
+        Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.MONEY, increment);
 
+        foreach (var item in FindObjectsOfType<UpgradeButton>(true))
+        {//this should be done on open in / update of UpgradeUI
+            if (moneyCurrent >= item.currentUpgradeInfo.price)
+            {
+                GameManager.instance.upgradeBTNAnimator.SetTrigger("Highlight");
+                break;
+            }
+        }
+    }
+    private void ChangeTrashInput(float increment)
+    {
+
+        trashAmmount += (int)increment;
+        if ((int)increment > 0)
+            for (int i = 0; i < (int)increment; i++)
+            {
+                Spawner.instance.CreateTrashBubble();
+            }
+        else
+            for (int i = 0; i > (int)increment; i--)
+            {
+                Spawner.instance.RemoveTrashBubble();
+            }
+        Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TRASH, (int)increment);
+        if (trashAmmount < 0)
+            trashAmmount = 0;
+
+        //gameManager.ChangeStats(PlayerStat.Trash, gameManager.trashIncrementAmount);
+    }
+    private void ChangeTrashIncrementInput(float increment)
+    {
+        trashIncrementAmmount += (int)increment;
+        //is this necessary?
+        Spawner.instance.SpawnTextSpecific(SpawnedStatTextType.TRASH, (int)increment);
+        gameManager.ChangeStats(PlayerStat.TrashIncrement, (int)increment);
+    }
     private void ChangeHint(float increment)
     {
         _hints += (int)increment;

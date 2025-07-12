@@ -26,7 +26,7 @@ we created EventHandler that will Invoke events and other stuff will subscribe t
 SOs	- all / msot of pop ups (events, bubbles, upgrades) are done by using SOs AChangeStats,
 these SOs have enum PlayerStats and value, was run over giant switch statement in GameManager
 	
-	we keep that logic but in AChangeStats will be switch statement - based on enum Run method in MyEventManager, 
+	we keep that logic but in AChangeStats is switch statement - based on enum Run method in MyEventManager, 
 	and subscribe methods in PlayerStatsNew
 
 
@@ -66,7 +66,10 @@ Singleton 	- we have Singleton<T> class and SingletonPresistent<T> class (second
 Interfaces	- we have Interface for button initiation - does not have to be motherClass
 		- its our standard InitiateButton, with playSound bonus
 
+Player (player Stats new) Subscribbed to events in MyEventManager, is handling all stats / resources / trash....
 
+SOs 	- there are scriptable obejcts with sets values, 9enum + number0 - used to work over switch statement
+		in GameManager, now based on enum it triggers Event in MyEventManager
 
 
 
@@ -78,13 +81,13 @@ A ChangeStats(inherits from PlayerActions) is used in pretty much everywhere
 switch - 
 
 we have now adjusted per order in switches
-Followers			ChangeFollowerAmmount	event created
-PopUp Income			not done input variant	event created
+Followers			ChangeFollowerAmmount	event ok
+PopUp Income			PopUpIncome		event ok
 *
-Timer				ChangeDaysLeft in Timer	event created
-Trash				
-Trash Increment			not done input varian	event created
-Hint				ChangeHint		event created
+Timer				ChangeDaysLeft in Timer	event created	neeed to do in time !!!!!!!!!!
+Trash				ChangeTrashInput	created ok
+Trash Increment			ChangeTrashIncrementInput	created	ok
+Hint				ChangeHint		event created  ok
 *
 *
 Price modifier			missing completely	event created
@@ -92,13 +95,13 @@ Price modifier			missing completely	event created
 Illegal Capacity		??? was really used?
 Illegality reduction interval	?? was really used?
 
-Trash Cap
-Donation Intensity
+Trash Cap			unused
+Donation Intensity		unused
 
 To Do:
 
 NEXT: everything what is not stat manipulation defined by time must be adjusted to initiate events - progress here, finish SOs stuff
-
+trashIncrement_Increment change method refers to 
 
 FollowUp: fix texts on sliders, move pop up value to UI class, doTexts, remove all stats (trash money illegality, followers) from GameManager
 (need to move all stats to newPlayerStats first), News show wrong days remaining

@@ -34,6 +34,38 @@ public class MyEventHandler : Singleton<MyEventHandler>
     {
         
     }
+
+
+    #region Events no input
+
+    public void DonationTimerSpawnerEvent()
+    {
+        OnDonationTimer?.Invoke();
+        Debug.Log(" donation event Invoked");
+    }
+    public void FollowerIncomeTimerSpawner()
+    {        
+        OnFollowerIncome?.Invoke();
+        Debug.Log(" follower event Invoked");
+    }
+    public void IllegalityTimerSpawner()
+    {        
+        OnIllegalityTimer?.Invoke();
+        Debug.Log(" illegality event Invoked");
+    }
+    public void TrashTimerSpawner()
+    {        
+        OnTrashTimer?.Invoke();
+        Debug.Log(" trash event Invoked");
+    }
+    public void TrashIncrementTimeSpawner()
+    {        
+        OnTrashIncrement?.Invoke();
+        Debug.Log(" trash increment event Invoked");
+    }
+    #endregion
+
+    #region Events w Inputs
     public void FollowerChangeInputEvent(float inputModifier)
     {
         OnFollowerChangeInput?.Invoke(inputModifier);
@@ -64,36 +96,6 @@ public class MyEventHandler : Singleton<MyEventHandler>
         OnPriceModifierInput?.Invoke(inputModifier);
     }
 
-
-
-
-    public void DonationTimerSpawnerEvent()
-    {
-        OnDonationTimer?.Invoke();
-        Debug.Log(" donation event Invoked");
-    }
-    public void FollowerIncomeTimerSpawner()
-    {        
-        OnFollowerIncome?.Invoke();
-        Debug.Log(" follower event Invoked");
-    }
-    public void IllegalityTimerSpawner()
-    {        
-        OnIllegalityTimer?.Invoke();
-        Debug.Log(" illegality event Invoked");
-    }
-    public void TrashTimerSpawner()
-    {        
-        OnTrashTimer?.Invoke();
-        Debug.Log(" trash event Invoked");
-    }
-    public void TrashIncrementTimeSpawner()
-    {        
-        OnTrashIncrement?.Invoke();
-        Debug.Log(" trash increment event Invoked");
-    }
-
-
-
+    #endregion
 
 }
