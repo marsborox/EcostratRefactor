@@ -100,8 +100,7 @@ Donation Intensity		unused
 
 To Do:
 
-NEXT: everything what is not stat manipulation defined by time must be adjusted to initiate events - progress here, finish SOs stuff
-trashIncrement_Increment change method refers to 
+NEXT: seems events work fine except, upgrades check wrong money value, illegality does not work at all (values - god knows how its w UI)
 
 FollowUp: fix texts on sliders, move pop up value to UI class, doTexts, remove all stats (trash money illegality, followers) from GameManager
 (need to move all stats to newPlayerStats first), News show wrong days remaining
